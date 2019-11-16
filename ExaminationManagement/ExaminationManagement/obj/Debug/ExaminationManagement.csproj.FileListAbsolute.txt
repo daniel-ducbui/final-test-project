@@ -1,0 +1,9 @@
+C:\Users\Lendy\Documents\GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csprojAssemblyReference.cache
+C:\Users\Lendy\Documents\GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.frmQuestion.resources
+C:\Users\Lendy\Documents\GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Properties.Resources.resources
+C:\Users\Lendy\Documents\GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csproj.GenerateResource.cache
+C:\Users\Lendy\Documents\GitHub\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\ExaminationManagement.exe.config
+C:\Users\Lendy\Documents\GitHub\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\ExaminationManagement.exe
+C:\Users\Lendy\Documents\GitHub\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\ExaminationManagement.pdb
+C:\Users\Lendy\Documents\GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.exe
+C:\Users\Lendy\Documents\GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.pdb
