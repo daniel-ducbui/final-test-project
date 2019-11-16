@@ -1,0 +1,12 @@
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\ExaminationManagement.exe.config
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\ExaminationManagement.exe
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\ExaminationManagement.pdb
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csprojAssemblyReference.cache
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.LoginForm.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Properties.Resources.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csproj.GenerateResource.cache
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.exe
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.pdb
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.AdminControlPanel.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.StudentControlPanel.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.TeacherControlPanel.resources

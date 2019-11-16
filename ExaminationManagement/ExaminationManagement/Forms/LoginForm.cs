@@ -1,0 +1,86 @@
+﻿using ExaminationManagement.Forms;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using ExaminationManagement.Functions;
+using ExaminationManagement.Views;
+using ExaminationManagement.Presenters;
+
+namespace ExaminationManagement
+{
+    public partial class LoginForm : Form, ILogin
+    {
+        // Call login presenter
+        LoginPresenter loginPresenter;
+        public LoginForm()
+        {
+            InitializeComponent();
+            Load += LoginForm_Load;
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            // Initialize login view
+            loginPresenter = new LoginPresenter(this);
+
+            // Rise error if connect to database failed 
+            if (!String.IsNullOrEmpty(loginPresenter.ErrorMessage))
+            {
+                MessageBox.Show(loginPresenter.ErrorMessage);
+                return;
+            }
+        }
+
+        private void Btn_login_Click(object sender, EventArgs e)
+        {
+            // Redirect to login presenter to authenticating account
+            int checking = loginPresenter.Authenticating();
+
+            // Check the return result
+            if (checking == -1) // Authenticating failed
+            {
+                MessageBox.Show(loginPresenter.ErrorMessage); // Rise error message
+            }
+            else // Authentication success
+            {
+                // Check the permission of each type of account 
+                // 0 ~ admin
+                // 1 ~ teacher
+                // 2 ~ student
+                if (checking == 0)
+                {
+                    AdminControlPanel adminControlPanel = new AdminControlPanel();
+                    adminControlPanel.Show();
+                }
+                else if (checking == 1)
+                {
+                    TeacherControlPanel teacherControlPanel = new TeacherControlPanel();
+                    teacherControlPanel.Show();
+                }
+                else if (checking == 2)
+                {
+                    StudentControlPanel studentControlPanel = new StudentControlPanel();
+                    studentControlPanel.Show();
+                }
+                else // Non determined error
+                {
+                    MessageBox.Show("Lag");
+                }
+            }
+        }
+
+        public string userID { get => tb_username.Text; }
+        public string password { get => tb_password.Text; }
+
+        public bool isMatched
+        {
+            get; set;
+        }
+    }
+}
