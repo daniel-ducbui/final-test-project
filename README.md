@@ -1,3 +1,4 @@
-# final-test-project
-// RE-CREATE PROJECT
-// READ THE LICENSE FIRST
+# READ THE LICENSE FIRST
+
+## **DO NOT ALLOW TO COPY OR CONSULT**
+### final-test-project
