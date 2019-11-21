@@ -18,6 +18,9 @@ namespace ExaminationManagement
     {
         // Call login presenter
         LoginPresenter loginPresenter;
+        AdminControlPanel adminControlPanel;
+        TeacherControlPanel teacherControlPanel;
+        StudentControlPanel studentControlPanel;
         public LoginForm()
         {
             InitializeComponent();
@@ -53,19 +56,24 @@ namespace ExaminationManagement
                 // 0 ~ admin
                 // 1 ~ teacher
                 // 2 ~ student
+                // Then show Form according to the permission
+                this.Hide();
                 if (checking == 0)
                 {
-                    AdminControlPanel adminControlPanel = new AdminControlPanel();
+                    adminControlPanel = new AdminControlPanel();
+                    adminControlPanel.FormClosed += (s, args) => this.Close();
                     adminControlPanel.Show();
                 }
                 else if (checking == 1)
                 {
-                    TeacherControlPanel teacherControlPanel = new TeacherControlPanel();
+                    teacherControlPanel = new TeacherControlPanel();
+                    teacherControlPanel.FormClosed += (s, args) => this.Close();
                     teacherControlPanel.Show();
                 }
                 else if (checking == 2)
                 {
-                    StudentControlPanel studentControlPanel = new StudentControlPanel();
+                    studentControlPanel = new StudentControlPanel();
+                    studentControlPanel.FormClosed += (s, args) => this.Close();
                     studentControlPanel.Show();
                 }
                 else // Non determined error
@@ -75,7 +83,7 @@ namespace ExaminationManagement
             }
         }
 
-        public string userID { get => tb_username.Text; }
+        public string username { get => tb_username.Text; }
         public string password { get => tb_password.Text; }
 
         public bool isMatched

@@ -8,7 +8,7 @@ namespace ExaminationManagement.Views
 {
     public interface ILogin
     {
-        string userID { get; }
+        string username { get; }
         string password { get; }
         bool isMatched { get; set; }
     }
