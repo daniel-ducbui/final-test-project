@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ExaminationManagement.Views
 {
@@ -13,21 +14,17 @@ namespace ExaminationManagement.Views
     }
     public interface IQuestionView
     {
-
-
-        //string level { get; set; }
-        //string content { get; set; }
-        //string choiceA { get; set; }
-        //string choiceB { get; set; }
-        //string choiceC { get; set; }
-        //string choiceD { get; set; }
-        //string choiceE { get; set; }
-        //string choiceF { get; set; }
-        //string correctAnswer { get; set; }
-        DataTable dt
-        {
-            get; set;
-        }
+        object DataGridViewItems { get; set; }
+        TextBox questionID { get; set; }
+        TextBox level { get; set; }
+        RichTextBox content { get; set; }
+        TextBox choiceA { get; set; }
+        TextBox choiceB { get; set; }
+        TextBox choiceC { get; set; }
+        TextBox choiceD { get; set; }
+        TextBox choiceE { get; set; }
+        TextBox choiceF { get; set; }
+        TextBox correctAnswer { get; set; }
 
         event EventHandler NewQuestion;
         event EventHandler UpdateQuestion;
