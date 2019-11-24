@@ -72,7 +72,7 @@ namespace ExaminationManagement.Presenters
         {
             var question = new TheQuestion
             {
-                questionID = int.Parse(view.questionID.Text),
+                //questionID = int.Parse(view.questionID.Text),
                 level = view.level.Text,
                 content = view.content.Text,
                 choiceA = view.choiceA.Text,

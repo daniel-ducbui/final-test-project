@@ -33,6 +33,8 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.grb1 = new System.Windows.Forms.GroupBox();
+            this.txtQuestionID = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.rtxtContent = new System.Windows.Forms.RichTextBox();
             this.txtCorrectAnswer = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -51,8 +53,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtLevel = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtQuestionID = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.btnImport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListQuestion)).BeginInit();
             this.grb1.SuspendLayout();
             this.SuspendLayout();
@@ -70,7 +71,7 @@
             // btnNew
             // 
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNew.Location = new System.Drawing.Point(146, 694);
+            this.btnNew.Location = new System.Drawing.Point(109, 685);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(87, 48);
             this.btnNew.TabIndex = 1;
@@ -80,7 +81,7 @@
             // btnDelete
             // 
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(887, 694);
+            this.btnDelete.Location = new System.Drawing.Point(962, 685);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(87, 48);
             this.btnDelete.TabIndex = 2;
@@ -90,7 +91,7 @@
             // btnUpdate
             // 
             this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(505, 694);
+            this.btnUpdate.Location = new System.Drawing.Point(691, 685);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(87, 48);
             this.btnUpdate.TabIndex = 3;
@@ -99,6 +100,7 @@
             // 
             // grb1
             // 
+            this.grb1.Controls.Add(this.btnImport);
             this.grb1.Controls.Add(this.txtQuestionID);
             this.grb1.Controls.Add(this.label10);
             this.grb1.Controls.Add(this.rtxtContent);
@@ -131,6 +133,22 @@
             this.grb1.TabIndex = 4;
             this.grb1.TabStop = false;
             this.grb1.Text = "Quản lý câu hỏi";
+            // 
+            // txtQuestionID
+            // 
+            this.txtQuestionID.Location = new System.Drawing.Point(464, 329);
+            this.txtQuestionID.Name = "txtQuestionID";
+            this.txtQuestionID.Size = new System.Drawing.Size(358, 29);
+            this.txtQuestionID.TabIndex = 24;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(367, 329);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(104, 24);
+            this.label10.TabIndex = 23;
+            this.label10.Text = "questionID:";
             // 
             // rtxtContent
             // 
@@ -277,21 +295,15 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "level:";
             // 
-            // txtQuestionID
+            // btnImport
             // 
-            this.txtQuestionID.Location = new System.Drawing.Point(464, 329);
-            this.txtQuestionID.Name = "txtQuestionID";
-            this.txtQuestionID.Size = new System.Drawing.Size(358, 29);
-            this.txtQuestionID.TabIndex = 24;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(367, 329);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(104, 24);
-            this.label10.TabIndex = 23;
-            this.label10.Text = "questionID:";
+            this.btnImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImport.Location = new System.Drawing.Point(384, 685);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(83, 48);
+            this.btnImport.TabIndex = 25;
+            this.btnImport.Text = "Import";
+            this.btnImport.UseVisualStyleBackColor = true;
             // 
             // frmQuestion
             // 
@@ -335,5 +347,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtQuestionID;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnImport;
     }
 }
