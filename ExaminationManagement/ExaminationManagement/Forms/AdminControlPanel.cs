@@ -27,10 +27,17 @@ namespace ExaminationManagement.Forms
             btn_add.Click += Btn_add_Click;
         }
 
+        private void AdminControlPanel_Load(object sender, EventArgs e)
+        {
+            this.cb_table.SelectedIndex = 0;
+            accountManagementPresenter = new AccountManagementPresenter(this);
+            LoadData?.Invoke(this, null);
+        }
+
         private void Btn_add_Click(object sender, EventArgs e)
         {
             AddUser?.Invoke(this, null);
-            if (String.IsNullOrEmpty(ErrorMessage))
+            if (!String.IsNullOrEmpty(ErrorMessage))
             {
                 MessageBox.Show(accountManagementPresenter.ErrorMessage);
             }
@@ -38,7 +45,14 @@ namespace ExaminationManagement.Forms
 
         private void Btn_readData_Click(object sender, EventArgs e)
         {
-            ImportUser?.Invoke(this, null);
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                ImportUser?.Invoke(this, null);
+                if (!String.IsNullOrEmpty(ErrorMessage))
+                {
+                    MessageBox.Show(accountManagementPresenter.ErrorMessage);
+                }
+            }
         }
 
         private void Btn_loadData_Click(object sender, EventArgs e)
@@ -53,18 +67,17 @@ namespace ExaminationManagement.Forms
             }
         }
 
-        private void AdminControlPanel_Load(object sender, EventArgs e)
-        {
-            accountManagementPresenter = new AccountManagementPresenter(this);
-            LoadData?.Invoke(this, null);
-        }
-
         private void btn_logout_Click(object sender, EventArgs e)
         {
             this.Hide();
             LoginForm loginForm = new LoginForm();
             loginForm.FormClosed += (s, args) => this.Close();
             loginForm.Show();
+        }
+
+        private void cb_table_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadData?.Invoke(this, null);
         }
 
         public string searchContent { get => this.tb_search.Text; set => this.tb_search.Text = value; }
@@ -77,7 +90,9 @@ namespace ExaminationManagement.Forms
         public string gradeID { get => this.tb_gradeID.Text; set => this.tb_gradeID.Text = value; }
         public string accountType { get => this.cb_accountType.SelectedItem.ToString(); }
         public string password { get => this.tb_password.Text; set => this.tb_password.Text = value; }
-        public object DataSource { get => this.dgv_accounts.DataSource; set => this.dgv_accounts.DataSource = value; }
+        public object DataSource { get => this.dgv_table.DataSource; set => this.dgv_table.DataSource = value; }
+        public string fileName { get => this.openFileDialog1.FileName.ToString(); }
+        public string selectedTable { get => this.cb_table.SelectedIndex.ToString(); }
 
         public event EventHandler LoadData;
         public event EventHandler AddUser;

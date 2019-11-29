@@ -16,7 +16,6 @@ namespace ExaminationManagement.Presenters
     {
         IAccountManagement view;
         Authentication authentication;
-        //List<Account> accountList;
 
         public string ErrorMessage = null;
 
@@ -35,28 +34,43 @@ namespace ExaminationManagement.Presenters
             view.ImportUser += View_ImportUser;
         }
 
-        private void View_LoadData(object sender, EventArgs e)
+        private void LoadData()
         {
             using (var _data = new ExaminationManagementDataContext())
             {
-                var accountList = (from a in _data.Accounts
-                                   select new { a.UserID, a.Username, a.RegistryDate }).ToList();
-                view.DataSource = accountList;
+                if (view.selectedTable == "0")
+                {
+                    var accountList = (from a in _data.Accounts
+                                       select new { a.UserID, a.Username, a.RegistryDate }).ToList();
+                    view.DataSource = accountList;
+                }
+                else
+                {
+                    var accountList = (from a in _data.AccountDetails
+                                       select new { a.UserID, a.Name, a.PhoneNumber, a.Email, a.DOB, a.Address, a.ClassID, a.GradeID, a.AccountType }).ToList();
+                    view.DataSource = accountList;
+                }
             }
+        }
+
+        private void View_LoadData(object sender, EventArgs e)
+        {
+            LoadData();
         }
 
         private void View_ImportUser(object sender, EventArgs e)
         {
             UploadFileExcel uploadFile = new UploadFileExcel();
-            string fileName = @"C:\_GIT_github\final-test-project\Data.xlsx";
+            string fileName = view.fileName;
             uploadFile.ReadData(fileName);
 
             ErrorMessage = uploadFile.ErrorMessage;
+            LoadData();
         }
 
         private void View_EditUser(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+
         }
 
         private void View_AddUser(object sender, EventArgs e)
@@ -101,6 +115,7 @@ namespace ExaminationManagement.Presenters
             {
                 ErrorMessage = "Something wrong. Please try again! \nDetails: " + ex.Message;
             }
+            LoadData();
         }
     }
 }

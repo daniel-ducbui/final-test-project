@@ -19,6 +19,8 @@ namespace ExaminationManagement.Views
         string accountType { get; }
         string password { get; set; }
         object DataSource { get; set; }
+        string fileName { get; }
+        string selectedTable { get; }  
 
         event EventHandler AddUser;
         event EventHandler EditUser;

@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 397);
+            this.ClientSize = new System.Drawing.Size(725, 268);
             this.Name = "TeacherControlPanel";
             this.Text = "TeacherControlPanel";
             this.ResumeLayout(false);
