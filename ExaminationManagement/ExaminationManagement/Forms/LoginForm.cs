@@ -21,6 +21,11 @@ namespace ExaminationManagement
         AdminControlPanel adminControlPanel;
         TeacherControlPanel teacherControlPanel;
         StudentControlPanel studentControlPanel;
+
+        // Khởi tạo delegate truyền userID
+        int _userID;
+        public delegate void UserID(int _userID);
+
         public LoginForm()
         {
             InitializeComponent();
@@ -62,18 +67,33 @@ namespace ExaminationManagement
                 {
                     adminControlPanel = new AdminControlPanel();
                     adminControlPanel.FormClosed += (s, args) => this.Close();
+
+                    // Truyền userID hiện tại
+                    UserID userID = new UserID(adminControlPanel.GetUserID);
+                    userID(this._userID);
+
                     adminControlPanel.Show();
                 }
                 else if (checking == 1)
                 {
                     teacherControlPanel = new TeacherControlPanel();
                     teacherControlPanel.FormClosed += (s, args) => this.Close();
+
+                    // Truyền userID hiện tại
+                    UserID userID = new UserID(teacherControlPanel.GetUserID);
+                    userID(this._userID);
+
                     teacherControlPanel.Show();
                 }
                 else if (checking == 2)
                 {
                     studentControlPanel = new StudentControlPanel();
                     studentControlPanel.FormClosed += (s, args) => this.Close();
+
+                    // Truyền userID hiện tại
+                    UserID userID = new UserID(studentControlPanel.GetUserID);
+                    userID(this._userID);
+
                     studentControlPanel.Show();
                 }
                 else // Non determined error
@@ -83,6 +103,7 @@ namespace ExaminationManagement
             }
         }
 
+        public int userID { get => this._userID; set => this._userID = value; }
         public string username { get => tb_username.Text; }
         public string password { get => tb_password.Text; }
 

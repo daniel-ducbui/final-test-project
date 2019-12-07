@@ -12,9 +12,18 @@ namespace ExaminationManagement.Forms
 {
     public partial class StudentControlPanel : Form
     {
+        int userID;
+
         public StudentControlPanel()
         {
             InitializeComponent();
+        }
+
+        // NOTE: Khi sử dụng userID chỉ cần gọi this.userID
+
+        public void GetUserID(int _userID)
+        {
+            this.userID = _userID;
         }
     }
 }

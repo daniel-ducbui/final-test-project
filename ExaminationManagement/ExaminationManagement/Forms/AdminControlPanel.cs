@@ -17,6 +17,8 @@ namespace ExaminationManagement.Forms
         AccountManagementPresenter accountManagementPresenter;
         string ErrorMessage = null;
 
+        int userID;
+
         public AdminControlPanel()
         {
             InitializeComponent();
@@ -25,6 +27,13 @@ namespace ExaminationManagement.Forms
             btn_loadData.Click += Btn_loadData_Click;
             btn_readData.Click += Btn_readData_Click;
             btn_add.Click += Btn_add_Click;
+        }
+
+        // NOTE: Khi sử dụng userID chỉ cần gọi this.userID
+
+        public void GetUserID(int _userID)
+        {
+            this.userID = _userID;
         }
 
         private void AdminControlPanel_Load(object sender, EventArgs e)
@@ -41,6 +50,11 @@ namespace ExaminationManagement.Forms
             {
                 MessageBox.Show(accountManagementPresenter.ErrorMessage);
             }
+        }
+
+        private void btn_save_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(this.userID.ToString()); // Test lấy userID
         }
 
         private void Btn_readData_Click(object sender, EventArgs e)
@@ -69,6 +83,8 @@ namespace ExaminationManagement.Forms
 
         private void btn_logout_Click(object sender, EventArgs e)
         {
+            // Clear current user id
+            this.userID = -1;
             this.Hide();
             LoginForm loginForm = new LoginForm();
             loginForm.FormClosed += (s, args) => this.Close();

@@ -44,6 +44,9 @@ namespace ExaminationManagement.Presenters
                     // Check if password that user typed is matched password in database
                     if (decryptedPassword == password)
                     {
+                        // Get current user id
+                        view.userID = Convert.ToInt32(_account.UserID);
+
                         return permission; // Return permission if all are matched
                     }
                     ErrorMessage = "Password wrong!"; // Rise error if password is not matched
