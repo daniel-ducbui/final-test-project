@@ -84,7 +84,7 @@ namespace ExaminationManagement.Forms
 
         private void Btn_addQuestion_Click(object sender, EventArgs e)
         {
-            addQuestionControlPanel = new AddQuestionControlPanel();
+            addQuestionControlPanel = new AddQuestionControlPanel(this.userID);
             addQuestionControlPanel.ShowDialog();
         }
 

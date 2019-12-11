@@ -51,8 +51,6 @@
             this.btn_prev = new System.Windows.Forms.Button();
             this.btn_next = new System.Windows.Forms.Button();
             this.btn_save = new System.Windows.Forms.Button();
-            this.Level = new System.Windows.Forms.Label();
-            this.cb_levelQuestion = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -232,8 +230,6 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.cb_levelQuestion);
-            this.panel4.Controls.Add(this.Level);
             this.panel4.Controls.Add(this.btn_prev);
             this.panel4.Controls.Add(this.btn_next);
             this.panel4.Controls.Add(this.btn_save);
@@ -270,31 +266,6 @@
             this.btn_save.Text = "Save";
             this.btn_save.UseVisualStyleBackColor = true;
             // 
-            // Level
-            // 
-            this.Level.AutoSize = true;
-            this.Level.Location = new System.Drawing.Point(18, 15);
-            this.Level.Name = "Level";
-            this.Level.Size = new System.Drawing.Size(65, 25);
-            this.Level.TabIndex = 4;
-            this.Level.Text = "Level";
-            // 
-            // cb_levelQuestion
-            // 
-            this.cb_levelQuestion.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cb_levelQuestion.FormattingEnabled = true;
-            this.cb_levelQuestion.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4"});
-            this.cb_levelQuestion.Location = new System.Drawing.Point(106, 12);
-            this.cb_levelQuestion.Name = "cb_levelQuestion";
-            this.cb_levelQuestion.Size = new System.Drawing.Size(162, 33);
-            this.cb_levelQuestion.TabIndex = 5;
-            // 
             // AddQuestionControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 25F);
@@ -313,7 +284,6 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -342,7 +312,5 @@
         private System.Windows.Forms.Button btn_prev;
         private System.Windows.Forms.Button btn_next;
         private System.Windows.Forms.Button btn_save;
-        private System.Windows.Forms.Label Level;
-        private System.Windows.Forms.ComboBox cb_levelQuestion;
     }
 }

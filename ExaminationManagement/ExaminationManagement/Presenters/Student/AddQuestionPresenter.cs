@@ -11,7 +11,6 @@ namespace ExaminationManagement.Presenters.Student
     public class AddQuestionPresenter
     {
         IAddQuestion view;
-        //List<TheQuestion> theQuestions;
 
         public AddQuestionPresenter(IAddQuestion addQuestionView)
         {
@@ -28,8 +27,12 @@ namespace ExaminationManagement.Presenters.Student
         {
             var theQuestion = new TheQuestion
             {
-                QuestionLevel = int.Parse(view.questionLevel),
-                QuestionType = 1,
+                //Student (QuestionType = 2)
+                //Teacher (QuestionType = 1)
+                //Student (QuestionLevel = 0)
+
+                QuestionLevel = 0,
+                QuestionType = 2,
                 QuestionContent = view.questionContent,
                 ChoiceA = view.choiceA,
                 ChoiceB = view.choiceB,
@@ -38,13 +41,20 @@ namespace ExaminationManagement.Presenters.Student
                 ChoiceE = view.choiceE,
                 ChoiceF = view.choiceF,
                 Answer = view.answer,
-                //UserID = int.Parse(temp)
-                UserID = 0
+                UserID = view.userID
             };
             using (var _data = new ExaminationManagementDataContext())
             {
                 _data.TheQuestions.InsertOnSubmit(theQuestion);
                 _data.SubmitChanges();
+                view.questionContent = null;
+                view.choiceA = null;
+                view.choiceB = null;
+                view.choiceC = null;
+                view.choiceD = null;
+                view.choiceE = null;
+                view.choiceF = null;
+                view.answer = null;
             }
         }
     }

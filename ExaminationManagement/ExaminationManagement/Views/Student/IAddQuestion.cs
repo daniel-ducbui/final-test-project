@@ -8,7 +8,6 @@ namespace ExaminationManagement.Views.Student
 {
     public interface IAddQuestion
     {
-        string questionLevel { get; set; }
         string questionContent { get; set; }
         string choiceA { get; set; }
         string choiceB { get; set; }
@@ -17,6 +16,7 @@ namespace ExaminationManagement.Views.Student
         string choiceE { get; set; }
         string choiceF { get; set; }
         string answer { get; set; }
+        int userID { get; }
 
         event EventHandler SaveQuestion;
     }
