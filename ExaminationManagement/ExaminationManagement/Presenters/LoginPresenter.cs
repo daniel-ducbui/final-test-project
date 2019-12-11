@@ -32,6 +32,8 @@ namespace ExaminationManagement.Presenters
                     // Get dataSet
                     var _account = _data.Accounts
                                         .Where(a => a.Username.ToString() == view.username).FirstOrDefault();
+                    //getUserID.userID = int.Parse(_account.UserID.ToString());
+                    //string userid = _account.UserID.ToString();
                     // Get password in database
                     string password = _account.Password.ToString();
                     // Get account's permission
@@ -44,6 +46,9 @@ namespace ExaminationManagement.Presenters
                     // Check if password that user typed is matched password in database
                     if (decryptedPassword == password)
                     {
+                        // Get current user id
+                        view.userID = Convert.ToInt32(_account.UserID);
+
                         return permission; // Return permission if all are matched
                     }
                     ErrorMessage = "Password wrong!"; // Rise error if password is not matched

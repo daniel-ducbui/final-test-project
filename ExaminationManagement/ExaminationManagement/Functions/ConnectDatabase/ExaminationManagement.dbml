@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ExaminationManagement" Class="ExaminationManagementDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DANIELPC\SQLEXPRESS;Initial Catalog=ExaminationManagement;Persist Security Info=True;User ID=sa" SettingsObjectName="ExaminationManagement.Properties.Settings" SettingsPropertyName="ExaminationManagementConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-SK3UUL3\SONG_DU;Initial Catalog=ExaminationManagement;Integrated Security=True" SettingsObjectName="ExaminationManagement.Properties.Settings" SettingsPropertyName="ExaminationManagementConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="AccountID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

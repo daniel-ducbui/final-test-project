@@ -57,7 +57,7 @@ namespace ExaminationManagement.Functions.ConnectDatabase
     #endregion
 		
 		public ExaminationManagementDataContext() : 
-				base(global::ExaminationManagement.Properties.Settings.Default.ExaminationManagementConnectionString, mappingSource)
+				base(global::ExaminationManagement.Properties.Settings.Default.ExaminationManagementConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}

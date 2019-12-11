@@ -56,6 +56,18 @@
     <Compile Include="Forms\AdminControlPanel.Designer.cs">
       <DependentUpon>AdminControlPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Student\AddQuestionControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\AddQuestionControlPanel.Designer.cs">
+      <DependentUpon>AddQuestionControlPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Student\ExaminationControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\ExaminationControlPanel.Designer.cs">
+      <DependentUpon>ExaminationControlPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,14 +80,30 @@
     <Compile Include="Forms\StudentControlPanel.Designer.cs">
       <DependentUpon>StudentControlPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Student\Profile\CalendarExaminationControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\Profile\CalendarExaminationControlPanel.Designer.cs">
+      <DependentUpon>CalendarExaminationControlPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Student\Profile\ResultExaminationControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\Profile\ResultExaminationControlPanel.Designer.cs">
+      <DependentUpon>ResultExaminationControlPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TeacherControlPanel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\TeacherControlPanel.Designer.cs">
       <DependentUpon>TeacherControlPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Functions\ConnectDatabase\ExaminationManagement.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExaminationManagement.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Functions\QueryData\BaseQuery.cs" />
-    <Compile Include="Functions\ConnectDatabase\BaseConnection.cs" />
     <Compile Include="Functions\Login\Authentication\Authentication.cs" />
     <Compile Include="Functions\Login\Validation\BaseValidator.cs">
       <SubType>Component</SubType>
@@ -89,24 +117,37 @@
     </Compile>
     <Compile Include="Functions\UploadFile\UploadFileExcel.cs" />
     <Compile Include="Presenters\AccountManagementPresenter.cs" />
-    <Compile Include="Functions\ConnectDatabase\ExaminationManagement.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ExaminationManagement.dbml</DependentUpon>
-    </Compile>
+    <Compile Include="Presenters\Student\ProfilePresenter.cs" />
     <Compile Include="Presenters\LoginPresenter.cs" />
+    <Compile Include="Presenters\Student\AddQuestionPresenter.cs" />
+    <Compile Include="Presenters\Student\ExaminationPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\IAccountManagement.cs" />
     <Compile Include="Views\ILogin.cs" />
+    <Compile Include="Views\Student\IAddQuestion.cs" />
+    <Compile Include="Views\Student\IExamination.cs" />
+    <Compile Include="Views\Student\IProfile.cs" />
     <EmbeddedResource Include="Forms\AdminControlPanel.resx">
       <DependentUpon>AdminControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Student\AddQuestionControlPanel.resx">
+      <DependentUpon>AddQuestionControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Student\ExaminationControlPanel.resx">
+      <DependentUpon>ExaminationControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StudentControlPanel.resx">
       <DependentUpon>StudentControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Student\Profile\CalendarExaminationControlPanel.resx">
+      <DependentUpon>CalendarExaminationControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Student\Profile\ResultExaminationControlPanel.resx">
+      <DependentUpon>ResultExaminationControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherControlPanel.resx">
       <DependentUpon>TeacherControlPanel.cs</DependentUpon>
