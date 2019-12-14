@@ -102,5 +102,73 @@ namespace ExaminationManagement.Functions.UploadFile
             application.Quit();
             Marshal.ReleaseComObject(application);
         }
+
+        public void ReadQuestionData(string fileName, int UserID)
+        {
+            // Create COM Objects. Create a COM object for everything that is referenced
+            Excel.Application application = new Excel.Application();
+            Excel.Workbook workbook = application.Workbooks.Open(fileName);
+            Excel._Worksheet _worksheet = workbook.Sheets[1];
+            Excel.Range range = _worksheet.UsedRange;
+
+            BaseQuery baseQuery = new BaseQuery();
+
+            try
+            {
+                int rowCount = range.Rows.Count;
+                int columnCount = range.Columns.Count;
+
+                string content = null,
+                    c1 = null,
+                    c2 = null,
+                    c3 = null,
+                    c4 = null,
+                    c5 = null,
+                    c6 = null,
+                    answer = null;
+                int level = 0;
+
+                // Fetch every single row
+                for (int i = 3; i < rowCount; i++)
+                {
+                    content = range.Cells[i, 1].Value2.ToString();
+                    c1 = range.Cells[i, 2].Value2.ToString();
+                    c2 = range.Cells[i, 3].Value2.ToString();
+                    c3 = range.Cells[i, 4].Value2.ToString();
+                    c4 = range.Cells[i, 5].Value2.ToString();
+                    c5 = range.Cells[i, 5].Value2.ToString();
+                    c6 = range.Cells[i, 5].Value2.ToString();
+                    answer = range.Cells[i, 6].Value2.ToString();
+                    level = range.Cells[i, 7].Value2.ToString();
+
+                    // Call add account function
+                    baseQuery.AddQuestion(content, c1, c2, c3, c4, c5, c6, answer, level, UserID);
+
+                }
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = "Fail! \nDetails: " + e.Message + "\n" + baseQuery.ErrorMessage;
+            }
+            // cleanup
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            // rule of thumb for releasing com objects:
+            //  never use two dots, all COM objects must be referenced and released individually
+            //  ex: [somthing].[something].[something] is bad
+
+            // release com objects to fully kill excel process from running in the background
+            Marshal.ReleaseComObject(range);
+            Marshal.ReleaseComObject(_worksheet);
+
+            // close and release
+            workbook.Close();
+            Marshal.ReleaseComObject(workbook);
+
+            // quit and release
+            application.Quit();
+            Marshal.ReleaseComObject(application);
+        }
     }
 }

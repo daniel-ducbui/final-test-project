@@ -96,8 +96,6 @@ namespace ExaminationManagement.Presenters
             temp = view.password;
 
             // Convert date
-            // double date = double.Parse(DOB);
-            //DateTime _dob = DateTime.FromOADate(DOB);
             DateTime _dob = DateTime.Parse(DOB);
 
             // Encrypt password - Main password
@@ -105,6 +103,7 @@ namespace ExaminationManagement.Presenters
             string _temp = authentication.Encrypt(temp);
 
             BaseQuery baseQuery = new BaseQuery();
+
             try
             {
                 // Insert to database
