@@ -90,11 +90,8 @@ namespace ExaminationManagement.Forms
 
         private void Btn_examination_Click(object sender, EventArgs e)
         {
-            this.Hide();
-
-            examinationControlPanel = new ExaminationControlPanel();
-            examinationControlPanel.FormClosed += (s, args) => this.Close();
-            examinationControlPanel.Show();
+            examinationControlPanel = new ExaminationControlPanel(this.userID);
+            examinationControlPanel.ShowDialog();
         }
 
         public event EventHandler SaveProfile;

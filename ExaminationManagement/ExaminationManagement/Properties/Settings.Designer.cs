@@ -44,5 +44,16 @@ namespace ExaminationManagement.Properties {
                 return ((string)(this["ExaminationManagementConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-SK3UUL3\\Song_Du;Initial Catalog=ExaminationManagement;Integra" +
+            "ted Security=True")]
+        public string ExaminationManagementConnectionString2 {
+            get {
+                return ((string)(this["ExaminationManagementConnectionString2"]));
+            }
+        }
     }
 }

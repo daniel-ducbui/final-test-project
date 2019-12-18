@@ -9,16 +9,21 @@ namespace ExaminationManagement.Views
 {
     public interface IExamination
     {
-        RichTextBox questionContent { get; set; }
-        CheckBox choiceA { get; set; }
-        CheckBox choiceB { get; set; }
-        CheckBox choiceC { get; set; }
-        CheckBox choiceD { get; set; }
-        CheckBox choiceE { get; set; }
-        CheckBox choiceF { get; set; }
-        string answer { get; set; }
+        public class SelectedChangedEventArgs : EventArgs
+        {
+            public int index { get; set; }
+        }
+        string questionContent { get; set; }
+        string choiceA { get; set; }
+        string choiceB { get; set; }
+        string choiceC { get; set; }
+        string choiceD { get; set; }
+        string choiceE { get; set; }
+        string choiceF { get; set; }
 
-        event EventHandler LoadQuestion;
         event EventHandler ChooseAnswer;
+        event EventHandler NextQuestion;
+        event EventHandler PrevQuestion;
+        event EventHandler<SelectedChangedEventArgs> selectedChangedQuestion;
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ExaminationManagement" Class="ExaminationManagementDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-SK3UUL3\SONG_DU;Initial Catalog=ExaminationManagement;Integrated Security=True" SettingsObjectName="ExaminationManagement.Properties.Settings" SettingsPropertyName="ExaminationManagementConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-SK3UUL3\Song_Du;Initial Catalog=ExaminationManagement;Integrated Security=True" SettingsObjectName="ExaminationManagement.Properties.Settings" SettingsPropertyName="ExaminationManagementConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="AccountID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -13,13 +13,13 @@
       <Association Name="AccountDetail_Account" Member="AccountDetail" ThisKey="UserID" OtherKey="UserID" Type="AccountDetail" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.TheTest" Member="TheTests">
-    <Type Name="TheTest">
-      <Column Name="TestID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="QuestionListID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="TheTest_Result" Member="Results" ThisKey="TestID" OtherKey="TestID" Type="Result" />
-      <Association Name="TheTest_TheExamination" Member="TheExaminations" ThisKey="TestID" OtherKey="TestID" Type="TheExamination" />
-      <Association Name="QuestionList_TheTest" Member="QuestionList" ThisKey="QuestionListID" OtherKey="QuestionListID" Type="QuestionList" IsForeignKey="true" />
+  <Table Name="dbo.TheTestDetails" Member="TheTestDetails">
+    <Type Name="TheTestDetail">
+      <Column Name="TestDetailsID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TestID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="Answer" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="TheTestDetail_Result" Member="Results" ThisKey="TestDetailsID" OtherKey="TestDetailsID" Type="Result" />
+      <Association Name="TheTest_TheTestDetail" Member="TheTest" ThisKey="TestID" OtherKey="TestID" Type="TheTest" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.AccountDetails" Member="AccountDetails">
@@ -45,29 +45,44 @@
       <Association Name="Account_ExamineeList" Member="Account" ThisKey="AccountID" OtherKey="AccountID" Type="Account" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.QuestionList" Member="QuestionLists">
-    <Type Name="QuestionList">
-      <Column Name="QuestionListID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="QuestionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="QuestionListName" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="QuestionList_TheTest" Member="TheTests" ThisKey="QuestionListID" OtherKey="QuestionListID" Type="TheTest" />
-      <Association Name="TheQuestion_QuestionList" Member="TheQuestion" ThisKey="QuestionID" OtherKey="QuestionID" Type="TheQuestion" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Result" Member="Results">
     <Type Name="Result">
       <Column Name="ResultID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="AccountID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="TestID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Score" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TestDetailsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Account_Result" Member="Account" ThisKey="AccountID" OtherKey="AccountID" Type="Account" IsForeignKey="true" />
-      <Association Name="TheTest_Result" Member="TheTest" ThisKey="TestID" OtherKey="TestID" Type="TheTest" IsForeignKey="true" />
+      <Association Name="TheTestDetail_Result" Member="TheTestDetail" ThisKey="TestDetailsID" OtherKey="TestDetailsID" Type="TheTestDetail" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestDetails" Member="TestDetails">
+    <Type Name="TestDetail">
+      <Column Name="TestID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="QuestionID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="TheQuestion_TestDetail" Member="TheQuestion" ThisKey="QuestionID" OtherKey="QuestionID" Type="TheQuestion" IsForeignKey="true" />
+      <Association Name="TheTest_TestDetail" Member="TheTest" ThisKey="TestID" OtherKey="TestID" Type="TheTest" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestList" Member="TestLists">
+    <Type Name="TestList">
+      <Column Name="TestListID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TestListName" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Association Name="TestList_TestListDetail" Member="TestListDetails" ThisKey="TestListID" OtherKey="TestListID" Type="TestListDetail" />
+      <Association Name="TestList_TheExamination" Member="TheExaminations" ThisKey="TestListID" OtherKey="ListID" Type="TheExamination" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestListDetails" Member="TestListDetails">
+    <Type Name="TestListDetail">
+      <Column Name="TestListID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TestID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="TestList_TestListDetail" Member="TestList" ThisKey="TestListID" OtherKey="TestListID" Type="TestList" IsForeignKey="true" />
+      <Association Name="TheTest_TestListDetail" Member="TheTest" ThisKey="TestID" OtherKey="TestID" Type="TheTest" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TheExamination" Member="TheExaminations">
     <Type Name="TheExamination">
       <Column Name="ExaminationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TestID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ListID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Column Name="ExamineeListID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ExaminationName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="ExaminationType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -77,7 +92,7 @@
       <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="ExamineeList_TheExamination" Member="ExamineeList" ThisKey="ExamineeListID" OtherKey="ExamineeListID" Type="ExamineeList" IsForeignKey="true" />
-      <Association Name="TheTest_TheExamination" Member="TheTest" ThisKey="TestID" OtherKey="TestID" Type="TheTest" IsForeignKey="true" />
+      <Association Name="TestList_TheExamination" Member="TestList" ThisKey="ListID" OtherKey="TestListID" Type="TestList" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TheQuestion" Member="TheQuestions">
@@ -94,7 +109,16 @@
       <Column Name="ChoiceF" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="Answer" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="TheQuestion_QuestionList" Member="QuestionLists" ThisKey="QuestionID" OtherKey="QuestionID" Type="QuestionList" />
+      <Association Name="TheQuestion_TestDetail" Member="TestDetails" ThisKey="QuestionID" OtherKey="QuestionID" Type="TestDetail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TheTest" Member="TheTests">
+    <Type Name="TheTest">
+      <Column Name="TestID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TestName" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Association Name="TheTest_TheTestDetail" Member="TheTestDetails" ThisKey="TestID" OtherKey="TestID" Type="TheTestDetail" />
+      <Association Name="TheTest_TestDetail" Member="TestDetails" ThisKey="TestID" OtherKey="TestID" Type="TestDetail" />
+      <Association Name="TheTest_TestListDetail" Member="TestListDetails" ThisKey="TestID" OtherKey="TestID" Type="TestListDetail" />
     </Type>
   </Table>
 </Database>

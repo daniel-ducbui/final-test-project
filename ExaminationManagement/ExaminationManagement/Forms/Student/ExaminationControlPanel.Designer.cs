@@ -40,13 +40,18 @@
             this.lb_Time = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.rtb_contentQuestion = new System.Windows.Forms.RichTextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.btn_next = new System.Windows.Forms.Button();
+            this.btn_prev = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.cb_choiceF);
             this.panel2.Controls.Add(this.cb_choiceE);
             this.panel2.Controls.Add(this.cb_choiceD);
@@ -62,7 +67,7 @@
             // cb_choiceF
             // 
             this.cb_choiceF.AutoSize = true;
-            this.cb_choiceF.Location = new System.Drawing.Point(54, 204);
+            this.cb_choiceF.Location = new System.Drawing.Point(19, 189);
             this.cb_choiceF.Name = "cb_choiceF";
             this.cb_choiceF.Size = new System.Drawing.Size(119, 29);
             this.cb_choiceF.TabIndex = 5;
@@ -72,7 +77,7 @@
             // cb_choiceE
             // 
             this.cb_choiceE.AutoSize = true;
-            this.cb_choiceE.Location = new System.Drawing.Point(54, 169);
+            this.cb_choiceE.Location = new System.Drawing.Point(19, 154);
             this.cb_choiceE.Name = "cb_choiceE";
             this.cb_choiceE.Size = new System.Drawing.Size(120, 29);
             this.cb_choiceE.TabIndex = 4;
@@ -82,7 +87,7 @@
             // cb_choiceD
             // 
             this.cb_choiceD.AutoSize = true;
-            this.cb_choiceD.Location = new System.Drawing.Point(55, 134);
+            this.cb_choiceD.Location = new System.Drawing.Point(20, 119);
             this.cb_choiceD.Name = "cb_choiceD";
             this.cb_choiceD.Size = new System.Drawing.Size(121, 29);
             this.cb_choiceD.TabIndex = 3;
@@ -92,7 +97,7 @@
             // cb_choiceC
             // 
             this.cb_choiceC.AutoSize = true;
-            this.cb_choiceC.Location = new System.Drawing.Point(54, 99);
+            this.cb_choiceC.Location = new System.Drawing.Point(19, 84);
             this.cb_choiceC.Name = "cb_choiceC";
             this.cb_choiceC.Size = new System.Drawing.Size(121, 29);
             this.cb_choiceC.TabIndex = 2;
@@ -102,7 +107,7 @@
             // cb_choiceB
             // 
             this.cb_choiceB.AutoSize = true;
-            this.cb_choiceB.Location = new System.Drawing.Point(55, 64);
+            this.cb_choiceB.Location = new System.Drawing.Point(20, 49);
             this.cb_choiceB.Name = "cb_choiceB";
             this.cb_choiceB.Size = new System.Drawing.Size(120, 29);
             this.cb_choiceB.TabIndex = 1;
@@ -112,7 +117,7 @@
             // cb_choiceA
             // 
             this.cb_choiceA.AutoSize = true;
-            this.cb_choiceA.Location = new System.Drawing.Point(54, 29);
+            this.cb_choiceA.Location = new System.Drawing.Point(19, 14);
             this.cb_choiceA.Name = "cb_choiceA";
             this.cb_choiceA.Size = new System.Drawing.Size(119, 29);
             this.cb_choiceA.TabIndex = 0;
@@ -171,6 +176,36 @@
             this.rtb_contentQuestion.TabIndex = 0;
             this.rtb_contentQuestion.Text = "";
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.btn_prev);
+            this.panel4.Controls.Add(this.btn_next);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 230);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(936, 43);
+            this.panel4.TabIndex = 6;
+            // 
+            // btn_next
+            // 
+            this.btn_next.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btn_next.Location = new System.Drawing.Point(770, 0);
+            this.btn_next.Name = "btn_next";
+            this.btn_next.Size = new System.Drawing.Size(166, 43);
+            this.btn_next.TabIndex = 0;
+            this.btn_next.Text = "Next";
+            this.btn_next.UseVisualStyleBackColor = true;
+            // 
+            // btn_prev
+            // 
+            this.btn_prev.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btn_prev.Location = new System.Drawing.Point(604, 0);
+            this.btn_prev.Name = "btn_prev";
+            this.btn_prev.Size = new System.Drawing.Size(166, 43);
+            this.btn_prev.TabIndex = 1;
+            this.btn_prev.Text = "Prev";
+            this.btn_prev.UseVisualStyleBackColor = true;
+            // 
             // ExaminationControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 25F);
@@ -187,6 +222,7 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -204,5 +240,8 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.RichTextBox rtb_contentQuestion;
         private System.Windows.Forms.Button btn_back;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btn_prev;
+        private System.Windows.Forms.Button btn_next;
     }
 }

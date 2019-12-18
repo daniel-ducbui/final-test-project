@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ExaminationManagement.Views.Student
 {
     public interface IAddQuestion
     {
-        string questionContent { get; set; }
-        string choiceA { get; set; }
-        string choiceB { get; set; }
-        string choiceC { get; set; }
-        string choiceD { get; set; }
-        string choiceE { get; set; }
-        string choiceF { get; set; }
-        string answer { get; set; }
+        RichTextBox questionContent { get; set; }
+        TextBox choiceA { get; set; }
+        TextBox choiceB { get; set; }
+        TextBox choiceC { get; set; }
+        TextBox choiceD { get; set; }
+        TextBox choiceE { get; set; }
+        TextBox choiceF { get; set; }
+        TextBox answer { get; set; }
+        DataGridView dgvTheQuestion { get; set; }
         int userID { get; }
 
+        event EventHandler LoadTheQuestion;
         event EventHandler SaveQuestion;
+        event EventHandler UpdateQuestion;
     }
 }
