@@ -48,7 +48,7 @@
             this.tb_username.Name = "tb_username";
             this.tb_username.Size = new System.Drawing.Size(260, 30);
             this.tb_username.TabIndex = 0;
-            this.tb_username.Text = "12340001@student.hcmus.edu.vn   ";
+            this.tb_username.Text = "tmtue@fit.hcmus.edu.vn";
             // 
             // label1
             // 
@@ -103,7 +103,7 @@
             this.tb_password.Name = "tb_password";
             this.tb_password.Size = new System.Drawing.Size(260, 30);
             this.tb_password.TabIndex = 0;
-            this.tb_password.Text = "090210CK1";
+            this.tb_password.Text = "11020";
             this.tb_password.UseSystemPasswordChar = true;
             // 
             // panel2

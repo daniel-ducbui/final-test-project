@@ -106,7 +106,7 @@ namespace ExaminationManagement.Presenters.Student
                     ChoiceE = view.choiceE.Text,
                     ChoiceF = view.choiceF.Text,
                     Answer = view.answer.Text,
-                    //Status = 0,
+                    Status = 0,
                     UserID = view.userID
                 };
                 using (var _data = new ExaminationManagementDataContext())

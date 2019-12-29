@@ -72,8 +72,9 @@ namespace ExaminationManagement
                 }
                 else if (checking == 1)
                 {
-                    teacherControlPanel = new TeacherControlPanel();
+                    teacherControlPanel = new TeacherControlPanel(this.userID);
                     teacherControlPanel.FormClosed += (s, args) => this.Close();
+
                     teacherControlPanel.Show();
                 }
                 else if (checking == 2)
