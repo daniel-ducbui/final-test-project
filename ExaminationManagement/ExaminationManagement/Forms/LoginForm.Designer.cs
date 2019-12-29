@@ -35,6 +35,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tb_password = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_quit = new System.Windows.Forms.Button();
             this.btn_login = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -47,6 +48,7 @@
             this.tb_username.Name = "tb_username";
             this.tb_username.Size = new System.Drawing.Size(196, 26);
             this.tb_username.TabIndex = 0;
+            this.tb_username.Text = "ducbui2991@gmail.com";
             // 
             // label1
             // 
@@ -96,20 +98,32 @@
             this.tb_password.Name = "tb_password";
             this.tb_password.Size = new System.Drawing.Size(196, 26);
             this.tb_password.TabIndex = 0;
+            this.tb_password.Text = "090212A1";
             this.tb_password.UseSystemPasswordChar = true;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btn_quit);
             this.panel2.Controls.Add(this.btn_login);
             this.panel2.Location = new System.Drawing.Point(12, 161);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(393, 47);
             this.panel2.TabIndex = 3;
             // 
+            // btn_quit
+            // 
+            this.btn_quit.Font = new System.Drawing.Font("Maven Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_quit.Location = new System.Drawing.Point(75, 3);
+            this.btn_quit.Name = "btn_quit";
+            this.btn_quit.Size = new System.Drawing.Size(124, 40);
+            this.btn_quit.TabIndex = 1;
+            this.btn_quit.Text = "Quit";
+            this.btn_quit.UseVisualStyleBackColor = true;
+            // 
             // btn_login
             // 
             this.btn_login.Font = new System.Drawing.Font("Maven Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_login.Location = new System.Drawing.Point(129, 4);
+            this.btn_login.Location = new System.Drawing.Point(205, 3);
             this.btn_login.Name = "btn_login";
             this.btn_login.Size = new System.Drawing.Size(124, 40);
             this.btn_login.TabIndex = 0;
@@ -145,6 +159,7 @@
         private System.Windows.Forms.TextBox tb_password;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btn_login;
+        private System.Windows.Forms.Button btn_quit;
     }
 }
 

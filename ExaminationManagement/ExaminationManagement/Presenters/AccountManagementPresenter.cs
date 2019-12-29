@@ -107,7 +107,7 @@ namespace ExaminationManagement.Presenters
             try
             {
                 // Insert to database
-                baseQuery.AddAccount(Name, PhoneNumber, Email, _dob, Address, ClassID, GradeID, AccountType, _temp);
+                baseQuery.ExecuteAccount(-1, Name, PhoneNumber, Email, _dob, Address, ClassID, GradeID, AccountType, _temp);
                 ErrorMessage = baseQuery.ErrorMessage;
             }
             catch (Exception ex)

@@ -74,7 +74,7 @@ namespace ExaminationManagement.Functions.UploadFile
                     string _temp = authentication.Encrypt(temp);
 
                     // Call add account function
-                    baseQuery.AddAccount(Name, PhoneNumber, Email, _dob, Address, ClassID, GradeID, AccountType, _temp);
+                    baseQuery.ExecuteAccount(-1, Name, PhoneNumber, Email, _dob, Address, ClassID, GradeID, AccountType, _temp);
 
                 }
             }
@@ -142,7 +142,7 @@ namespace ExaminationManagement.Functions.UploadFile
                     level = range.Cells[i, 7].Value2.ToString();
 
                     // Call add account function
-                    baseQuery.AddQuestion(content, c1, c2, c3, c4, c5, c6, answer, level, UserID);
+                    baseQuery.ExecuteQuestion(0, content, c1, c2, c3, c4, c5, c6, answer, level, 1, UserID);
 
                 }
             }

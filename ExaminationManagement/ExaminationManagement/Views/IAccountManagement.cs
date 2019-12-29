@@ -8,6 +8,7 @@ namespace ExaminationManagement.Views
 {
     public interface IAccountManagement
     {
+        int _userID { get; }
         string searchContent { get; set; }
         string name { get; set; }
         string phoneNumber { get; set; }

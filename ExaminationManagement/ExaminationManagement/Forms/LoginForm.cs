@@ -30,6 +30,12 @@ namespace ExaminationManagement
         {
             InitializeComponent();
             Load += LoginForm_Load;
+            btn_quit.Click += Btn_quit_Click;
+        }
+
+        private void Btn_quit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void LoginForm_Load(object sender, EventArgs e)

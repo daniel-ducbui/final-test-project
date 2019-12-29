@@ -42,12 +42,21 @@ namespace ExaminationManagement.Functions.ConnectDatabase
     partial void InsertExamineeList(ExamineeList instance);
     partial void UpdateExamineeList(ExamineeList instance);
     partial void DeleteExamineeList(ExamineeList instance);
-    partial void InsertQuestionList(QuestionList instance);
-    partial void UpdateQuestionList(QuestionList instance);
-    partial void DeleteQuestionList(QuestionList instance);
+    partial void InsertExamineeListDetail(ExamineeListDetail instance);
+    partial void UpdateExamineeListDetail(ExamineeListDetail instance);
+    partial void DeleteExamineeListDetail(ExamineeListDetail instance);
     partial void InsertResult(Result instance);
     partial void UpdateResult(Result instance);
     partial void DeleteResult(Result instance);
+    partial void InsertResultDetail(ResultDetail instance);
+    partial void UpdateResultDetail(ResultDetail instance);
+    partial void DeleteResultDetail(ResultDetail instance);
+    partial void InsertTestDetail(TestDetail instance);
+    partial void UpdateTestDetail(TestDetail instance);
+    partial void DeleteTestDetail(TestDetail instance);
+    partial void InsertTestList(TestList instance);
+    partial void UpdateTestList(TestList instance);
+    partial void DeleteTestList(TestList instance);
     partial void InsertTheExamination(TheExamination instance);
     partial void UpdateTheExamination(TheExamination instance);
     partial void DeleteTheExamination(TheExamination instance);
@@ -118,11 +127,11 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		public System.Data.Linq.Table<QuestionList> QuestionLists
+		public System.Data.Linq.Table<ExamineeListDetail> ExamineeListDetails
 		{
 			get
 			{
-				return this.GetTable<QuestionList>();
+				return this.GetTable<ExamineeListDetail>();
 			}
 		}
 		
@@ -131,6 +140,30 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			get
 			{
 				return this.GetTable<Result>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ResultDetail> ResultDetails
+		{
+			get
+			{
+				return this.GetTable<ResultDetail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TestDetail> TestDetails
+		{
+			get
+			{
+				return this.GetTable<TestDetail>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TestList> TestLists
+		{
+			get
+			{
+				return this.GetTable<TestList>();
 			}
 		}
 		
@@ -157,9 +190,7 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _AccountID;
-		
-		private System.Nullable<int> _UserID;
+		private int _UserID;
 		
 		private string _Username;
 		
@@ -169,7 +200,7 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		private System.DateTime _RegistryDate;
 		
-		private EntitySet<ExamineeList> _ExamineeLists;
+		private EntitySet<ExamineeListDetail> _ExamineeListDetails;
 		
 		private EntitySet<Result> _Results;
 		
@@ -179,9 +210,7 @@ namespace ExaminationManagement.Functions.ConnectDatabase
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnAccountIDChanging(int value);
-    partial void OnAccountIDChanged();
-    partial void OnUserIDChanging(System.Nullable<int> value);
+    partial void OnUserIDChanging(int value);
     partial void OnUserIDChanged();
     partial void OnUsernameChanging(string value);
     partial void OnUsernameChanged();
@@ -195,34 +224,14 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		public Account()
 		{
-			this._ExamineeLists = new EntitySet<ExamineeList>(new Action<ExamineeList>(this.attach_ExamineeLists), new Action<ExamineeList>(this.detach_ExamineeLists));
+			this._ExamineeListDetails = new EntitySet<ExamineeListDetail>(new Action<ExamineeListDetail>(this.attach_ExamineeListDetails), new Action<ExamineeListDetail>(this.detach_ExamineeListDetails));
 			this._Results = new EntitySet<Result>(new Action<Result>(this.attach_Results), new Action<Result>(this.detach_Results));
 			this._AccountDetail = default(EntityRef<AccountDetail>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int AccountID
-		{
-			get
-			{
-				return this._AccountID;
-			}
-			set
-			{
-				if ((this._AccountID != value))
-				{
-					this.OnAccountIDChanging(value);
-					this.SendPropertyChanging();
-					this._AccountID = value;
-					this.SendPropertyChanged("AccountID");
-					this.OnAccountIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int")]
-		public System.Nullable<int> UserID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int UserID
 		{
 			get
 			{
@@ -325,20 +334,20 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_ExamineeList", Storage="_ExamineeLists", ThisKey="AccountID", OtherKey="AccountID")]
-		public EntitySet<ExamineeList> ExamineeLists
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_ExamineeListDetail", Storage="_ExamineeListDetails", ThisKey="UserID", OtherKey="UserID")]
+		public EntitySet<ExamineeListDetail> ExamineeListDetails
 		{
 			get
 			{
-				return this._ExamineeLists;
+				return this._ExamineeListDetails;
 			}
 			set
 			{
-				this._ExamineeLists.Assign(value);
+				this._ExamineeListDetails.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Result", Storage="_Results", ThisKey="AccountID", OtherKey="AccountID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Result", Storage="_Results", ThisKey="UserID", OtherKey="UserID")]
 		public EntitySet<Result> Results
 		{
 			get
@@ -368,17 +377,17 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 					if ((previousValue != null))
 					{
 						this._AccountDetail.Entity = null;
-						previousValue.Accounts.Remove(this);
+						previousValue.Account = null;
 					}
 					this._AccountDetail.Entity = value;
 					if ((value != null))
 					{
-						value.Accounts.Add(this);
+						value.Account = this;
 						this._UserID = value.UserID;
 					}
 					else
 					{
-						this._UserID = default(Nullable<int>);
+						this._UserID = default(int);
 					}
 					this.SendPropertyChanged("AccountDetail");
 				}
@@ -405,13 +414,13 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		private void attach_ExamineeLists(ExamineeList entity)
+		private void attach_ExamineeListDetails(ExamineeListDetail entity)
 		{
 			this.SendPropertyChanging();
 			entity.Account = this;
 		}
 		
-		private void detach_ExamineeLists(ExamineeList entity)
+		private void detach_ExamineeListDetails(ExamineeListDetail entity)
 		{
 			this.SendPropertyChanging();
 			entity.Account = null;
@@ -436,36 +445,36 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _TestID;
+		private string _TestID;
 		
-		private int _QuestionListID;
+		private string _TestName;
 		
 		private EntitySet<Result> _Results;
 		
-		private EntitySet<TheExamination> _TheExaminations;
+		private EntitySet<TestDetail> _TestDetails;
 		
-		private EntityRef<QuestionList> _QuestionList;
+		private EntitySet<TestList> _TestLists;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnTestIDChanging(int value);
+    partial void OnTestIDChanging(string value);
     partial void OnTestIDChanged();
-    partial void OnQuestionListIDChanging(int value);
-    partial void OnQuestionListIDChanged();
+    partial void OnTestNameChanging(string value);
+    partial void OnTestNameChanged();
     #endregion
 		
 		public TheTest()
 		{
 			this._Results = new EntitySet<Result>(new Action<Result>(this.attach_Results), new Action<Result>(this.detach_Results));
-			this._TheExaminations = new EntitySet<TheExamination>(new Action<TheExamination>(this.attach_TheExaminations), new Action<TheExamination>(this.detach_TheExaminations));
-			this._QuestionList = default(EntityRef<QuestionList>);
+			this._TestDetails = new EntitySet<TestDetail>(new Action<TestDetail>(this.attach_TestDetails), new Action<TestDetail>(this.detach_TestDetails));
+			this._TestLists = new EntitySet<TestList>(new Action<TestList>(this.attach_TestLists), new Action<TestList>(this.detach_TestLists));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int TestID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string TestID
 		{
 			get
 			{
@@ -484,26 +493,22 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionListID", DbType="Int NOT NULL")]
-		public int QuestionListID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestName", DbType="Char(20) NOT NULL", CanBeNull=false)]
+		public string TestName
 		{
 			get
 			{
-				return this._QuestionListID;
+				return this._TestName;
 			}
 			set
 			{
-				if ((this._QuestionListID != value))
+				if ((this._TestName != value))
 				{
-					if (this._QuestionList.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnQuestionListIDChanging(value);
+					this.OnTestNameChanging(value);
 					this.SendPropertyChanging();
-					this._QuestionListID = value;
-					this.SendPropertyChanged("QuestionListID");
-					this.OnQuestionListIDChanged();
+					this._TestName = value;
+					this.SendPropertyChanged("TestName");
+					this.OnTestNameChanged();
 				}
 			}
 		}
@@ -521,50 +526,29 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheTest_TheExamination", Storage="_TheExaminations", ThisKey="TestID", OtherKey="TestID")]
-		public EntitySet<TheExamination> TheExaminations
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheTest_TestDetail", Storage="_TestDetails", ThisKey="TestID", OtherKey="TestID")]
+		public EntitySet<TestDetail> TestDetails
 		{
 			get
 			{
-				return this._TheExaminations;
+				return this._TestDetails;
 			}
 			set
 			{
-				this._TheExaminations.Assign(value);
+				this._TestDetails.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="QuestionList_TheTest", Storage="_QuestionList", ThisKey="QuestionListID", OtherKey="QuestionListID", IsForeignKey=true)]
-		public QuestionList QuestionList
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheTest_TestList", Storage="_TestLists", ThisKey="TestID", OtherKey="TestID")]
+		public EntitySet<TestList> TestLists
 		{
 			get
 			{
-				return this._QuestionList.Entity;
+				return this._TestLists;
 			}
 			set
 			{
-				QuestionList previousValue = this._QuestionList.Entity;
-				if (((previousValue != value) 
-							|| (this._QuestionList.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._QuestionList.Entity = null;
-						previousValue.TheTests.Remove(this);
-					}
-					this._QuestionList.Entity = value;
-					if ((value != null))
-					{
-						value.TheTests.Add(this);
-						this._QuestionListID = value.QuestionListID;
-					}
-					else
-					{
-						this._QuestionListID = default(int);
-					}
-					this.SendPropertyChanged("QuestionList");
-				}
+				this._TestLists.Assign(value);
 			}
 		}
 		
@@ -600,13 +584,25 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			entity.TheTest = null;
 		}
 		
-		private void attach_TheExaminations(TheExamination entity)
+		private void attach_TestDetails(TestDetail entity)
 		{
 			this.SendPropertyChanging();
 			entity.TheTest = this;
 		}
 		
-		private void detach_TheExaminations(TheExamination entity)
+		private void detach_TestDetails(TestDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.TheTest = null;
+		}
+		
+		private void attach_TestLists(TestList entity)
+		{
+			this.SendPropertyChanging();
+			entity.TheTest = this;
+		}
+		
+		private void detach_TestLists(TestList entity)
 		{
 			this.SendPropertyChanging();
 			entity.TheTest = null;
@@ -639,7 +635,7 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		private string _temp;
 		
-		private EntitySet<Account> _Accounts;
+		private EntityRef<Account> _Account;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -669,7 +665,7 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		public AccountDetail()
 		{
-			this._Accounts = new EntitySet<Account>(new Action<Account>(this.attach_Accounts), new Action<Account>(this.detach_Accounts));
+			this._Account = default(EntityRef<Account>);
 			OnCreated();
 		}
 		
@@ -873,141 +869,7 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AccountDetail_Account", Storage="_Accounts", ThisKey="UserID", OtherKey="UserID")]
-		public EntitySet<Account> Accounts
-		{
-			get
-			{
-				return this._Accounts;
-			}
-			set
-			{
-				this._Accounts.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Accounts(Account entity)
-		{
-			this.SendPropertyChanging();
-			entity.AccountDetail = this;
-		}
-		
-		private void detach_Accounts(Account entity)
-		{
-			this.SendPropertyChanging();
-			entity.AccountDetail = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ExamineeList")]
-	public partial class ExamineeList : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ExamineeListID;
-		
-		private int _AccountID;
-		
-		private EntitySet<TheExamination> _TheExaminations;
-		
-		private EntityRef<Account> _Account;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnExamineeListIDChanging(int value);
-    partial void OnExamineeListIDChanged();
-    partial void OnAccountIDChanging(int value);
-    partial void OnAccountIDChanged();
-    #endregion
-		
-		public ExamineeList()
-		{
-			this._TheExaminations = new EntitySet<TheExamination>(new Action<TheExamination>(this.attach_TheExaminations), new Action<TheExamination>(this.detach_TheExaminations));
-			this._Account = default(EntityRef<Account>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamineeListID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ExamineeListID
-		{
-			get
-			{
-				return this._ExamineeListID;
-			}
-			set
-			{
-				if ((this._ExamineeListID != value))
-				{
-					this.OnExamineeListIDChanging(value);
-					this.SendPropertyChanging();
-					this._ExamineeListID = value;
-					this.SendPropertyChanged("ExamineeListID");
-					this.OnExamineeListIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountID", DbType="Int NOT NULL")]
-		public int AccountID
-		{
-			get
-			{
-				return this._AccountID;
-			}
-			set
-			{
-				if ((this._AccountID != value))
-				{
-					if (this._Account.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnAccountIDChanging(value);
-					this.SendPropertyChanging();
-					this._AccountID = value;
-					this.SendPropertyChanged("AccountID");
-					this.OnAccountIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ExamineeList_TheExamination", Storage="_TheExaminations", ThisKey="ExamineeListID", OtherKey="ExamineeListID")]
-		public EntitySet<TheExamination> TheExaminations
-		{
-			get
-			{
-				return this._TheExaminations;
-			}
-			set
-			{
-				this._TheExaminations.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_ExamineeList", Storage="_Account", ThisKey="AccountID", OtherKey="AccountID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AccountDetail_Account", Storage="_Account", ThisKey="UserID", OtherKey="UserID", IsUnique=true, IsForeignKey=false)]
 		public Account Account
 		{
 			get
@@ -1024,17 +886,12 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 					if ((previousValue != null))
 					{
 						this._Account.Entity = null;
-						previousValue.ExamineeLists.Remove(this);
+						previousValue.AccountDetail = null;
 					}
 					this._Account.Entity = value;
 					if ((value != null))
 					{
-						value.ExamineeLists.Add(this);
-						this._AccountID = value.AccountID;
-					}
-					else
-					{
-						this._AccountID = default(int);
+						value.AccountDetail = this;
 					}
 					this.SendPropertyChanged("Account");
 				}
@@ -1060,163 +917,102 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void attach_TheExaminations(TheExamination entity)
-		{
-			this.SendPropertyChanging();
-			entity.ExamineeList = this;
-		}
-		
-		private void detach_TheExaminations(TheExamination entity)
-		{
-			this.SendPropertyChanging();
-			entity.ExamineeList = null;
-		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.QuestionList")]
-	public partial class QuestionList : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ExamineeList")]
+	public partial class ExamineeList : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _QuestionListID;
+		private int _ExamineeListID;
 		
-		private int _QuestionID;
+		private string _ExamineeListName;
 		
-		private string _QuestionListName;
+		private EntitySet<ExamineeListDetail> _ExamineeListDetails;
 		
-		private EntitySet<TheTest> _TheTests;
-		
-		private EntityRef<TheQuestion> _TheQuestion;
+		private EntitySet<TheExamination> _TheExaminations;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnQuestionListIDChanging(int value);
-    partial void OnQuestionListIDChanged();
-    partial void OnQuestionIDChanging(int value);
-    partial void OnQuestionIDChanged();
-    partial void OnQuestionListNameChanging(string value);
-    partial void OnQuestionListNameChanged();
+    partial void OnExamineeListIDChanging(int value);
+    partial void OnExamineeListIDChanged();
+    partial void OnExamineeListNameChanging(string value);
+    partial void OnExamineeListNameChanged();
     #endregion
 		
-		public QuestionList()
+		public ExamineeList()
 		{
-			this._TheTests = new EntitySet<TheTest>(new Action<TheTest>(this.attach_TheTests), new Action<TheTest>(this.detach_TheTests));
-			this._TheQuestion = default(EntityRef<TheQuestion>);
+			this._ExamineeListDetails = new EntitySet<ExamineeListDetail>(new Action<ExamineeListDetail>(this.attach_ExamineeListDetails), new Action<ExamineeListDetail>(this.detach_ExamineeListDetails));
+			this._TheExaminations = new EntitySet<TheExamination>(new Action<TheExamination>(this.attach_TheExaminations), new Action<TheExamination>(this.detach_TheExaminations));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionListID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int QuestionListID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamineeListID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ExamineeListID
 		{
 			get
 			{
-				return this._QuestionListID;
+				return this._ExamineeListID;
 			}
 			set
 			{
-				if ((this._QuestionListID != value))
+				if ((this._ExamineeListID != value))
 				{
-					this.OnQuestionListIDChanging(value);
+					this.OnExamineeListIDChanging(value);
 					this.SendPropertyChanging();
-					this._QuestionListID = value;
-					this.SendPropertyChanged("QuestionListID");
-					this.OnQuestionListIDChanged();
+					this._ExamineeListID = value;
+					this.SendPropertyChanged("ExamineeListID");
+					this.OnExamineeListIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionID", DbType="Int NOT NULL")]
-		public int QuestionID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamineeListName", DbType="Char(20) NOT NULL", CanBeNull=false)]
+		public string ExamineeListName
 		{
 			get
 			{
-				return this._QuestionID;
+				return this._ExamineeListName;
 			}
 			set
 			{
-				if ((this._QuestionID != value))
+				if ((this._ExamineeListName != value))
 				{
-					if (this._TheQuestion.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnQuestionIDChanging(value);
+					this.OnExamineeListNameChanging(value);
 					this.SendPropertyChanging();
-					this._QuestionID = value;
-					this.SendPropertyChanged("QuestionID");
-					this.OnQuestionIDChanged();
+					this._ExamineeListName = value;
+					this.SendPropertyChanged("ExamineeListName");
+					this.OnExamineeListNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionListName", DbType="NChar(20) NOT NULL", CanBeNull=false)]
-		public string QuestionListName
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ExamineeList_ExamineeListDetail", Storage="_ExamineeListDetails", ThisKey="ExamineeListID", OtherKey="ExamineeListID")]
+		public EntitySet<ExamineeListDetail> ExamineeListDetails
 		{
 			get
 			{
-				return this._QuestionListName;
+				return this._ExamineeListDetails;
 			}
 			set
 			{
-				if ((this._QuestionListName != value))
-				{
-					this.OnQuestionListNameChanging(value);
-					this.SendPropertyChanging();
-					this._QuestionListName = value;
-					this.SendPropertyChanged("QuestionListName");
-					this.OnQuestionListNameChanged();
-				}
+				this._ExamineeListDetails.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="QuestionList_TheTest", Storage="_TheTests", ThisKey="QuestionListID", OtherKey="QuestionListID")]
-		public EntitySet<TheTest> TheTests
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ExamineeList_TheExamination", Storage="_TheExaminations", ThisKey="ExamineeListID", OtherKey="ExamineeListID")]
+		public EntitySet<TheExamination> TheExaminations
 		{
 			get
 			{
-				return this._TheTests;
+				return this._TheExaminations;
 			}
 			set
 			{
-				this._TheTests.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheQuestion_QuestionList", Storage="_TheQuestion", ThisKey="QuestionID", OtherKey="QuestionID", IsForeignKey=true)]
-		public TheQuestion TheQuestion
-		{
-			get
-			{
-				return this._TheQuestion.Entity;
-			}
-			set
-			{
-				TheQuestion previousValue = this._TheQuestion.Entity;
-				if (((previousValue != value) 
-							|| (this._TheQuestion.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TheQuestion.Entity = null;
-						previousValue.QuestionLists.Remove(this);
-					}
-					this._TheQuestion.Entity = value;
-					if ((value != null))
-					{
-						value.QuestionLists.Add(this);
-						this._QuestionID = value.QuestionID;
-					}
-					else
-					{
-						this._QuestionID = default(int);
-					}
-					this.SendPropertyChanged("TheQuestion");
-				}
+				this._TheExaminations.Assign(value);
 			}
 		}
 		
@@ -1240,16 +1036,220 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		private void attach_TheTests(TheTest entity)
+		private void attach_ExamineeListDetails(ExamineeListDetail entity)
 		{
 			this.SendPropertyChanging();
-			entity.QuestionList = this;
+			entity.ExamineeList = this;
 		}
 		
-		private void detach_TheTests(TheTest entity)
+		private void detach_ExamineeListDetails(ExamineeListDetail entity)
 		{
 			this.SendPropertyChanging();
-			entity.QuestionList = null;
+			entity.ExamineeList = null;
+		}
+		
+		private void attach_TheExaminations(TheExamination entity)
+		{
+			this.SendPropertyChanging();
+			entity.ExamineeList = this;
+		}
+		
+		private void detach_TheExaminations(TheExamination entity)
+		{
+			this.SendPropertyChanging();
+			entity.ExamineeList = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ExamineeListDetails")]
+	public partial class ExamineeListDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ExamineeListID;
+		
+		private int _UserID;
+		
+		private int _Status;
+		
+		private EntityRef<Account> _Account;
+		
+		private EntityRef<ExamineeList> _ExamineeList;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnExamineeListIDChanging(int value);
+    partial void OnExamineeListIDChanged();
+    partial void OnUserIDChanging(int value);
+    partial void OnUserIDChanged();
+    partial void OnStatusChanging(int value);
+    partial void OnStatusChanged();
+    #endregion
+		
+		public ExamineeListDetail()
+		{
+			this._Account = default(EntityRef<Account>);
+			this._ExamineeList = default(EntityRef<ExamineeList>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExamineeListID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ExamineeListID
+		{
+			get
+			{
+				return this._ExamineeListID;
+			}
+			set
+			{
+				if ((this._ExamineeListID != value))
+				{
+					if (this._ExamineeList.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnExamineeListIDChanging(value);
+					this.SendPropertyChanging();
+					this._ExamineeListID = value;
+					this.SendPropertyChanged("ExamineeListID");
+					this.OnExamineeListIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int UserID
+		{
+			get
+			{
+				return this._UserID;
+			}
+			set
+			{
+				if ((this._UserID != value))
+				{
+					if (this._Account.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int NOT NULL")]
+		public int Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_ExamineeListDetail", Storage="_Account", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
+		public Account Account
+		{
+			get
+			{
+				return this._Account.Entity;
+			}
+			set
+			{
+				Account previousValue = this._Account.Entity;
+				if (((previousValue != value) 
+							|| (this._Account.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Account.Entity = null;
+						previousValue.ExamineeListDetails.Remove(this);
+					}
+					this._Account.Entity = value;
+					if ((value != null))
+					{
+						value.ExamineeListDetails.Add(this);
+						this._UserID = value.UserID;
+					}
+					else
+					{
+						this._UserID = default(int);
+					}
+					this.SendPropertyChanged("Account");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ExamineeList_ExamineeListDetail", Storage="_ExamineeList", ThisKey="ExamineeListID", OtherKey="ExamineeListID", IsForeignKey=true)]
+		public ExamineeList ExamineeList
+		{
+			get
+			{
+				return this._ExamineeList.Entity;
+			}
+			set
+			{
+				ExamineeList previousValue = this._ExamineeList.Entity;
+				if (((previousValue != value) 
+							|| (this._ExamineeList.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ExamineeList.Entity = null;
+						previousValue.ExamineeListDetails.Remove(this);
+					}
+					this._ExamineeList.Entity = value;
+					if ((value != null))
+					{
+						value.ExamineeListDetails.Add(this);
+						this._ExamineeListID = value.ExamineeListID;
+					}
+					else
+					{
+						this._ExamineeListID = default(int);
+					}
+					this.SendPropertyChanged("ExamineeList");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -1261,11 +1261,13 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		private int _ResultID;
 		
-		private int _AccountID;
+		private int _UserID;
 		
-		private int _TestID;
+		private string _TestID;
 		
-		private int _Score;
+		private int _TotalScore;
+		
+		private EntitySet<ResultDetail> _ResultDetails;
 		
 		private EntityRef<Account> _Account;
 		
@@ -1277,16 +1279,17 @@ namespace ExaminationManagement.Functions.ConnectDatabase
     partial void OnCreated();
     partial void OnResultIDChanging(int value);
     partial void OnResultIDChanged();
-    partial void OnAccountIDChanging(int value);
-    partial void OnAccountIDChanged();
-    partial void OnTestIDChanging(int value);
+    partial void OnUserIDChanging(int value);
+    partial void OnUserIDChanged();
+    partial void OnTestIDChanging(string value);
     partial void OnTestIDChanged();
-    partial void OnScoreChanging(int value);
-    partial void OnScoreChanged();
+    partial void OnTotalScoreChanging(int value);
+    partial void OnTotalScoreChanged();
     #endregion
 		
 		public Result()
 		{
+			this._ResultDetails = new EntitySet<ResultDetail>(new Action<ResultDetail>(this.attach_ResultDetails), new Action<ResultDetail>(this.detach_ResultDetails));
 			this._Account = default(EntityRef<Account>);
 			this._TheTest = default(EntityRef<TheTest>);
 			OnCreated();
@@ -1312,32 +1315,32 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountID", DbType="Int NOT NULL")]
-		public int AccountID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL")]
+		public int UserID
 		{
 			get
 			{
-				return this._AccountID;
+				return this._UserID;
 			}
 			set
 			{
-				if ((this._AccountID != value))
+				if ((this._UserID != value))
 				{
 					if (this._Account.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnAccountIDChanging(value);
+					this.OnUserIDChanging(value);
 					this.SendPropertyChanging();
-					this._AccountID = value;
-					this.SendPropertyChanged("AccountID");
-					this.OnAccountIDChanged();
+					this._UserID = value;
+					this.SendPropertyChanged("UserID");
+					this.OnUserIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestID", DbType="Int NOT NULL")]
-		public int TestID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string TestID
 		{
 			get
 			{
@@ -1360,27 +1363,40 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Score", DbType="Int NOT NULL")]
-		public int Score
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalScore", DbType="Int NOT NULL")]
+		public int TotalScore
 		{
 			get
 			{
-				return this._Score;
+				return this._TotalScore;
 			}
 			set
 			{
-				if ((this._Score != value))
+				if ((this._TotalScore != value))
 				{
-					this.OnScoreChanging(value);
+					this.OnTotalScoreChanging(value);
 					this.SendPropertyChanging();
-					this._Score = value;
-					this.SendPropertyChanged("Score");
-					this.OnScoreChanged();
+					this._TotalScore = value;
+					this.SendPropertyChanged("TotalScore");
+					this.OnTotalScoreChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Result", Storage="_Account", ThisKey="AccountID", OtherKey="AccountID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Result_ResultDetail", Storage="_ResultDetails", ThisKey="ResultID", OtherKey="ResultID")]
+		public EntitySet<ResultDetail> ResultDetails
+		{
+			get
+			{
+				return this._ResultDetails;
+			}
+			set
+			{
+				this._ResultDetails.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Account_Result", Storage="_Account", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true)]
 		public Account Account
 		{
 			get
@@ -1403,11 +1419,11 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 					if ((value != null))
 					{
 						value.Results.Add(this);
-						this._AccountID = value.AccountID;
+						this._UserID = value.UserID;
 					}
 					else
 					{
-						this._AccountID = default(int);
+						this._UserID = default(int);
 					}
 					this.SendPropertyChanged("Account");
 				}
@@ -1441,9 +1457,573 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 					}
 					else
 					{
-						this._TestID = default(int);
+						this._TestID = default(string);
 					}
 					this.SendPropertyChanged("TheTest");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ResultDetails(ResultDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Result = this;
+		}
+		
+		private void detach_ResultDetails(ResultDetail entity)
+		{
+			this.SendPropertyChanging();
+			entity.Result = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ResultDetails")]
+	public partial class ResultDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _QuestionID;
+		
+		private int _ResultID;
+		
+		private string _Answer;
+		
+		private int _Score;
+		
+		private EntityRef<Result> _Result;
+		
+		private EntityRef<TheQuestion> _TheQuestion;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnQuestionIDChanging(int value);
+    partial void OnQuestionIDChanged();
+    partial void OnResultIDChanging(int value);
+    partial void OnResultIDChanged();
+    partial void OnAnswerChanging(string value);
+    partial void OnAnswerChanged();
+    partial void OnScoreChanging(int value);
+    partial void OnScoreChanged();
+    #endregion
+		
+		public ResultDetail()
+		{
+			this._Result = default(EntityRef<Result>);
+			this._TheQuestion = default(EntityRef<TheQuestion>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int QuestionID
+		{
+			get
+			{
+				return this._QuestionID;
+			}
+			set
+			{
+				if ((this._QuestionID != value))
+				{
+					if (this._TheQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestionIDChanging(value);
+					this.SendPropertyChanging();
+					this._QuestionID = value;
+					this.SendPropertyChanged("QuestionID");
+					this.OnQuestionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ResultID", DbType="Int NOT NULL")]
+		public int ResultID
+		{
+			get
+			{
+				return this._ResultID;
+			}
+			set
+			{
+				if ((this._ResultID != value))
+				{
+					if (this._Result.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnResultIDChanging(value);
+					this.SendPropertyChanging();
+					this._ResultID = value;
+					this.SendPropertyChanged("ResultID");
+					this.OnResultIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Answer", DbType="Char(20) NOT NULL", CanBeNull=false)]
+		public string Answer
+		{
+			get
+			{
+				return this._Answer;
+			}
+			set
+			{
+				if ((this._Answer != value))
+				{
+					this.OnAnswerChanging(value);
+					this.SendPropertyChanging();
+					this._Answer = value;
+					this.SendPropertyChanged("Answer");
+					this.OnAnswerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Score", DbType="Int NOT NULL")]
+		public int Score
+		{
+			get
+			{
+				return this._Score;
+			}
+			set
+			{
+				if ((this._Score != value))
+				{
+					this.OnScoreChanging(value);
+					this.SendPropertyChanging();
+					this._Score = value;
+					this.SendPropertyChanged("Score");
+					this.OnScoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Result_ResultDetail", Storage="_Result", ThisKey="ResultID", OtherKey="ResultID", IsForeignKey=true)]
+		public Result Result
+		{
+			get
+			{
+				return this._Result.Entity;
+			}
+			set
+			{
+				Result previousValue = this._Result.Entity;
+				if (((previousValue != value) 
+							|| (this._Result.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Result.Entity = null;
+						previousValue.ResultDetails.Remove(this);
+					}
+					this._Result.Entity = value;
+					if ((value != null))
+					{
+						value.ResultDetails.Add(this);
+						this._ResultID = value.ResultID;
+					}
+					else
+					{
+						this._ResultID = default(int);
+					}
+					this.SendPropertyChanged("Result");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheQuestion_ResultDetail", Storage="_TheQuestion", ThisKey="QuestionID", OtherKey="QuestionID", IsForeignKey=true)]
+		public TheQuestion TheQuestion
+		{
+			get
+			{
+				return this._TheQuestion.Entity;
+			}
+			set
+			{
+				TheQuestion previousValue = this._TheQuestion.Entity;
+				if (((previousValue != value) 
+							|| (this._TheQuestion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TheQuestion.Entity = null;
+						previousValue.ResultDetail = null;
+					}
+					this._TheQuestion.Entity = value;
+					if ((value != null))
+					{
+						value.ResultDetail = this;
+						this._QuestionID = value.QuestionID;
+					}
+					else
+					{
+						this._QuestionID = default(int);
+					}
+					this.SendPropertyChanged("TheQuestion");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TestDetails")]
+	public partial class TestDetail : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _TestID;
+		
+		private int _QuestionID;
+		
+		private EntityRef<TheTest> _TheTest;
+		
+		private EntityRef<TheQuestion> _TheQuestion;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTestIDChanging(string value);
+    partial void OnTestIDChanged();
+    partial void OnQuestionIDChanging(int value);
+    partial void OnQuestionIDChanged();
+    #endregion
+		
+		public TestDetail()
+		{
+			this._TheTest = default(EntityRef<TheTest>);
+			this._TheQuestion = default(EntityRef<TheQuestion>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string TestID
+		{
+			get
+			{
+				return this._TestID;
+			}
+			set
+			{
+				if ((this._TestID != value))
+				{
+					if (this._TheTest.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTestIDChanging(value);
+					this.SendPropertyChanging();
+					this._TestID = value;
+					this.SendPropertyChanged("TestID");
+					this.OnTestIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QuestionID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int QuestionID
+		{
+			get
+			{
+				return this._QuestionID;
+			}
+			set
+			{
+				if ((this._QuestionID != value))
+				{
+					if (this._TheQuestion.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnQuestionIDChanging(value);
+					this.SendPropertyChanging();
+					this._QuestionID = value;
+					this.SendPropertyChanged("QuestionID");
+					this.OnQuestionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheTest_TestDetail", Storage="_TheTest", ThisKey="TestID", OtherKey="TestID", IsForeignKey=true)]
+		public TheTest TheTest
+		{
+			get
+			{
+				return this._TheTest.Entity;
+			}
+			set
+			{
+				TheTest previousValue = this._TheTest.Entity;
+				if (((previousValue != value) 
+							|| (this._TheTest.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TheTest.Entity = null;
+						previousValue.TestDetails.Remove(this);
+					}
+					this._TheTest.Entity = value;
+					if ((value != null))
+					{
+						value.TestDetails.Add(this);
+						this._TestID = value.TestID;
+					}
+					else
+					{
+						this._TestID = default(string);
+					}
+					this.SendPropertyChanged("TheTest");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheQuestion_TestDetail", Storage="_TheQuestion", ThisKey="QuestionID", OtherKey="QuestionID", IsForeignKey=true)]
+		public TheQuestion TheQuestion
+		{
+			get
+			{
+				return this._TheQuestion.Entity;
+			}
+			set
+			{
+				TheQuestion previousValue = this._TheQuestion.Entity;
+				if (((previousValue != value) 
+							|| (this._TheQuestion.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TheQuestion.Entity = null;
+						previousValue.TestDetails.Remove(this);
+					}
+					this._TheQuestion.Entity = value;
+					if ((value != null))
+					{
+						value.TestDetails.Add(this);
+						this._QuestionID = value.QuestionID;
+					}
+					else
+					{
+						this._QuestionID = default(int);
+					}
+					this.SendPropertyChanged("TheQuestion");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TestList")]
+	public partial class TestList : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _TestListID;
+		
+		private string _TestID;
+		
+		private EntityRef<TheTest> _TheTest;
+		
+		private EntityRef<TheExamination> _TheExamination;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTestListIDChanging(string value);
+    partial void OnTestListIDChanged();
+    partial void OnTestIDChanging(string value);
+    partial void OnTestIDChanged();
+    #endregion
+		
+		public TestList()
+		{
+			this._TheTest = default(EntityRef<TheTest>);
+			this._TheExamination = default(EntityRef<TheExamination>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestListID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string TestListID
+		{
+			get
+			{
+				return this._TestListID;
+			}
+			set
+			{
+				if ((this._TestListID != value))
+				{
+					if (this._TheExamination.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTestListIDChanging(value);
+					this.SendPropertyChanging();
+					this._TestListID = value;
+					this.SendPropertyChanged("TestListID");
+					this.OnTestListIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestID", DbType="Char(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string TestID
+		{
+			get
+			{
+				return this._TestID;
+			}
+			set
+			{
+				if ((this._TestID != value))
+				{
+					if (this._TheTest.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTestIDChanging(value);
+					this.SendPropertyChanging();
+					this._TestID = value;
+					this.SendPropertyChanged("TestID");
+					this.OnTestIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheTest_TestList", Storage="_TheTest", ThisKey="TestID", OtherKey="TestID", IsForeignKey=true)]
+		public TheTest TheTest
+		{
+			get
+			{
+				return this._TheTest.Entity;
+			}
+			set
+			{
+				TheTest previousValue = this._TheTest.Entity;
+				if (((previousValue != value) 
+							|| (this._TheTest.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TheTest.Entity = null;
+						previousValue.TestLists.Remove(this);
+					}
+					this._TheTest.Entity = value;
+					if ((value != null))
+					{
+						value.TestLists.Add(this);
+						this._TestID = value.TestID;
+					}
+					else
+					{
+						this._TestID = default(string);
+					}
+					this.SendPropertyChanged("TheTest");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheExamination_TestList", Storage="_TheExamination", ThisKey="TestListID", OtherKey="TestListID", IsForeignKey=true)]
+		public TheExamination TheExamination
+		{
+			get
+			{
+				return this._TheExamination.Entity;
+			}
+			set
+			{
+				TheExamination previousValue = this._TheExamination.Entity;
+				if (((previousValue != value) 
+							|| (this._TheExamination.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._TheExamination.Entity = null;
+						previousValue.TestLists.Remove(this);
+					}
+					this._TheExamination.Entity = value;
+					if ((value != null))
+					{
+						value.TestLists.Add(this);
+						this._TestListID = value.TestListID;
+					}
+					else
+					{
+						this._TestListID = default(string);
+					}
+					this.SendPropertyChanged("TheExamination");
 				}
 			}
 		}
@@ -1477,7 +2057,7 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		private int _ExaminationID;
 		
-		private System.Nullable<int> _TestID;
+		private string _TestListID;
 		
 		private System.Nullable<int> _ExamineeListID;
 		
@@ -1487,6 +2067,8 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		private int _GradeID;
 		
+		private int _Time;
+		
 		private string _Creator;
 		
 		private System.DateTime _CreateDate;
@@ -1495,9 +2077,9 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		private System.Nullable<System.DateTime> _EndDate;
 		
-		private EntityRef<ExamineeList> _ExamineeList;
+		private EntitySet<TestList> _TestLists;
 		
-		private EntityRef<TheTest> _TheTest;
+		private EntityRef<ExamineeList> _ExamineeList;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1505,8 +2087,8 @@ namespace ExaminationManagement.Functions.ConnectDatabase
     partial void OnCreated();
     partial void OnExaminationIDChanging(int value);
     partial void OnExaminationIDChanged();
-    partial void OnTestIDChanging(System.Nullable<int> value);
-    partial void OnTestIDChanged();
+    partial void OnTestListIDChanging(string value);
+    partial void OnTestListIDChanged();
     partial void OnExamineeListIDChanging(System.Nullable<int> value);
     partial void OnExamineeListIDChanged();
     partial void OnExaminationNameChanging(string value);
@@ -1515,6 +2097,8 @@ namespace ExaminationManagement.Functions.ConnectDatabase
     partial void OnExaminationTypeChanged();
     partial void OnGradeIDChanging(int value);
     partial void OnGradeIDChanged();
+    partial void OnTimeChanging(int value);
+    partial void OnTimeChanged();
     partial void OnCreatorChanging(string value);
     partial void OnCreatorChanged();
     partial void OnCreateDateChanging(System.DateTime value);
@@ -1527,8 +2111,8 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		public TheExamination()
 		{
+			this._TestLists = new EntitySet<TestList>(new Action<TestList>(this.attach_TestLists), new Action<TestList>(this.detach_TestLists));
 			this._ExamineeList = default(EntityRef<ExamineeList>);
-			this._TheTest = default(EntityRef<TheTest>);
 			OnCreated();
 		}
 		
@@ -1552,26 +2136,22 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestID", DbType="Int")]
-		public System.Nullable<int> TestID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestListID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		public string TestListID
 		{
 			get
 			{
-				return this._TestID;
+				return this._TestListID;
 			}
 			set
 			{
-				if ((this._TestID != value))
+				if ((this._TestListID != value))
 				{
-					if (this._TheTest.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTestIDChanging(value);
+					this.OnTestListIDChanging(value);
 					this.SendPropertyChanging();
-					this._TestID = value;
-					this.SendPropertyChanged("TestID");
-					this.OnTestIDChanged();
+					this._TestListID = value;
+					this.SendPropertyChanged("TestListID");
+					this.OnTestListIDChanged();
 				}
 			}
 		}
@@ -1660,6 +2240,26 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Time", DbType="Int NOT NULL")]
+		public int Time
+		{
+			get
+			{
+				return this._Time;
+			}
+			set
+			{
+				if ((this._Time != value))
+				{
+					this.OnTimeChanging(value);
+					this.SendPropertyChanging();
+					this._Time = value;
+					this.SendPropertyChanged("Time");
+					this.OnTimeChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Creator", DbType="Char(30) NOT NULL", CanBeNull=false)]
 		public string Creator
 		{
@@ -1740,6 +2340,19 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheExamination_TestList", Storage="_TestLists", ThisKey="TestListID", OtherKey="TestListID")]
+		public EntitySet<TestList> TestLists
+		{
+			get
+			{
+				return this._TestLists;
+			}
+			set
+			{
+				this._TestLists.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ExamineeList_TheExamination", Storage="_ExamineeList", ThisKey="ExamineeListID", OtherKey="ExamineeListID", IsForeignKey=true)]
 		public ExamineeList ExamineeList
 		{
@@ -1774,40 +2387,6 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheTest_TheExamination", Storage="_TheTest", ThisKey="TestID", OtherKey="TestID", IsForeignKey=true)]
-		public TheTest TheTest
-		{
-			get
-			{
-				return this._TheTest.Entity;
-			}
-			set
-			{
-				TheTest previousValue = this._TheTest.Entity;
-				if (((previousValue != value) 
-							|| (this._TheTest.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._TheTest.Entity = null;
-						previousValue.TheExaminations.Remove(this);
-					}
-					this._TheTest.Entity = value;
-					if ((value != null))
-					{
-						value.TheExaminations.Add(this);
-						this._TestID = value.TestID;
-					}
-					else
-					{
-						this._TestID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("TheTest");
-				}
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -1826,6 +2405,18 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_TestLists(TestList entity)
+		{
+			this.SendPropertyChanging();
+			entity.TheExamination = this;
+		}
+		
+		private void detach_TestLists(TestList entity)
+		{
+			this.SendPropertyChanging();
+			entity.TheExamination = null;
 		}
 	}
 	
@@ -1857,9 +2448,13 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		private string _Answer;
 		
+		private int _Status;
+		
 		private System.Nullable<int> _UserID;
 		
-		private EntitySet<QuestionList> _QuestionLists;
+		private EntityRef<ResultDetail> _ResultDetail;
+		
+		private EntitySet<TestDetail> _TestDetails;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1887,13 +2482,16 @@ namespace ExaminationManagement.Functions.ConnectDatabase
     partial void OnChoiceFChanged();
     partial void OnAnswerChanging(string value);
     partial void OnAnswerChanged();
+    partial void OnStatusChanging(int value);
+    partial void OnStatusChanged();
     partial void OnUserIDChanging(System.Nullable<int> value);
     partial void OnUserIDChanged();
     #endregion
 		
 		public TheQuestion()
 		{
-			this._QuestionLists = new EntitySet<QuestionList>(new Action<QuestionList>(this.attach_QuestionLists), new Action<QuestionList>(this.detach_QuestionLists));
+			this._ResultDetail = default(EntityRef<ResultDetail>);
+			this._TestDetails = new EntitySet<TestDetail>(new Action<TestDetail>(this.attach_TestDetails), new Action<TestDetail>(this.detach_TestDetails));
 			OnCreated();
 		}
 		
@@ -2097,7 +2695,7 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Answer", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Answer", DbType="Char(20) NOT NULL", CanBeNull=false)]
 		public string Answer
 		{
 			get
@@ -2113,6 +2711,26 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 					this._Answer = value;
 					this.SendPropertyChanged("Answer");
 					this.OnAnswerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="Int NOT NULL")]
+		public int Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
 				}
 			}
 		}
@@ -2137,16 +2755,45 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheQuestion_QuestionList", Storage="_QuestionLists", ThisKey="QuestionID", OtherKey="QuestionID")]
-		public EntitySet<QuestionList> QuestionLists
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheQuestion_ResultDetail", Storage="_ResultDetail", ThisKey="QuestionID", OtherKey="QuestionID", IsUnique=true, IsForeignKey=false)]
+		public ResultDetail ResultDetail
 		{
 			get
 			{
-				return this._QuestionLists;
+				return this._ResultDetail.Entity;
 			}
 			set
 			{
-				this._QuestionLists.Assign(value);
+				ResultDetail previousValue = this._ResultDetail.Entity;
+				if (((previousValue != value) 
+							|| (this._ResultDetail.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ResultDetail.Entity = null;
+						previousValue.TheQuestion = null;
+					}
+					this._ResultDetail.Entity = value;
+					if ((value != null))
+					{
+						value.TheQuestion = this;
+					}
+					this.SendPropertyChanged("ResultDetail");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TheQuestion_TestDetail", Storage="_TestDetails", ThisKey="QuestionID", OtherKey="QuestionID")]
+		public EntitySet<TestDetail> TestDetails
+		{
+			get
+			{
+				return this._TestDetails;
+			}
+			set
+			{
+				this._TestDetails.Assign(value);
 			}
 		}
 		
@@ -2170,13 +2817,13 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		private void attach_QuestionLists(QuestionList entity)
+		private void attach_TestDetails(TestDetail entity)
 		{
 			this.SendPropertyChanging();
 			entity.TheQuestion = this;
 		}
 		
-		private void detach_QuestionLists(QuestionList entity)
+		private void detach_TestDetails(TestDetail entity)
 		{
 			this.SendPropertyChanging();
 			entity.TheQuestion = null;

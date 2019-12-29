@@ -40,13 +40,24 @@ namespace ExaminationManagement.Forms
         {
             this.cb_table.SelectedIndex = 0;
             accountManagementPresenter = new AccountManagementPresenter(this);
-            LoadData?.Invoke(this, null);
+            try
+            {
+                LoadData?.Invoke(this, null);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show(accountManagementPresenter.ErrorMessage);
+            }
         }
 
         private void Btn_add_Click(object sender, EventArgs e)
         {
-            AddUser?.Invoke(this, null);
-            if (!String.IsNullOrEmpty(ErrorMessage))
+            try
+            {
+                AddUser?.Invoke(this, null);
+                MessageBox.Show(accountManagementPresenter.ErrorMessage);
+            }
+            catch (Exception)
             {
                 MessageBox.Show(accountManagementPresenter.ErrorMessage);
             }
@@ -96,6 +107,7 @@ namespace ExaminationManagement.Forms
             LoadData?.Invoke(this, null);
         }
 
+        public int _userID => this.userID;
         public string searchContent { get => this.tb_search.Text; set => this.tb_search.Text = value; }
         public string name { get => this.tb_name.Text; set => this.tb_name.Text = value; }
         public string phoneNumber { get => this.tb_phoneNumber.Text; set => this.tb_phoneNumber.Text = value; }

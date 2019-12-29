@@ -68,12 +68,50 @@
     <Compile Include="Forms\StudentControlPanel.Designer.cs">
       <DependentUpon>StudentControlPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Student\ExaminationControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\ExaminationControlPanel.Designer.cs">
+      <DependentUpon>ExaminationControlPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Student\Examination\MainExamination.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\Examination\MainExamination.Designer.cs">
+      <DependentUpon>MainExamination.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Student\Examination\TestExamination.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\Examination\TestExamination.Designer.cs">
+      <DependentUpon>TestExamination.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Student\ProfileControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\ProfileControlPanel.Designer.cs">
+      <DependentUpon>ProfileControlPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Student\QuestionControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\QuestionControlPanel.Designer.cs">
+      <DependentUpon>QuestionControlPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Student\ResultControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Student\ResultControlPanel.Designer.cs">
+      <DependentUpon>ResultControlPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TeacherControlPanel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\TeacherControlPanel.Designer.cs">
       <DependentUpon>TeacherControlPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Functions\Events\SelectedChangedEventArgs.cs" />
+    <Compile Include="Functions\MainFunction.cs" />
     <Compile Include="Functions\QueryData\BaseQuery.cs" />
     <Compile Include="Functions\ConnectDatabase\BaseConnection.cs" />
     <Compile Include="Functions\Login\Authentication\Authentication.cs" />
@@ -95,10 +133,18 @@
       <DependentUpon>ExaminationManagement.dbml</DependentUpon>
     </Compile>
     <Compile Include="Presenters\LoginPresenter.cs" />
+    <Compile Include="Presenters\Student\ExaminationControllerPresenter.cs" />
+    <Compile Include="Presenters\Student\Examination\MainExaminationPresenter.cs" />
+    <Compile Include="Presenters\Student\ProfilePresenter.cs" />
+    <Compile Include="Presenters\Student\QuestionPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\IAccountManagement.cs" />
     <Compile Include="Views\ILogin.cs" />
+    <Compile Include="Views\Student\Examination\IMainExamination.cs" />
+    <Compile Include="Views\Student\IExaminationController.cs" />
+    <Compile Include="Views\Student\IProfile.cs" />
+    <Compile Include="Views\Student\IQuestion.cs" />
     <EmbeddedResource Include="Forms\AdminControlPanel.resx">
       <DependentUpon>AdminControlPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -107,6 +153,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StudentControlPanel.resx">
       <DependentUpon>StudentControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Student\ExaminationControlPanel.resx">
+      <DependentUpon>ExaminationControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Student\Examination\MainExamination.resx">
+      <DependentUpon>MainExamination.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Student\ProfileControlPanel.resx">
+      <DependentUpon>ProfileControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Student\QuestionControlPanel.resx">
+      <DependentUpon>QuestionControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherControlPanel.resx">
       <DependentUpon>TeacherControlPanel.cs</DependentUpon>
