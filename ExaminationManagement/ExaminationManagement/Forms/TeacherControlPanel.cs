@@ -15,6 +15,7 @@ namespace ExaminationManagement.Forms
     public partial class TeacherControlPanel : Form, IProfile
     {
         QuestionManagementControlPanel questionManagementControlPanel;
+        ExamManagementControlPanel examManagementControlPanel;
 
         int userID;
 
@@ -22,7 +23,15 @@ namespace ExaminationManagement.Forms
         {
             InitializeComponent();
             btn_questionManagement.Click += Btn_questionManagement_Click;
+            btn_examManagement.Click += Btn_examManagement_Click;
         }
+
+        private void Btn_examManagement_Click(object sender, EventArgs e)
+        {
+            examManagementControlPanel = new ExamManagementControlPanel(this.userID);
+            examManagementControlPanel.ShowDialog();
+        }
+
         public TeacherControlPanel(int userID) : this()
         {
             this.userID = userID;

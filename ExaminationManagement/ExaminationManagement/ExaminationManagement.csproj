@@ -98,6 +98,12 @@
     <Compile Include="Forms\TeacherControlPanel.Designer.cs">
       <DependentUpon>TeacherControlPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Teacher\ExamManagementControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher\ExamManagementControlPanel.Designer.cs">
+      <DependentUpon>ExamManagementControlPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Teacher\QuestionManagementControlPanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +133,7 @@
     <Compile Include="Presenters\LoginPresenter.cs" />
     <Compile Include="Presenters\Student\AddQuestionPresenter.cs" />
     <Compile Include="Presenters\Student\ExaminationPresenter.cs" />
+    <Compile Include="Presenters\Teacher\ExamManagementPresenter.cs" />
     <Compile Include="Presenters\Teacher\QuestionManagementPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,6 +142,7 @@
     <Compile Include="Views\Student\IAddQuestion.cs" />
     <Compile Include="Views\Student\IExamination.cs" />
     <Compile Include="Views\Student\IProfile.cs" />
+    <Compile Include="Views\Tearcher\IExamManagement.cs" />
     <Compile Include="Views\Tearcher\IProfile.cs" />
     <Compile Include="Views\Tearcher\IQuestionManagement.cs" />
     <EmbeddedResource Include="Forms\AdminControlPanel.resx">
@@ -160,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherControlPanel.resx">
       <DependentUpon>TeacherControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher\ExamManagementControlPanel.resx">
+      <DependentUpon>ExamManagementControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teacher\QuestionManagementControlPanel.resx">
       <DependentUpon>QuestionManagementControlPanel.cs</DependentUpon>
