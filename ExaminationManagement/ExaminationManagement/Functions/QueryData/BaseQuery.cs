@@ -111,6 +111,30 @@ namespace ExaminationManagement.Functions
             }
         }
 
+        public int TotalScore(int _resultID)
+        {
+            int score = 0;
+
+            using (var _data = new ExaminationManagementDataContext())
+            {
+                var isExists = (from r in _data.Results
+                                where r.ResultID == _resultID
+                                select r).FirstOrDefault();
+
+                if (isExists != null)
+                {
+                    var _resultDetails = (from rd in _data.ResultDetails
+                                          where rd.ResultID == _resultID && rd.Score == 1
+                                          select rd).ToList();
+
+                    score = _resultDetails.Count();
+                    this.ErrorMessage = "Success!";
+                }
+            }
+
+            return score;
+        }
+
         public void SaveResult(int _resultID, int _userID, string _testID, int _totalScore)
         {
             using (var _data = new ExaminationManagementDataContext())
@@ -135,6 +159,7 @@ namespace ExaminationManagement.Functions
                     isExists.TotalScore = _totalScore;
                     _data.SubmitChanges();
                 }
+                this.ErrorMessage = "Success!";
             }
         }
 
@@ -143,8 +168,7 @@ namespace ExaminationManagement.Functions
             using (var _data = new ExaminationManagementDataContext())
             {
                 var isExists = (from exld in _data.ExamineeListDetails
-                                where exld.UserID == _userID
-                                where exld.ExamineeListID == _examineeListID
+                                where exld.UserID == _userID && exld.ExamineeListID == _examineeListID
                                 select exld).FirstOrDefault();
 
                 if (isExists != null)
@@ -156,6 +180,11 @@ namespace ExaminationManagement.Functions
                         isExists.Status = 1;
                         _data.SubmitChanges();
                     }
+                    this.ErrorMessage = "Success!";
+                }
+                else
+                {
+                    this.ErrorMessage = "Fail!";
                 }
             }
         }
@@ -204,20 +233,44 @@ namespace ExaminationManagement.Functions
             using (var _data = new ExaminationManagementDataContext())
             {
                 var _result = (from r in _data.Results
-                               where r.UserID == _userID
-                               where r.TestID == _testID
+                               where r.UserID == _userID && r.TestID == _testID
                                select r.ResultID).FirstOrDefault();
 
                 if (_result != null)
                 {
                     resultID = _result;
+                    this.ErrorMessage = "Success!";
                 }
             }
 
             return resultID;
         }
 
-        public int TotalScore(int _resultID)
+        public int GetNumbersOfQuestion(string _testID)
+        {
+            int number = 0;
+
+            using (var _data = new ExaminationManagementDataContext())
+            {
+                var isExists = (from r in _data.TheTests
+                                where r.TestID == _testID
+                                select r).FirstOrDefault();
+
+                if (isExists != null)
+                {
+                    var _number = (from td in _data.TestDetails
+                                   where td.TestID == _testID
+                                   select td).ToList();
+
+                    number = _number.Count();
+                    this.ErrorMessage = "Success!";
+                }
+            }
+
+            return number;
+        }
+
+        public int GetTotalScore(int _resultID)
         {
             int totalScore = 0;
 
@@ -230,6 +283,7 @@ namespace ExaminationManagement.Functions
                 if (_totalScore != null)
                 {
                     totalScore = _totalScore;
+                    this.ErrorMessage = "Success!";
                 }
             }
 
@@ -243,13 +297,13 @@ namespace ExaminationManagement.Functions
             using (var _data = new ExaminationManagementDataContext())
             {
                 var _score = (from r in _data.ResultDetails
-                              where r.ResultID == _resultID
-                              where r.QuestionID == _questionID
+                              where r.ResultID == _resultID && r.QuestionID == _questionID
                               select r.Score).FirstOrDefault();
 
                 if (_score != null)
                 {
                     score = _score;
+                    this.ErrorMessage = "Success!";
                 }
             }
 
@@ -276,6 +330,8 @@ namespace ExaminationManagement.Functions
                     string[] _temp = mainFunction.SplitAnswerArray(item);
                     userAnswersList.Add(_temp);
                 }
+
+                this.ErrorMessage = "Success!";
             }
 
             return userAnswersList;

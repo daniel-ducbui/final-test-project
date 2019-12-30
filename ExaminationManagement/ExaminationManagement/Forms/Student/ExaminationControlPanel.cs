@@ -47,11 +47,11 @@ namespace ExaminationManagement.Forms.Student
 
         private void Btn_enroll_Click(object sender, EventArgs e)
         {
-            int index = dgv_examInfo.SelectedCells[0].RowIndex;
-            this.examID = Convert.ToInt32(dgv_examInfo.Rows[index].Cells[0].Value.ToString());
-
             try
             {
+                int index = dgv_examInfo.SelectedCells[0].RowIndex;
+                this.examID = Convert.ToInt32(dgv_examInfo.Rows[index].Cells[0].Value.ToString());
+
                 GetExamInfo?.Invoke(this, null);
 
                 this.Hide();

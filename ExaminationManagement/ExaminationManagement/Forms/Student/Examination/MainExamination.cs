@@ -26,6 +26,7 @@ namespace ExaminationManagement.Forms.Student.Examination
         bool nav = false;
 
         int currentIndex = 0;
+        int maxQuestions = 0;
         string[] previousAnswers = null;
 
         public MainExamination()
@@ -46,41 +47,6 @@ namespace ExaminationManagement.Forms.Student.Examination
             this.examInfo = examInfo;
             this.examineeListID = examineeListID;
             this.time = time;
-        }
-
-        private void Btn_back_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("You have not submitted yet! ", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                this.Close();
-
-                examinationControlPanel = new ExaminationControlPanel(this.userID);
-                examinationControlPanel.Show();
-            }
-        }
-
-        private void Btn_submit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (MessageBox.Show("Confirm", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    answer = CheckedAnswer();
-
-                    Submit?.Invoke(this, null);
-
-                    answer = null;
-
-                    this.Close();
-
-                    examinationControlPanel = new ExaminationControlPanel(this.userID);
-                    examinationControlPanel.Show();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Fail" + ex.Message);
-            }
         }
 
         private void MainExamination_Load(object sender, EventArgs e)
@@ -121,14 +87,16 @@ namespace ExaminationManagement.Forms.Student.Examination
                 btn_next.Enabled = btn_previous.Enabled = btn_submit.Enabled = true;
                 LoadQuestions();
 
-                //this.answers = this.previousAnswers;
+                // 2nd Way
+                this.answers = this.previousAnswers;
 
-                //if (answers != null)
-                //{
-                //    this.PreviouAnswers(answers);
+                if (answers != null)
+                {
+                    this.PreviouAnswers(answers);
 
-                //    answers = null;
-                //}
+                    answers = null;
+                }
+                CheckIndex();
             }
             catch (Exception ex)
             {
@@ -136,39 +104,104 @@ namespace ExaminationManagement.Forms.Student.Examination
             }
         }
 
+        private void Btn_back_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You have not submitted yet! ", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                this.Close();
+
+                examinationControlPanel = new ExaminationControlPanel(this.userID);
+                examinationControlPanel.Show();
+            }
+        }
+
+        private void Btn_submit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (MessageBox.Show("Confirm", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    answer = CheckedAnswer();
+
+                    Submit?.Invoke(this, null);
+
+                    answer = null;
+
+                    this.Close();
+
+                    examinationControlPanel = new ExaminationControlPanel(this.userID);
+                    examinationControlPanel.Show();
+                    MessageBox.Show(mainExaminationController.ErrorMessage);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fail" + ex.Message);
+            }
+        }
+
+        void CheckIndex()
+        {
+            if (this.currentIndex < this.maxQuestions - 1 && this.currentIndex > 0)
+            {
+                btn_next.Enabled = true;
+                btn_previous.Enabled = true;
+            }
+            else
+            {
+                if (this.currentIndex < 1)
+                {
+                    btn_previous.Enabled = false;
+                    btn_next.Enabled = true;
+                }
+                if (this.currentIndex >= this.maxQuestions - 1)
+                {
+                    btn_next.Enabled = false;
+                    btn_previous.Enabled = true;
+                }
+            }
+        }
+
         string CheckedAnswer()
         {
             answer = null;
             //ckb_choiceA.Checked ? answer = 'A' : null;
-            if (ckb_choiceA.Checked)
+            if (!ckb_choiceA.Checked && !ckb_choiceB.Checked && !ckb_choiceC.Checked && !ckb_choiceD.Checked && !ckb_choiceE.Checked && !ckb_choiceF.Checked)
             {
-                answer += "a-";
-                ckb_choiceA.Checked = false;
+                answer = "null";
             }
-            if (ckb_choiceB.Checked)
+            else
             {
-                answer += "b-";
-                ckb_choiceB.Checked = false;
-            }
-            if (ckb_choiceC.Checked)
-            {
-                answer += "c-";
-                ckb_choiceC.Checked = false;
-            }
-            if (ckb_choiceD.Checked)
-            {
-                answer += "d-";
-                ckb_choiceD.Checked = false;
-            }
-            if (ckb_choiceE.Checked)
-            {
-                answer += "e-";
-                ckb_choiceE.Checked = false;
-            }
-            if (ckb_choiceF.Checked)
-            {
-                answer += "f-";
-                ckb_choiceF.Checked = false;
+                if (ckb_choiceA.Checked)
+                {
+                    answer += "a-";
+                    ckb_choiceA.Checked = false;
+                }
+                if (ckb_choiceB.Checked)
+                {
+                    answer += "b-";
+                    ckb_choiceB.Checked = false;
+                }
+                if (ckb_choiceC.Checked)
+                {
+                    answer += "c-";
+                    ckb_choiceC.Checked = false;
+                }
+                if (ckb_choiceD.Checked)
+                {
+                    answer += "d-";
+                    ckb_choiceD.Checked = false;
+                }
+                if (ckb_choiceE.Checked)
+                {
+                    answer += "e-";
+                    ckb_choiceE.Checked = false;
+                }
+                if (ckb_choiceF.Checked)
+                {
+                    answer += "f-";
+                    ckb_choiceF.Checked = false;
+                }
             }
 
             return answer;
@@ -205,6 +238,14 @@ namespace ExaminationManagement.Forms.Student.Examination
             }
         }
 
+        void Timer()
+        {
+            int _time = this.time;
+
+            testTime.Interval = (_time * 1000); // 10s current
+
+        }
+
         private void Btn_next_Click(object sender, EventArgs e)
         {
             nav = true;
@@ -224,24 +265,25 @@ namespace ExaminationManagement.Forms.Student.Examination
                     answers = null;
                 }
 
-                if (this.currentIndex < 9 && this.currentIndex > 0)
-                {
-                    btn_next.Enabled = true;
-                    btn_previous.Enabled = true;
-                }
-                else
-                {
-                    if (this.currentIndex < 1)
-                    {
-                        btn_previous.Enabled = false;
-                        btn_next.Enabled = true;
-                    }
-                    if (this.currentIndex > 8)
-                    {
-                        btn_next.Enabled = false;
-                        btn_previous.Enabled = true;
-                    }
-                }
+                //if (this.currentIndex <= this.maxQuestions && this.currentIndex > 0)
+                //{
+                //    btn_next.Enabled = true;
+                //    btn_previous.Enabled = true;
+                //}
+                //else
+                //{
+                //    if (this.currentIndex < 1)
+                //    {
+                //        btn_previous.Enabled = false;
+                //        btn_next.Enabled = true;
+                //    }
+                //    if (this.currentIndex >= this.maxQuestions)
+                //    {
+                //        btn_next.Enabled = false;
+                //        btn_previous.Enabled = true;
+                //    }
+                //}
+                CheckIndex();
             }
             catch (Exception ex)
             {
@@ -268,24 +310,25 @@ namespace ExaminationManagement.Forms.Student.Examination
                     answers = null;
                 }
 
-                if (this.currentIndex < 9 && this.currentIndex > 0)
-                {
-                    btn_next.Enabled = true;
-                    btn_previous.Enabled = true;
-                }
-                else
-                {
-                    if (this.currentIndex < 1)
-                    {
-                        btn_previous.Enabled = false;
-                        btn_next.Enabled = true;
-                    }
-                    if (this.currentIndex > 8)
-                    {
-                        btn_next.Enabled = false;
-                        btn_previous.Enabled = true;
-                    }
-                }
+                //if (this.currentIndex <= this.maxQuestions && this.currentIndex > 0)
+                //{
+                //    btn_next.Enabled = true;
+                //    btn_previous.Enabled = true;
+                //}
+                //else
+                //{
+                //    if (this.currentIndex < 1)
+                //    {
+                //        btn_previous.Enabled = false;
+                //        btn_next.Enabled = true;
+                //    }
+                //    if (this.currentIndex >= this.maxQuestions)
+                //    {
+                //        btn_next.Enabled = false;
+                //        btn_previous.Enabled = true;
+                //    }
+                //}
+                CheckIndex();
             }
             catch (Exception ex)
             {
@@ -305,6 +348,7 @@ namespace ExaminationManagement.Forms.Student.Examination
         public string choiceF { get => tb_f.Text; set => tb_f.Text = value; }
         string IMainExamination.answer => this.answer;
         int IMainExamination.currentIndex { set => this.currentIndex = value; }
+        int IMainExamination.numberOfQuestion { set => this.maxQuestions = value; }
         int IMainExamination.examineeListID => this.examineeListID;
         string[] IMainExamination.previousAnswers { get => this.previousAnswers; set => this.previousAnswers = value; }
 

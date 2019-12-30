@@ -18,8 +18,13 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
         List<TheQuestion> testQuestionList;
         List<string[]> userAnswersList = new List<string[]>();
+        List<string> userCurrentAnswers = new List<string>();
+        List<string> _tempAnswersList;
 
         int resultID = 0;
+        int flag = 0;
+        int flag2 = 0;
+        int numberOfQuestion = 0;
 
         public string ErrorMessage = null;
 
@@ -49,8 +54,16 @@ namespace ExaminationManagement.Presenters.Student.Examination
                                     select q).ToList();
             }
 
+            this.numberOfQuestion = baseQuery.GetNumbersOfQuestion(view.testID);
             this.resultID = baseQuery.FindResult(view.userID, view.testID);
-            userAnswersList.Add(null);
+
+            view.numberOfQuestion = this.numberOfQuestion;
+            // 1nd Way
+            //userAnswersList.Add(null);
+
+            // 2nd Way
+            this.userCurrentAnswers.Add(null);
+            this.userAnswersList = baseQuery.GetUserAnsweredList(this.resultID);
         }
 
         void LoadQuestion()
@@ -67,12 +80,14 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
             view.currentIndex = currentIndex;
 
-            //userAnswersList = baseQuery.GetUserAnsweredList(this.resultID);
+            // 2nd Way
+            this.userAnswersList = baseQuery.GetUserAnsweredList(this.resultID);
 
-            //if (userAnswersList.Count > 0)
-            //{
-            //    view.previousAnswers = userAnswersList[currentIndex];
-            //}
+            if (userAnswersList.Count > 0 && this.flag == 0)
+            {
+                view.previousAnswers = userAnswersList[currentIndex];
+                this.flag = 1;
+            }
         }
 
         private void View_SelectedChangedQuestion(object sender, Functions.Events.SelectedChangedEventArgs e)
@@ -103,22 +118,35 @@ namespace ExaminationManagement.Presenters.Student.Examination
                 trueAnswers = mainFunction.SplitAnswerArray(_trueAnswer);
                 userAnswers = mainFunction.SplitAnswerArray(answer);
 
+                // 1nd Way
                 /* 
                  * 
                  * IMPORTANT == DO NOT DELETE == IMPORTANT
                  * 
                  */
-
                 // Add this answer to answered list
 
-                int listIndex = currentIndex;
+                //int listIndex = currentIndex;
 
-                userAnswersList.RemoveAt(listIndex);
-                userAnswersList.Insert(listIndex, userAnswers);
+                //userAnswersList.RemoveAt(listIndex);
+                //userAnswersList.Insert(listIndex, userAnswers);
 
-                if (userAnswersList.Count == ++listIndex)
+                //if (userAnswersList.Count == ++listIndex)
+                //{
+                //    userAnswersList.Add(null);
+                //}
+
+                if (this.flag2 == 0)
                 {
-                    userAnswersList.Add(null);
+                    int listIndex = currentIndex;
+
+                    userCurrentAnswers.RemoveAt(listIndex);
+                    userCurrentAnswers.Insert(listIndex, answer);
+
+                    if (userCurrentAnswers.Count == ++listIndex)
+                    {
+                        userCurrentAnswers.Add(null);
+                    }
                 }
 
                 if (userAnswers.Length == trueAnswers.Length)
@@ -143,20 +171,20 @@ namespace ExaminationManagement.Presenters.Student.Examination
             try
             {
                 int currentScore = Score(questionID, answer);
-                int previousScore = baseQuery.Score(this.resultID, questionID);
+                //int previousScore = baseQuery.Score(this.resultID, questionID);
+                //int totalScore = baseQuery.GetTotalScore(this.resultID);
 
                 baseQuery.SaveResultDetails(questionID, this.resultID, (answer == null ? "-" : answer), currentScore);
 
-                int totalScore = baseQuery.TotalScore(this.resultID);
-
-                if (currentScore == 1 && previousScore == 0)
-                {
-                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, totalScore + 1);
-                }
-                else if (currentScore == 0 && previousScore == 1 && totalScore > 0)
-                {
-                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, totalScore - 1);
-                }
+                // Problem here
+                //if (currentScore == 1 && previousScore == 0)
+                //{
+                //    baseQuery.SaveResult(this.resultID, view.userID, view.testID, totalScore + 1);
+                //}
+                //else if (currentScore == 0 && previousScore == 1 && totalScore > 0)
+                //{
+                //    baseQuery.SaveResult(this.resultID, view.userID, view.testID, totalScore - 1);
+                //}
             }
             catch (Exception ex)
             {
@@ -170,12 +198,20 @@ namespace ExaminationManagement.Presenters.Student.Examination
             {
                 baseQuery.SaveResult(this.resultID, view.userID, view.testID, 0);
 
-                foreach (var item in testQuestionList)
+                if (this.resultID == 0)
                 {
-                    baseQuery.SaveResultDetails(item.QuestionID, this.resultID, "-", 0);
+                    this.resultID = baseQuery.FindResult(view.userID, view.testID);
                 }
 
-                baseQuery.EnrollExamination(view.userID, view.examineeListID);
+                if (userAnswersList.Count < 1)
+                {
+                    foreach (var item in testQuestionList)
+                    {
+                        baseQuery.SaveResultDetails(item.QuestionID, this.resultID, "-", 0);
+                    }
+                }
+
+                // EnrollExamination maybe here
 
                 LoadQuestion();
             }
@@ -193,6 +229,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
             {
                 currentIndex++;
 
+                // Both Ways
                 view.previousAnswers = userAnswersList[currentIndex];
 
                 LoadQuestion();
@@ -207,6 +244,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
             {
                 currentIndex--;
 
+                // Both Ways
                 view.previousAnswers = userAnswersList[currentIndex];
 
                 LoadQuestion();
@@ -218,6 +256,31 @@ namespace ExaminationManagement.Presenters.Student.Examination
             try
             {
                 CheckResult(testQuestionList[currentIndex].QuestionID, view.answer);
+
+                // Save all the answers
+                this.userCurrentAnswers.RemoveAt(this.numberOfQuestion);
+                _tempAnswersList = new List<string>();
+                _tempAnswersList = this.userCurrentAnswers;
+                int listIndex = 0;
+                this.currentIndex = 0;
+
+                this.flag2 = 1;
+
+                foreach (var item in _tempAnswersList)
+                {
+                    CheckResult(testQuestionList[this.currentIndex].QuestionID, item);
+                    this.currentIndex++;
+                }
+
+                // Calculate TotalScore 
+                int _totalScore = baseQuery.TotalScore(this.resultID);
+
+                // Save total score
+                baseQuery.SaveResult(this.resultID, view.userID, view.testID, _totalScore);
+                // EnrollExamination
+                baseQuery.EnrollExamination(view.userID, view.examineeListID);
+
+                this.ErrorMessage = baseQuery.ErrorMessage;
             }
             catch (Exception ex)
             {

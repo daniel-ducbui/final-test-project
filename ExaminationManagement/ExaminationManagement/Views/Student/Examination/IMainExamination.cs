@@ -20,6 +20,7 @@ namespace ExaminationManagement.Views.Student.Examination
         string choiceF { get; set; }
         string answer { get; }
         int currentIndex { set; }
+        int numberOfQuestion { set; }
         int examineeListID { get; }
         string[] previousAnswers { get; set; }
 

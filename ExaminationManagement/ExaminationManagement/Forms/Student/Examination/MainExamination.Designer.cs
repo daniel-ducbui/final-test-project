@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_back = new System.Windows.Forms.Button();
             this.pnl_1 = new System.Windows.Forms.Panel();
@@ -47,10 +48,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_submit = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btn_start = new System.Windows.Forms.Button();
             this.pnl_question = new System.Windows.Forms.Panel();
             this.btn_next = new System.Windows.Forms.Button();
             this.btn_previous = new System.Windows.Forms.Button();
-            this.btn_start = new System.Windows.Forms.Button();
+            this.testTime = new System.Windows.Forms.Timer(this.components);
+            this.tb_time = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.pnl_1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -59,6 +62,7 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.tb_time);
             this.panel1.Controls.Add(this.btn_back);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -168,64 +172,64 @@
             // 
             // tb_f
             // 
-            this.tb_f.Enabled = false;
             this.tb_f.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_f.Location = new System.Drawing.Point(209, 340);
             this.tb_f.Name = "tb_f";
+            this.tb_f.ReadOnly = true;
             this.tb_f.Size = new System.Drawing.Size(889, 30);
             this.tb_f.TabIndex = 8;
             // 
             // tb_e
             // 
-            this.tb_e.Enabled = false;
             this.tb_e.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_e.Location = new System.Drawing.Point(209, 304);
             this.tb_e.Name = "tb_e";
+            this.tb_e.ReadOnly = true;
             this.tb_e.Size = new System.Drawing.Size(889, 30);
             this.tb_e.TabIndex = 7;
             // 
             // tb_d
             // 
-            this.tb_d.Enabled = false;
             this.tb_d.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_d.Location = new System.Drawing.Point(209, 268);
             this.tb_d.Name = "tb_d";
+            this.tb_d.ReadOnly = true;
             this.tb_d.Size = new System.Drawing.Size(889, 30);
             this.tb_d.TabIndex = 6;
             // 
             // tb_c
             // 
-            this.tb_c.Enabled = false;
             this.tb_c.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_c.Location = new System.Drawing.Point(209, 232);
             this.tb_c.Name = "tb_c";
+            this.tb_c.ReadOnly = true;
             this.tb_c.Size = new System.Drawing.Size(889, 30);
             this.tb_c.TabIndex = 5;
             // 
             // tb_b
             // 
-            this.tb_b.Enabled = false;
             this.tb_b.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_b.Location = new System.Drawing.Point(209, 196);
             this.tb_b.Name = "tb_b";
+            this.tb_b.ReadOnly = true;
             this.tb_b.Size = new System.Drawing.Size(889, 30);
             this.tb_b.TabIndex = 4;
             // 
             // tb_a
             // 
-            this.tb_a.Enabled = false;
             this.tb_a.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_a.Location = new System.Drawing.Point(209, 160);
             this.tb_a.Name = "tb_a";
+            this.tb_a.ReadOnly = true;
             this.tb_a.Size = new System.Drawing.Size(889, 30);
             this.tb_a.TabIndex = 3;
             // 
             // tb_content
             // 
-            this.tb_content.Enabled = false;
             this.tb_content.Location = new System.Drawing.Point(209, 6);
             this.tb_content.Multiline = true;
             this.tb_content.Name = "tb_content";
+            this.tb_content.ReadOnly = true;
             this.tb_content.Size = new System.Drawing.Size(1198, 148);
             this.tb_content.TabIndex = 2;
             // 
@@ -263,6 +267,15 @@
             this.panel3.Size = new System.Drawing.Size(1420, 57);
             this.panel3.TabIndex = 4;
             // 
+            // btn_start
+            // 
+            this.btn_start.Location = new System.Drawing.Point(1226, 3);
+            this.btn_start.Name = "btn_start";
+            this.btn_start.Size = new System.Drawing.Size(81, 42);
+            this.btn_start.TabIndex = 5;
+            this.btn_start.Text = "Start";
+            this.btn_start.UseVisualStyleBackColor = true;
+            // 
             // pnl_question
             // 
             this.pnl_question.Location = new System.Drawing.Point(113, 3);
@@ -288,14 +301,16 @@
             this.btn_previous.Text = "Previous";
             this.btn_previous.UseVisualStyleBackColor = true;
             // 
-            // btn_start
+            // tb_time
             // 
-            this.btn_start.Location = new System.Drawing.Point(1226, 3);
-            this.btn_start.Name = "btn_start";
-            this.btn_start.Size = new System.Drawing.Size(81, 42);
-            this.btn_start.TabIndex = 5;
-            this.btn_start.Text = "Start";
-            this.btn_start.UseVisualStyleBackColor = true;
+            this.tb_time.Font = new System.Drawing.Font("Maven Pro", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_time.Location = new System.Drawing.Point(1241, 14);
+            this.tb_time.Name = "tb_time";
+            this.tb_time.ReadOnly = true;
+            this.tb_time.Size = new System.Drawing.Size(166, 32);
+            this.tb_time.TabIndex = 1;
+            this.tb_time.Text = "00:00";
+            this.tb_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // MainExamination
             // 
@@ -311,6 +326,7 @@
             this.Name = "MainExamination";
             this.Text = "MainExamination";
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.pnl_1.ResumeLayout(false);
             this.pnl_1.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -343,5 +359,7 @@
         private System.Windows.Forms.CheckBox ckb_choiceB;
         private System.Windows.Forms.CheckBox ckb_choiceA;
         private System.Windows.Forms.Button btn_start;
+        private System.Windows.Forms.Timer testTime;
+        private System.Windows.Forms.TextBox tb_time;
     }
 }
