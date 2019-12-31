@@ -30,6 +30,7 @@
         {
             this.btn_questionManagement = new System.Windows.Forms.Button();
             this.btn_examManagement = new System.Windows.Forms.Button();
+            this.btn_manageTheListOfContestants = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_questionManagement
@@ -52,11 +53,22 @@
             this.btn_examManagement.Text = "Exam Management";
             this.btn_examManagement.UseVisualStyleBackColor = true;
             // 
+            // btn_manageTheListOfContestants
+            // 
+            this.btn_manageTheListOfContestants.Location = new System.Drawing.Point(650, 14);
+            this.btn_manageTheListOfContestants.Margin = new System.Windows.Forms.Padding(5);
+            this.btn_manageTheListOfContestants.Name = "btn_manageTheListOfContestants";
+            this.btn_manageTheListOfContestants.Size = new System.Drawing.Size(297, 109);
+            this.btn_manageTheListOfContestants.TabIndex = 2;
+            this.btn_manageTheListOfContestants.Text = "Manage The List Of Contestants";
+            this.btn_manageTheListOfContestants.UseVisualStyleBackColor = true;
+            // 
             // TeacherControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 540);
+            this.Controls.Add(this.btn_manageTheListOfContestants);
             this.Controls.Add(this.btn_examManagement);
             this.Controls.Add(this.btn_questionManagement);
             this.Font = new System.Drawing.Font("Times New Roman", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -71,5 +83,6 @@
 
         private System.Windows.Forms.Button btn_questionManagement;
         private System.Windows.Forms.Button btn_examManagement;
+        private System.Windows.Forms.Button btn_manageTheListOfContestants;
     }
 }

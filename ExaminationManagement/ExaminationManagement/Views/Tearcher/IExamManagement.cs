@@ -8,7 +8,7 @@ using System.Windows.Forms;
 namespace ExaminationManagement.Views.Tearcher
 {
     public interface IExamManagement
-    {
+    { 
         int userID { get; }
         DataGridView dgv_questionSection { get; set; }
         DataGridView dgv_examInformation { get; set; }

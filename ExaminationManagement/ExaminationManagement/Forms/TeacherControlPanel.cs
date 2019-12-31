@@ -16,7 +16,7 @@ namespace ExaminationManagement.Forms
     {
         QuestionManagementControlPanel questionManagementControlPanel;
         ExamManagementControlPanel examManagementControlPanel;
-
+        ManageTheListOfContestantsControlPanel manageTheListOfContestantsControlPanel;
         int userID;
 
         public TeacherControlPanel()
@@ -24,6 +24,13 @@ namespace ExaminationManagement.Forms
             InitializeComponent();
             btn_questionManagement.Click += Btn_questionManagement_Click;
             btn_examManagement.Click += Btn_examManagement_Click;
+            btn_manageTheListOfContestants.Click += Btn_manageTheListOfContestants_Click;
+        }
+
+        private void Btn_manageTheListOfContestants_Click(object sender, EventArgs e)
+        {
+            manageTheListOfContestantsControlPanel = new ManageTheListOfContestantsControlPanel(this.userID);
+            manageTheListOfContestantsControlPanel.ShowDialog();
         }
 
         private void Btn_examManagement_Click(object sender, EventArgs e)
