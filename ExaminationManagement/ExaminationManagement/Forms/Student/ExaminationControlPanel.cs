@@ -35,6 +35,7 @@ namespace ExaminationManagement.Forms.Student
         }
 
         string testID;
+        string testListID;
         int userID;
         int examineeListID;
         int examID;
@@ -51,48 +52,67 @@ namespace ExaminationManagement.Forms.Student
             {
                 int index = dgv_examInfo.SelectedCells[0].RowIndex;
                 this.examID = Convert.ToInt32(dgv_examInfo.Rows[index].Cells[0].Value.ToString());
+                this.testID = dgv_examInfo.Rows[index].Cells[1].Value.ToString();
 
                 GetExamInfo?.Invoke(this, null);
 
                 this.Hide();
-                MainExamination mainExamination = new MainExamination(this.userID, this.testID, this.examineeListID, this.time);
+                Examinate mainExamination = new Examinate(this.userID, this.testID, this.testListID, this.examineeListID, this.time);
                 mainExamination.Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("The examination doesn't exist or have any test! Take a break \nDetails: " + ex.Message);
+                MessageBox.Show("The examination doesn't have any test! Take a break \nDetails: " + ex.Message);
             }
         }
 
         private void Btn_testExam_Click(object sender, EventArgs e)
         {
-            TestExamination testExamination = new TestExamination(this.userID);
-            testExamination.ShowDialog();
+            //TestExamination testExamination = new TestExamination(this.userID);
+            //testExamination.ShowDialog();
+
+
+            pnl_exam.Size = new Size(1019, 449);
+            pnl_mainExam.Visible = true;
+            pnl_mainExam.Location = new Point(3, 76);
+            pnl_mainExam.Size = new Size(1011, 368);
+            btn_enroll.Location = new Point(870, 300);
+            btn_enroll.Size = new Size(136, 63);
+
+            try
+            {
+                GetTestExamList?.Invoke(this, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There is no examination found! \nDetails: " + ex.Message);
+            }
+
+            dgv_examInfo.Location = new Point(3, 3);
+            dgv_examInfo.Size = new Size(860, 360);
         }
 
         private void Btn_mainExam_Click(object sender, EventArgs e)
         {
-            if (!pnl_mainExam.Visible)
+
+            pnl_exam.Size = new Size(1019, 449);
+            pnl_mainExam.Visible = true;
+            pnl_mainExam.Location = new Point(3, 76);
+            pnl_mainExam.Size = new Size(1011, 368);
+            btn_enroll.Location = new Point(870, 300);
+            btn_enroll.Size = new Size(136, 63);
+
+            try
             {
-                pnl_exam.Size = new Size(1019, 449);
-                pnl_mainExam.Visible = true;
-                pnl_mainExam.Location = new Point(3, 76);
-                pnl_mainExam.Size = new Size(1011, 368);
-                btn_enroll.Location = new Point(870, 300);
-                btn_enroll.Size = new Size(136, 63);
-
-                try
-                {
-                    GetExamList?.Invoke(this, null);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Something wrong! \nDetails: " + ex.Message);
-                }
-
-                dgv_examInfo.Location = new Point(3, 3);
-                dgv_examInfo.Size = new Size(860, 360);
+                GetMainExamList?.Invoke(this, null);
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There is no examination found! \nDetails: " + ex.Message);
+            }
+
+            dgv_examInfo.Location = new Point(3, 3);
+            dgv_examInfo.Size = new Size(860, 360);
         }
 
         private void Btn_result_Click(object sender, EventArgs e)
@@ -127,12 +147,14 @@ namespace ExaminationManagement.Forms.Student
             studentControlPanel.Show();
         }
 
-        public event EventHandler GetExamList;
+        public event EventHandler GetMainExamList;
+        public event EventHandler GetTestExamList;
         public event EventHandler GetExamInfo;
 
         int IExaminationController.userID => this.userID;
         object IExaminationController.examList { get => dgv_examInfo.DataSource; set => dgv_examInfo.DataSource = value; }
         string IExaminationController.testID { get => this.testID; set => this.testID = value; }
+        string IExaminationController.testListID { set => this.testListID = value; }
         int IExaminationController.examineeListID { get => this.examineeListID; set => this.examineeListID = value; }
         int IExaminationController.examID => this.examID;
         int IExaminationController.time { get => this.time; set => this.time = value; }

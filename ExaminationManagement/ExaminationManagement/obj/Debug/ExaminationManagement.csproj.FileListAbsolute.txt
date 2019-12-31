@@ -14,4 +14,4 @@ C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\ob
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.pdb
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.QuestionControlPanel.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.ExaminationControlPanel.resources
-C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.Examination.MainExamination.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.Examination.Examinate.resources

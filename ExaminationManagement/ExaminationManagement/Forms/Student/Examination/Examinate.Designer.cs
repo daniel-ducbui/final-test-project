@@ -1,6 +1,6 @@
 ﻿namespace ExaminationManagement.Forms.Student.Examination
 {
-    partial class MainExamination
+    partial class Examinate
     {
         /// <summary>
         /// Required designer variable.
@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tb_time = new System.Windows.Forms.TextBox();
             this.btn_back = new System.Windows.Forms.Button();
             this.pnl_1 = new System.Windows.Forms.Panel();
             this.ckb_choiceF = new System.Windows.Forms.CheckBox();
@@ -53,7 +54,6 @@
             this.btn_next = new System.Windows.Forms.Button();
             this.btn_previous = new System.Windows.Forms.Button();
             this.testTime = new System.Windows.Forms.Timer(this.components);
-            this.tb_time = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.pnl_1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -71,14 +71,26 @@
             this.panel1.Size = new System.Drawing.Size(1420, 61);
             this.panel1.TabIndex = 0;
             // 
+            // tb_time
+            // 
+            this.tb_time.Font = new System.Drawing.Font("Maven Pro", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_time.Location = new System.Drawing.Point(1241, 14);
+            this.tb_time.Name = "tb_time";
+            this.tb_time.ReadOnly = true;
+            this.tb_time.Size = new System.Drawing.Size(166, 32);
+            this.tb_time.TabIndex = 1;
+            this.tb_time.Text = "00:00";
+            this.tb_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // btn_back
             // 
+            this.btn_back.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.btn_back.Location = new System.Drawing.Point(12, 12);
             this.btn_back.Name = "btn_back";
             this.btn_back.Size = new System.Drawing.Size(95, 42);
             this.btn_back.TabIndex = 0;
             this.btn_back.Text = "Back";
-            this.btn_back.UseVisualStyleBackColor = true;
+            this.btn_back.UseVisualStyleBackColor = false;
             // 
             // pnl_1
             // 
@@ -246,12 +258,13 @@
             // 
             // btn_submit
             // 
+            this.btn_submit.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.btn_submit.Location = new System.Drawing.Point(1313, 3);
             this.btn_submit.Name = "btn_submit";
             this.btn_submit.Size = new System.Drawing.Size(95, 42);
             this.btn_submit.TabIndex = 1;
             this.btn_submit.Text = "Submit";
-            this.btn_submit.UseVisualStyleBackColor = true;
+            this.btn_submit.UseVisualStyleBackColor = false;
             // 
             // panel3
             // 
@@ -269,12 +282,13 @@
             // 
             // btn_start
             // 
+            this.btn_start.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.btn_start.Location = new System.Drawing.Point(1226, 3);
             this.btn_start.Name = "btn_start";
             this.btn_start.Size = new System.Drawing.Size(81, 42);
             this.btn_start.TabIndex = 5;
             this.btn_start.Text = "Start";
-            this.btn_start.UseVisualStyleBackColor = true;
+            this.btn_start.UseVisualStyleBackColor = false;
             // 
             // pnl_question
             // 
@@ -301,18 +315,7 @@
             this.btn_previous.Text = "Previous";
             this.btn_previous.UseVisualStyleBackColor = true;
             // 
-            // tb_time
-            // 
-            this.tb_time.Font = new System.Drawing.Font("Maven Pro", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_time.Location = new System.Drawing.Point(1241, 14);
-            this.tb_time.Name = "tb_time";
-            this.tb_time.ReadOnly = true;
-            this.tb_time.Size = new System.Drawing.Size(166, 32);
-            this.tb_time.TabIndex = 1;
-            this.tb_time.Text = "00:00";
-            this.tb_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // MainExamination
+            // Examinate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -323,8 +326,8 @@
             this.Font = new System.Drawing.Font("Maven Pro", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "MainExamination";
-            this.Text = "MainExamination";
+            this.Name = "Examinate";
+            this.Text = "Examinate";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnl_1.ResumeLayout(false);

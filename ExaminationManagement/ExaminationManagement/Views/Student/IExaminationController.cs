@@ -11,11 +11,13 @@ namespace ExaminationManagement.Views.Student
         int userID { get; }
         object examList { get; set; }
         string testID { get; set; }
+        string testListID { set; }
         int examID { get; }
         int time { get; set; }
         int examineeListID { get; set; }
 
-        event EventHandler GetExamList;
+        event EventHandler GetMainExamList;
+        event EventHandler GetTestExamList;
         event EventHandler GetExamInfo;
     }
 }

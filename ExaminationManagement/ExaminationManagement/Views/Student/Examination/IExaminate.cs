@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace ExaminationManagement.Views.Student.Examination
 {
-    interface IMainExamination
+    interface IExaminate
     {
         int userID { get; }
         string testID { get; }
+        string testListID { get; }
         string content { get; set; }
         string choiceA { get; set; }
         string choiceB { get; set; }

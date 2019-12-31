@@ -18,7 +18,7 @@
       <Column Name="TestName" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
       <Association Name="TheTest_Result" Member="Results" ThisKey="TestID" OtherKey="TestID" Type="Result" />
       <Association Name="TheTest_TestDetail" Member="TestDetails" ThisKey="TestID" OtherKey="TestID" Type="TestDetail" />
-      <Association Name="TheTest_TestList" Member="TestLists" ThisKey="TestID" OtherKey="TestID" Type="TestList" />
+      <Association Name="TheTest_TestListDetail" Member="TestListDetails" ThisKey="TestID" OtherKey="TestID" Type="TestListDetail" />
     </Type>
   </Table>
   <Table Name="dbo.AccountDetails" Member="AccountDetails">
@@ -66,7 +66,8 @@
   </Table>
   <Table Name="dbo.ResultDetails" Member="ResultDetails">
     <Type Name="ResultDetail">
-      <Column Name="QuestionID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ResultDetailsID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="QuestionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ResultID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Answer" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
       <Column Name="Score" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -85,9 +86,17 @@
   <Table Name="dbo.TestList" Member="TestLists">
     <Type Name="TestList">
       <Column Name="TestListID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TestListName" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Association Name="TestList_TestListDetail" Member="TestListDetails" ThisKey="TestListID" OtherKey="TestListID" Type="TestListDetail" />
+      <Association Name="TestList_TheExamination" Member="TheExaminations" ThisKey="TestListID" OtherKey="TestListID" Type="TheExamination" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TestListDetails" Member="TestListDetails">
+    <Type Name="TestListDetail">
+      <Column Name="TestListID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="TestID" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="TheTest_TestList" Member="TheTest" ThisKey="TestID" OtherKey="TestID" Type="TheTest" IsForeignKey="true" />
-      <Association Name="TheExamination_TestList" Member="TheExamination" ThisKey="TestListID" OtherKey="TestListID" Type="TheExamination" IsForeignKey="true" />
+      <Association Name="TestList_TestListDetail" Member="TestList" ThisKey="TestListID" OtherKey="TestListID" Type="TestList" IsForeignKey="true" />
+      <Association Name="TheTest_TestListDetail" Member="TheTest" ThisKey="TestID" OtherKey="TestID" Type="TheTest" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TheExamination" Member="TheExaminations">
@@ -95,7 +104,7 @@
       <Column Name="ExaminationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TestListID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
       <Column Name="ExamineeListID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ExaminationName" Type="System.String" DbType="NVarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="ExaminationName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="ExaminationType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="GradeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Time" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -103,8 +112,8 @@
       <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="StartDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="EndDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="TheExamination_TestList" Member="TestLists" ThisKey="TestListID" OtherKey="TestListID" Type="TestList" />
       <Association Name="ExamineeList_TheExamination" Member="ExamineeList" ThisKey="ExamineeListID" OtherKey="ExamineeListID" Type="ExamineeList" IsForeignKey="true" />
+      <Association Name="TestList_TheExamination" Member="TestList" ThisKey="TestListID" OtherKey="TestListID" Type="TestList" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TheQuestion" Member="TheQuestions">
@@ -122,7 +131,7 @@
       <Column Name="Answer" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
       <Column Name="Status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="TheQuestion_ResultDetail" Member="ResultDetail" ThisKey="QuestionID" OtherKey="QuestionID" Type="ResultDetail" Cardinality="One" />
+      <Association Name="TheQuestion_ResultDetail" Member="ResultDetails" ThisKey="QuestionID" OtherKey="QuestionID" Type="ResultDetail" />
       <Association Name="TheQuestion_TestDetail" Member="TestDetails" ThisKey="QuestionID" OtherKey="QuestionID" Type="TestDetail" />
     </Type>
   </Table>

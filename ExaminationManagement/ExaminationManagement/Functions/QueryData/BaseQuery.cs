@@ -111,6 +111,22 @@ namespace ExaminationManagement.Functions
             }
         }
 
+        public int GetExaminationType(string _testListID)
+        {
+            int type = 0;
+
+            using (var _data = new ExaminationManagementDataContext())
+            {
+                var _type = (from ex in _data.TheExaminations
+                             where ex.TestListID == _testListID
+                             select ex.ExaminationType).FirstOrDefault();
+
+                type = _type;
+            }
+
+            return type;
+        }
+
         public int TotalScore(int _resultID)
         {
             int score = 0;
@@ -226,14 +242,22 @@ namespace ExaminationManagement.Functions
             }
         }
 
-        public int FindResult(int _userID, string _testID)
+        public int FindResult(int _userID, string _testID, string _testListID)
         {
             int resultID = 0;
 
             using (var _data = new ExaminationManagementDataContext())
             {
                 var _result = (from r in _data.Results
-                               where r.UserID == _userID && r.TestID == _testID
+                               join t in _data.TheTests on r.TestID equals t.TestID
+                               join td in _data.TestDetails on t.TestID equals td.TestID
+                               join tld in _data.TestListDetails on t.TestID equals tld.TestID
+                               join tl in _data.TestLists on tld.TestListID equals tl.TestListID
+                               join ex in _data.TheExaminations on tld.TestListID equals ex.TestListID
+
+                               where r.UserID == _userID 
+                                && r.TestID == _testID 
+                                && ex.TestListID == _testListID
                                select r.ResultID).FirstOrDefault();
 
                 if (_result != null)

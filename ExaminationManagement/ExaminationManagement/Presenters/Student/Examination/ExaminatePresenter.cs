@@ -9,11 +9,11 @@ using ExaminationManagement.Functions;
 
 namespace ExaminationManagement.Presenters.Student.Examination
 {
-    class MainExaminationPresenter
+    class ExaminatePresenter
     {
         int currentIndex = 0;
 
-        IMainExamination view;
+        IExaminate view;
         BaseQuery baseQuery = new BaseQuery();
 
         List<TheQuestion> testQuestionList;
@@ -25,10 +25,11 @@ namespace ExaminationManagement.Presenters.Student.Examination
         int flag = 0;
         int flag2 = 0;
         int numberOfQuestion = 0;
+        int examinationType = 0;
 
         public string ErrorMessage = null;
 
-        public MainExaminationPresenter(IMainExamination mainExaminationView)
+        public ExaminatePresenter(IExaminate mainExaminationView)
         {
             this.view = mainExaminationView;
 
@@ -50,12 +51,22 @@ namespace ExaminationManagement.Presenters.Student.Examination
                 testQuestionList = (from q in _data.TheQuestions
                                     join td in _data.TestDetails
                                         on q.QuestionID equals td.QuestionID
-                                    where td.QuestionID == q.QuestionID
+
+                                    where td.TestID == view.testID
+                                     && td.QuestionID == q.QuestionID
+
                                     select q).ToList();
             }
 
+            this.examinationType = baseQuery.GetExaminationType(view.testListID);
             this.numberOfQuestion = baseQuery.GetNumbersOfQuestion(view.testID);
-            this.resultID = baseQuery.FindResult(view.userID, view.testID);
+
+            if (this.numberOfQuestion < 1)
+            {
+                this.ErrorMessage = "No question found!";
+            }
+
+            this.resultID = baseQuery.FindResult(view.userID, view.testID, view.testListID);
 
             view.numberOfQuestion = this.numberOfQuestion;
             // 1nd Way
@@ -200,7 +211,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
                 if (this.resultID == 0)
                 {
-                    this.resultID = baseQuery.FindResult(view.userID, view.testID);
+                    this.resultID = baseQuery.FindResult(view.userID, view.testID, view.testListID);
                 }
 
                 if (userAnswersList.Count < 1)
@@ -256,14 +267,13 @@ namespace ExaminationManagement.Presenters.Student.Examination
             try
             {
                 CheckResult(testQuestionList[currentIndex].QuestionID, view.answer);
-
                 // Save all the answers
                 this.userCurrentAnswers.RemoveAt(this.numberOfQuestion);
+
                 _tempAnswersList = new List<string>();
                 _tempAnswersList = this.userCurrentAnswers;
-                int listIndex = 0;
-                this.currentIndex = 0;
 
+                this.currentIndex = 0;
                 this.flag2 = 1;
 
                 foreach (var item in _tempAnswersList)
@@ -272,13 +282,17 @@ namespace ExaminationManagement.Presenters.Student.Examination
                     this.currentIndex++;
                 }
 
-                // Calculate TotalScore 
+                // Calculate total score 
                 int _totalScore = baseQuery.TotalScore(this.resultID);
 
                 // Save total score
                 baseQuery.SaveResult(this.resultID, view.userID, view.testID, _totalScore);
-                // EnrollExamination
-                baseQuery.EnrollExamination(view.userID, view.examineeListID);
+
+                if (this.examinationType == 1)
+                {
+                    // Enroll the examination
+                    baseQuery.EnrollExamination(view.userID, view.examineeListID);
+                }
 
                 this.ErrorMessage = baseQuery.ErrorMessage;
             }

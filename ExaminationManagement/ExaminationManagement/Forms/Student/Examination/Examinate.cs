@@ -13,14 +13,15 @@ using System.Windows.Forms;
 
 namespace ExaminationManagement.Forms.Student.Examination
 {
-    public partial class MainExamination : Form, IMainExamination
+    public partial class Examinate : Form, IExaminate
     {
-        MainExaminationPresenter mainExaminationController;
+        ExaminatePresenter mainExaminationController;
         ExaminationControlPanel examinationControlPanel;
         int userID;
         int examineeListID;
         int time;
-        string examInfo = null;
+        string testID = null;
+        string testListID = null;
         string[] answers = null;
         string answer = null;
         bool nav = false;
@@ -29,7 +30,7 @@ namespace ExaminationManagement.Forms.Student.Examination
         int maxQuestions = 0;
         string[] previousAnswers = null;
 
-        public MainExamination()
+        public Examinate()
         {
             InitializeComponent();
 
@@ -41,17 +42,18 @@ namespace ExaminationManagement.Forms.Student.Examination
             btn_back.Click += Btn_back_Click;
         }
 
-        public MainExamination(int userID, string examInfo, int examineeListID, int time) : this()
+        public Examinate(int userID, string testID, string testListID, int examineeListID, int time) : this()
         {
             this.userID = userID;
-            this.examInfo = examInfo;
+            this.testID = testID;
+            this.testListID = testListID;
             this.examineeListID = examineeListID;
             this.time = time;
         }
 
         private void MainExamination_Load(object sender, EventArgs e)
         {
-            mainExaminationController = new MainExaminationPresenter(this);
+            mainExaminationController = new ExaminatePresenter(this);
 
             if (btn_start.Enabled)
             {
@@ -238,11 +240,31 @@ namespace ExaminationManagement.Forms.Student.Examination
             }
         }
 
+        int m = 0, s = 0;
+        int flag = 0;
+
         void Timer()
         {
             int _time = this.time;
 
             testTime.Interval = (_time * 1000); // 10s current
+
+            Invoke(new Action(() =>
+            {
+                s -= 1;
+
+                if (s == 0)
+                {
+                    s = 59;
+                    m -= 1;
+                }
+                if (m == 0)
+                {
+                    flag = 1;
+                }
+
+                tb_time.Text = string.Format("{0}:{1}", m.ToString().PadLeft(2, '0'), s.ToString().PadLeft(2, '0'));
+            }));
 
         }
 
@@ -336,8 +358,9 @@ namespace ExaminationManagement.Forms.Student.Examination
             }
         }
 
-        int IMainExamination.userID => this.userID;
-        string IMainExamination.testID => this.examInfo;
+        int IExaminate.userID => this.userID;
+        string IExaminate.testID => this.testID;
+        string IExaminate.testListID => this.testListID;
 
         public string content { get => tb_content.Text; set => tb_content.Text = value; }
         public string choiceA { get => tb_a.Text; set => tb_a.Text = value; }
@@ -346,11 +369,11 @@ namespace ExaminationManagement.Forms.Student.Examination
         public string choiceD { get => tb_d.Text; set => tb_d.Text = value; }
         public string choiceE { get => tb_e.Text; set => tb_e.Text = value; }
         public string choiceF { get => tb_f.Text; set => tb_f.Text = value; }
-        string IMainExamination.answer => this.answer;
-        int IMainExamination.currentIndex { set => this.currentIndex = value; }
-        int IMainExamination.numberOfQuestion { set => this.maxQuestions = value; }
-        int IMainExamination.examineeListID => this.examineeListID;
-        string[] IMainExamination.previousAnswers { get => this.previousAnswers; set => this.previousAnswers = value; }
+        string IExaminate.answer => this.answer;
+        int IExaminate.currentIndex { set => this.currentIndex = value; }
+        int IExaminate.numberOfQuestion { set => this.maxQuestions = value; }
+        int IExaminate.examineeListID => this.examineeListID;
+        string[] IExaminate.previousAnswers { get => this.previousAnswers; set => this.previousAnswers = value; }
 
         public event EventHandler NextQuestion;
         public event EventHandler PreviousQuestion;
