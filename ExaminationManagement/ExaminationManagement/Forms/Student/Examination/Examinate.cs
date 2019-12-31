@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace ExaminationManagement.Forms.Student.Examination
@@ -89,12 +90,24 @@ namespace ExaminationManagement.Forms.Student.Examination
                 btn_next.Enabled = btn_previous.Enabled = btn_submit.Enabled = true;
                 LoadQuestions();
 
+                // Millisecond to Minute:Second
+                double _time = this.time * 1000 * 60;
+                double _s = _time;
+
+                this.m = (int)(_s / (60 * 1000));
+                _s = _s % (60 * 1000);
+                this.s = (int)(_s / 1000);
+
+                // Start the timer here
+                testTimeLeft.Tick += OnTimedEvent;
+                testTimeLeft.Start();
+
                 // 2nd Way
                 this.answers = this.previousAnswers;
 
                 if (answers != null)
                 {
-                    this.PreviouAnswers(answers);
+                    this.SetPreviousAnswers(answers);
 
                     answers = null;
                 }
@@ -106,15 +119,76 @@ namespace ExaminationManagement.Forms.Student.Examination
             }
         }
 
+        int m = 0, s = 0;
+        int flag = 0;
+        // Timer
+        private void OnTimedEvent(object sender, EventArgs e)
+        {
+            testTimeLeft.Interval = 1000;
+
+            Invoke(new Action(() =>
+            {
+                if (this.m == 0 && this.s == 0)
+                {
+                    tb_time.BackColor = System.Drawing.Color.Red;
+                    flag = 1;
+
+                    testTimeLeft.Stop();
+
+                    try
+                    {
+                        if (MessageBox.Show("Time Up", "Time is up!", MessageBoxButtons.OK, MessageBoxIcon.Warning) == DialogResult.OK)
+                        {
+                            this.OnSubmit();
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        this.OnSubmit();
+                    }
+                }
+
+                if (this.s == 0 && this.flag == 0)
+                {
+                    this.s = 59;
+                    this.m -= 1;
+                }
+
+                if (m != 0 || s != 0)
+                {
+                    this.s -= 1;
+                }
+
+                tb_time.Text = string.Format("{0}:{1}", this.m.ToString().PadLeft(2, '0'), this.s.ToString().PadLeft(2, '0'));
+            }));
+
+        }
+
         private void Btn_back_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("You have not submitted yet! ", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
+                testTimeLeft.Stop();
                 this.Close();
 
                 examinationControlPanel = new ExaminationControlPanel(this.userID);
                 examinationControlPanel.Show();
             }
+        }
+
+        void OnSubmit()
+        {
+            answer = GetCheckedAnswer();
+
+            Submit?.Invoke(this, null);
+
+            answer = null;
+
+            this.Close();
+
+            examinationControlPanel = new ExaminationControlPanel(this.userID);
+            examinationControlPanel.Show();
+            MessageBox.Show(mainExaminationController.ErrorMessage);
         }
 
         private void Btn_submit_Click(object sender, EventArgs e)
@@ -123,17 +197,8 @@ namespace ExaminationManagement.Forms.Student.Examination
             {
                 if (MessageBox.Show("Confirm", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    answer = CheckedAnswer();
-
-                    Submit?.Invoke(this, null);
-
-                    answer = null;
-
-                    this.Close();
-
-                    examinationControlPanel = new ExaminationControlPanel(this.userID);
-                    examinationControlPanel.Show();
-                    MessageBox.Show(mainExaminationController.ErrorMessage);
+                    this.OnSubmit();
+                    testTimeLeft.Stop();
                 }
             }
             catch (Exception ex)
@@ -164,7 +229,7 @@ namespace ExaminationManagement.Forms.Student.Examination
             }
         }
 
-        string CheckedAnswer()
+        string GetCheckedAnswer()
         {
             answer = null;
             //ckb_choiceA.Checked ? answer = 'A' : null;
@@ -209,7 +274,7 @@ namespace ExaminationManagement.Forms.Student.Examination
             return answer;
         }
 
-        void PreviouAnswers(string[] previousAnswers)
+        void SetPreviousAnswers(string[] previousAnswers)
         {
             foreach (var item in previousAnswers)
             {
@@ -240,39 +305,11 @@ namespace ExaminationManagement.Forms.Student.Examination
             }
         }
 
-        int m = 0, s = 0;
-        int flag = 0;
-
-        void Timer()
-        {
-            int _time = this.time;
-
-            testTime.Interval = (_time * 1000); // 10s current
-
-            Invoke(new Action(() =>
-            {
-                s -= 1;
-
-                if (s == 0)
-                {
-                    s = 59;
-                    m -= 1;
-                }
-                if (m == 0)
-                {
-                    flag = 1;
-                }
-
-                tb_time.Text = string.Format("{0}:{1}", m.ToString().PadLeft(2, '0'), s.ToString().PadLeft(2, '0'));
-            }));
-
-        }
-
         private void Btn_next_Click(object sender, EventArgs e)
         {
             nav = true;
 
-            answer = CheckedAnswer();
+            answer = GetCheckedAnswer();
 
             try
             {
@@ -282,29 +319,11 @@ namespace ExaminationManagement.Forms.Student.Examination
 
                 if (answers != null)
                 {
-                    this.PreviouAnswers(answers);
+                    this.SetPreviousAnswers(answers);
 
                     answers = null;
                 }
 
-                //if (this.currentIndex <= this.maxQuestions && this.currentIndex > 0)
-                //{
-                //    btn_next.Enabled = true;
-                //    btn_previous.Enabled = true;
-                //}
-                //else
-                //{
-                //    if (this.currentIndex < 1)
-                //    {
-                //        btn_previous.Enabled = false;
-                //        btn_next.Enabled = true;
-                //    }
-                //    if (this.currentIndex >= this.maxQuestions)
-                //    {
-                //        btn_next.Enabled = false;
-                //        btn_previous.Enabled = true;
-                //    }
-                //}
                 CheckIndex();
             }
             catch (Exception ex)
@@ -317,7 +336,7 @@ namespace ExaminationManagement.Forms.Student.Examination
         {
             nav = true;
 
-            answer = CheckedAnswer();
+            answer = GetCheckedAnswer();
 
             try
             {
@@ -327,29 +346,11 @@ namespace ExaminationManagement.Forms.Student.Examination
 
                 if (answers != null)
                 {
-                    this.PreviouAnswers(answers);
+                    this.SetPreviousAnswers(answers);
 
                     answers = null;
                 }
 
-                //if (this.currentIndex <= this.maxQuestions && this.currentIndex > 0)
-                //{
-                //    btn_next.Enabled = true;
-                //    btn_previous.Enabled = true;
-                //}
-                //else
-                //{
-                //    if (this.currentIndex < 1)
-                //    {
-                //        btn_previous.Enabled = false;
-                //        btn_next.Enabled = true;
-                //    }
-                //    if (this.currentIndex >= this.maxQuestions)
-                //    {
-                //        btn_next.Enabled = false;
-                //        btn_previous.Enabled = true;
-                //    }
-                //}
                 CheckIndex();
             }
             catch (Exception ex)

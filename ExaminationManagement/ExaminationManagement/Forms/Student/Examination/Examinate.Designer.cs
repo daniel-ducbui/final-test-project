@@ -53,7 +53,7 @@
             this.pnl_question = new System.Windows.Forms.Panel();
             this.btn_next = new System.Windows.Forms.Button();
             this.btn_previous = new System.Windows.Forms.Button();
-            this.testTime = new System.Windows.Forms.Timer(this.components);
+            this.testTimeLeft = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.pnl_1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -362,7 +362,7 @@
         private System.Windows.Forms.CheckBox ckb_choiceB;
         private System.Windows.Forms.CheckBox ckb_choiceA;
         private System.Windows.Forms.Button btn_start;
-        private System.Windows.Forms.Timer testTime;
+        private System.Windows.Forms.Timer testTimeLeft;
         private System.Windows.Forms.TextBox tb_time;
     }
 }
