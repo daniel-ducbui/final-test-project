@@ -49,14 +49,19 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_submit = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.btn_start = new System.Windows.Forms.Button();
-            this.pnl_question = new System.Windows.Forms.Panel();
-            this.btn_next = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btn_showAllAnswers = new System.Windows.Forms.Button();
             this.btn_previous = new System.Windows.Forms.Button();
+            this.btn_showThisAnswer = new System.Windows.Forms.Button();
+            this.btn_next = new System.Windows.Forms.Button();
             this.testTimeLeft = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.pnl_1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -68,13 +73,13 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1420, 61);
+            this.panel1.Size = new System.Drawing.Size(1305, 61);
             this.panel1.TabIndex = 0;
             // 
             // tb_time
             // 
             this.tb_time.Font = new System.Drawing.Font("Maven Pro", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_time.Location = new System.Drawing.Point(1241, 14);
+            this.tb_time.Location = new System.Drawing.Point(1131, 14);
             this.tb_time.Name = "tb_time";
             this.tb_time.ReadOnly = true;
             this.tb_time.Size = new System.Drawing.Size(166, 32);
@@ -94,6 +99,7 @@
             // 
             // pnl_1
             // 
+            this.pnl_1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pnl_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_1.Controls.Add(this.ckb_choiceF);
             this.pnl_1.Controls.Add(this.ckb_choiceE);
@@ -113,14 +119,14 @@
             this.pnl_1.Location = new System.Drawing.Point(0, 61);
             this.pnl_1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnl_1.Name = "pnl_1";
-            this.pnl_1.Size = new System.Drawing.Size(1420, 749);
+            this.pnl_1.Size = new System.Drawing.Size(1305, 437);
             this.pnl_1.TabIndex = 1;
             // 
             // ckb_choiceF
             // 
             this.ckb_choiceF.AutoSize = true;
             this.ckb_choiceF.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckb_choiceF.Location = new System.Drawing.Point(160, 342);
+            this.ckb_choiceF.Location = new System.Drawing.Point(50, 339);
             this.ckb_choiceF.Name = "ckb_choiceF";
             this.ckb_choiceF.Size = new System.Drawing.Size(39, 28);
             this.ckb_choiceF.TabIndex = 14;
@@ -131,7 +137,7 @@
             // 
             this.ckb_choiceE.AutoSize = true;
             this.ckb_choiceE.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckb_choiceE.Location = new System.Drawing.Point(160, 306);
+            this.ckb_choiceE.Location = new System.Drawing.Point(50, 303);
             this.ckb_choiceE.Name = "ckb_choiceE";
             this.ckb_choiceE.Size = new System.Drawing.Size(40, 28);
             this.ckb_choiceE.TabIndex = 13;
@@ -142,7 +148,7 @@
             // 
             this.ckb_choiceD.AutoSize = true;
             this.ckb_choiceD.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckb_choiceD.Location = new System.Drawing.Point(160, 270);
+            this.ckb_choiceD.Location = new System.Drawing.Point(50, 267);
             this.ckb_choiceD.Name = "ckb_choiceD";
             this.ckb_choiceD.Size = new System.Drawing.Size(42, 28);
             this.ckb_choiceD.TabIndex = 12;
@@ -153,7 +159,7 @@
             // 
             this.ckb_choiceC.AutoSize = true;
             this.ckb_choiceC.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckb_choiceC.Location = new System.Drawing.Point(161, 234);
+            this.ckb_choiceC.Location = new System.Drawing.Point(51, 231);
             this.ckb_choiceC.Name = "ckb_choiceC";
             this.ckb_choiceC.Size = new System.Drawing.Size(41, 28);
             this.ckb_choiceC.TabIndex = 11;
@@ -164,7 +170,7 @@
             // 
             this.ckb_choiceB.AutoSize = true;
             this.ckb_choiceB.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckb_choiceB.Location = new System.Drawing.Point(161, 198);
+            this.ckb_choiceB.Location = new System.Drawing.Point(51, 195);
             this.ckb_choiceB.Name = "ckb_choiceB";
             this.ckb_choiceB.Size = new System.Drawing.Size(41, 28);
             this.ckb_choiceB.TabIndex = 10;
@@ -175,7 +181,7 @@
             // 
             this.ckb_choiceA.AutoSize = true;
             this.ckb_choiceA.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckb_choiceA.Location = new System.Drawing.Point(160, 162);
+            this.ckb_choiceA.Location = new System.Drawing.Point(50, 159);
             this.ckb_choiceA.Name = "ckb_choiceA";
             this.ckb_choiceA.Size = new System.Drawing.Size(41, 28);
             this.ckb_choiceA.TabIndex = 9;
@@ -184,8 +190,9 @@
             // 
             // tb_f
             // 
+            this.tb_f.BackColor = System.Drawing.Color.Snow;
             this.tb_f.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_f.Location = new System.Drawing.Point(209, 340);
+            this.tb_f.Location = new System.Drawing.Point(99, 337);
             this.tb_f.Name = "tb_f";
             this.tb_f.ReadOnly = true;
             this.tb_f.Size = new System.Drawing.Size(889, 30);
@@ -193,8 +200,9 @@
             // 
             // tb_e
             // 
+            this.tb_e.BackColor = System.Drawing.Color.Snow;
             this.tb_e.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_e.Location = new System.Drawing.Point(209, 304);
+            this.tb_e.Location = new System.Drawing.Point(99, 301);
             this.tb_e.Name = "tb_e";
             this.tb_e.ReadOnly = true;
             this.tb_e.Size = new System.Drawing.Size(889, 30);
@@ -202,8 +210,9 @@
             // 
             // tb_d
             // 
+            this.tb_d.BackColor = System.Drawing.Color.Snow;
             this.tb_d.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_d.Location = new System.Drawing.Point(209, 268);
+            this.tb_d.Location = new System.Drawing.Point(99, 265);
             this.tb_d.Name = "tb_d";
             this.tb_d.ReadOnly = true;
             this.tb_d.Size = new System.Drawing.Size(889, 30);
@@ -211,8 +220,9 @@
             // 
             // tb_c
             // 
+            this.tb_c.BackColor = System.Drawing.Color.Snow;
             this.tb_c.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_c.Location = new System.Drawing.Point(209, 232);
+            this.tb_c.Location = new System.Drawing.Point(99, 229);
             this.tb_c.Name = "tb_c";
             this.tb_c.ReadOnly = true;
             this.tb_c.Size = new System.Drawing.Size(889, 30);
@@ -220,8 +230,9 @@
             // 
             // tb_b
             // 
+            this.tb_b.BackColor = System.Drawing.Color.Snow;
             this.tb_b.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_b.Location = new System.Drawing.Point(209, 196);
+            this.tb_b.Location = new System.Drawing.Point(99, 193);
             this.tb_b.Name = "tb_b";
             this.tb_b.ReadOnly = true;
             this.tb_b.Size = new System.Drawing.Size(889, 30);
@@ -229,8 +240,9 @@
             // 
             // tb_a
             // 
+            this.tb_a.BackColor = System.Drawing.Color.Snow;
             this.tb_a.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_a.Location = new System.Drawing.Point(209, 160);
+            this.tb_a.Location = new System.Drawing.Point(99, 157);
             this.tb_a.Name = "tb_a";
             this.tb_a.ReadOnly = true;
             this.tb_a.Size = new System.Drawing.Size(889, 30);
@@ -238,7 +250,8 @@
             // 
             // tb_content
             // 
-            this.tb_content.Location = new System.Drawing.Point(209, 6);
+            this.tb_content.BackColor = System.Drawing.Color.Snow;
+            this.tb_content.Location = new System.Drawing.Point(99, 3);
             this.tb_content.Multiline = true;
             this.tb_content.Name = "tb_content";
             this.tb_content.ReadOnly = true;
@@ -250,7 +263,7 @@
             this.label1.AutoSize = true;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(113, 6);
+            this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 26);
             this.label1.TabIndex = 0;
@@ -259,7 +272,7 @@
             // btn_submit
             // 
             this.btn_submit.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btn_submit.Location = new System.Drawing.Point(1313, 3);
+            this.btn_submit.Location = new System.Drawing.Point(90, 3);
             this.btn_submit.Name = "btn_submit";
             this.btn_submit.Size = new System.Drawing.Size(95, 42);
             this.btn_submit.TabIndex = 1;
@@ -269,57 +282,90 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.btn_start);
-            this.panel3.Controls.Add(this.pnl_question);
-            this.panel3.Controls.Add(this.btn_next);
-            this.panel3.Controls.Add(this.btn_previous);
-            this.panel3.Controls.Add(this.btn_submit);
+            this.panel3.Controls.Add(this.panel4);
+            this.panel3.Controls.Add(this.panel2);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 753);
+            this.panel3.Location = new System.Drawing.Point(0, 441);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1420, 57);
+            this.panel3.Size = new System.Drawing.Size(1305, 57);
             this.panel3.TabIndex = 4;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.btn_start);
+            this.panel4.Controls.Add(this.btn_submit);
+            this.panel4.Location = new System.Drawing.Point(1108, 3);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(189, 49);
+            this.panel4.TabIndex = 15;
             // 
             // btn_start
             // 
             this.btn_start.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.btn_start.Location = new System.Drawing.Point(1226, 3);
+            this.btn_start.Location = new System.Drawing.Point(3, 3);
             this.btn_start.Name = "btn_start";
             this.btn_start.Size = new System.Drawing.Size(81, 42);
             this.btn_start.TabIndex = 5;
             this.btn_start.Text = "Start";
             this.btn_start.UseVisualStyleBackColor = false;
             // 
-            // pnl_question
+            // panel2
             // 
-            this.pnl_question.Location = new System.Drawing.Point(113, 3);
-            this.pnl_question.Name = "pnl_question";
-            this.pnl_question.Size = new System.Drawing.Size(1006, 42);
-            this.pnl_question.TabIndex = 4;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.btn_showAllAnswers);
+            this.panel2.Controls.Add(this.btn_previous);
+            this.panel2.Controls.Add(this.btn_showThisAnswer);
+            this.panel2.Controls.Add(this.btn_next);
+            this.panel2.Location = new System.Drawing.Point(422, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(403, 49);
+            this.panel2.TabIndex = 15;
             // 
-            // btn_next
+            // btn_showAllAnswers
             // 
-            this.btn_next.Location = new System.Drawing.Point(1125, 3);
-            this.btn_next.Name = "btn_next";
-            this.btn_next.Size = new System.Drawing.Size(95, 42);
-            this.btn_next.TabIndex = 3;
-            this.btn_next.Text = "Next";
-            this.btn_next.UseVisualStyleBackColor = true;
+            this.btn_showAllAnswers.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_showAllAnswers.Location = new System.Drawing.Point(304, 3);
+            this.btn_showAllAnswers.Name = "btn_showAllAnswers";
+            this.btn_showAllAnswers.Size = new System.Drawing.Size(93, 42);
+            this.btn_showAllAnswers.TabIndex = 17;
+            this.btn_showAllAnswers.Text = "Show All Answers";
+            this.btn_showAllAnswers.UseVisualStyleBackColor = false;
             // 
             // btn_previous
             // 
-            this.btn_previous.Location = new System.Drawing.Point(12, 3);
+            this.btn_previous.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_previous.Location = new System.Drawing.Point(3, 3);
             this.btn_previous.Name = "btn_previous";
             this.btn_previous.Size = new System.Drawing.Size(95, 42);
             this.btn_previous.TabIndex = 2;
             this.btn_previous.Text = "Previous";
-            this.btn_previous.UseVisualStyleBackColor = true;
+            this.btn_previous.UseVisualStyleBackColor = false;
+            // 
+            // btn_showThisAnswer
+            // 
+            this.btn_showThisAnswer.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_showThisAnswer.Location = new System.Drawing.Point(205, 3);
+            this.btn_showThisAnswer.Name = "btn_showThisAnswer";
+            this.btn_showThisAnswer.Size = new System.Drawing.Size(93, 42);
+            this.btn_showThisAnswer.TabIndex = 16;
+            this.btn_showThisAnswer.Text = "Show Answer";
+            this.btn_showThisAnswer.UseVisualStyleBackColor = false;
+            // 
+            // btn_next
+            // 
+            this.btn_next.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.btn_next.Location = new System.Drawing.Point(104, 3);
+            this.btn_next.Name = "btn_next";
+            this.btn_next.Size = new System.Drawing.Size(95, 42);
+            this.btn_next.TabIndex = 3;
+            this.btn_next.Text = "Next";
+            this.btn_next.UseVisualStyleBackColor = false;
             // 
             // Examinate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1420, 810);
+            this.ClientSize = new System.Drawing.Size(1305, 498);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnl_1);
             this.Controls.Add(this.panel1);
@@ -333,6 +379,8 @@
             this.pnl_1.ResumeLayout(false);
             this.pnl_1.PerformLayout();
             this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -346,7 +394,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btn_next;
         private System.Windows.Forms.Button btn_previous;
-        private System.Windows.Forms.Panel pnl_question;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tb_content;
         private System.Windows.Forms.TextBox tb_f;
@@ -364,5 +411,9 @@
         private System.Windows.Forms.Button btn_start;
         private System.Windows.Forms.Timer testTimeLeft;
         private System.Windows.Forms.TextBox tb_time;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button btn_showAllAnswers;
+        private System.Windows.Forms.Button btn_showThisAnswer;
     }
 }

@@ -16,16 +16,17 @@ namespace ExaminationManagement.Forms.Student.Examination
 {
     public partial class Examinate : Form, IExaminate
     {
-        ExaminatePresenter mainExaminationController;
+        ExaminatePresenter examinationPresenter;
         ExaminationControlPanel examinationControlPanel;
-        int userID;
-        int examineeListID;
-        int time;
+        int userID = 0;
+        int time = 0;
+        int examinationID = 0;
+        int examinationType = 0;
         string testID = null;
-        string testListID = null;
         string[] answers = null;
         string answer = null;
         bool nav = false;
+        int flag = 0;
 
         int currentIndex = 0;
         int maxQuestions = 0;
@@ -41,24 +42,116 @@ namespace ExaminationManagement.Forms.Student.Examination
             btn_previous.Click += Btn_previous_Click;
             btn_submit.Click += Btn_submit_Click;
             btn_back.Click += Btn_back_Click;
+            btn_showThisAnswer.Click += Btn_showThisAnswer_Click;
+            btn_showAllAnswers.Click += Btn_showAllAnswers_Click;
         }
 
-        public Examinate(int userID, string testID, string testListID, int examineeListID, int time) : this()
+        void OnSetPreviousAnswer()
+        {
+            this.answers = this.previousAnswers;
+
+            if (answers != null)
+            {
+                this.SetPreviousAnswers(answers);
+
+                answers = null;
+            }
+        }
+
+        void OnChangeColor()
+        {
+            tb_a.BackColor = Color.Snow;
+            tb_b.BackColor = Color.Snow;
+            tb_c.BackColor = Color.Snow;
+            tb_d.BackColor = Color.Snow;
+            tb_e.BackColor = Color.Snow;
+            tb_f.BackColor = Color.Snow;
+        }
+
+        void ShowAnswer()
+        {
+            try
+            {
+                ShowThisAnswer?.Invoke(this, null);
+
+                this.flag = 1;
+                this.OnSetPreviousAnswer();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong! \nDetails: " + ex.Message);
+            }
+        }
+
+        private void Btn_showThisAnswer_Click(object sender, EventArgs e)
+        {
+            this.ShowAnswer();
+        }
+
+        int flagShowAllAnswers = 0;
+        private void Btn_showAllAnswers_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ShowAllAnswers?.Invoke(this, null);
+
+                if (this.flagShowAllAnswers == 1)
+                {
+                    this.ShowAnswer();
+                    btn_showThisAnswer.Enabled = false;
+                    btn_showAllAnswers.BackColor = Color.Green;
+                }
+                else
+                {
+                    this.OnChangeColor();
+                    btn_showThisAnswer.Enabled = true;
+                    btn_showAllAnswers.BackColor = Color.WhiteSmoke;
+                }
+                this.OnSetPreviousAnswer();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something wrong! \nDetails: " + ex.Message);
+            }
+        }
+
+        public Examinate(int userID, int examinationID, string testID) : this()
         {
             this.userID = userID;
+            this.examinationID = examinationID;
             this.testID = testID;
-            this.testListID = testListID;
-            this.examineeListID = examineeListID;
-            this.time = time;
         }
 
         private void MainExamination_Load(object sender, EventArgs e)
         {
-            mainExaminationController = new ExaminatePresenter(this);
+            examinationPresenter = new ExaminatePresenter(this);
 
             if (btn_start.Enabled)
             {
-                btn_next.Enabled = btn_previous.Enabled = btn_submit.Enabled = false;
+                btn_next.Enabled
+                    = btn_previous.Enabled
+                    = btn_submit.Enabled
+                    = btn_showThisAnswer.Enabled
+                    = btn_showAllAnswers.Enabled
+                    = false;
+            }
+
+            if (this.maxQuestions == 0)
+            {
+                if (MessageBox.Show(examinationPresenter.ErrorMessage, "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
+                {
+                    this.Close();
+
+                    examinationControlPanel = new ExaminationControlPanel(this.userID);
+                    examinationControlPanel.Show();
+                }
+            }
+
+            if (this.examinationType == 1)
+            {
+                this.panel2.Size = new System.Drawing.Size(202, 49);
+                this.btn_showThisAnswer.Hide();
+                this.btn_showAllAnswers.Hide();
             }
 
             tb_content.TextChanged += (s, ev) =>
@@ -87,7 +180,13 @@ namespace ExaminationManagement.Forms.Student.Examination
             try
             {
                 btn_start.Enabled = false;
-                btn_next.Enabled = btn_previous.Enabled = btn_submit.Enabled = true;
+                btn_next.Enabled
+                    = btn_previous.Enabled
+                    = btn_submit.Enabled
+                    = btn_showThisAnswer.Enabled
+                    = btn_showAllAnswers.Enabled
+                    = true;
+
                 LoadQuestions();
 
                 // Millisecond to Minute:Second
@@ -98,19 +197,13 @@ namespace ExaminationManagement.Forms.Student.Examination
                 _s = _s % (60 * 1000);
                 this.s = (int)(_s / 1000);
 
-                // Start the timer here
+                // Start the timer
                 testTimeLeft.Tick += OnTimedEvent;
                 testTimeLeft.Start();
 
                 // 2nd Way
-                this.answers = this.previousAnswers;
+                this.OnSetPreviousAnswer();
 
-                if (answers != null)
-                {
-                    this.SetPreviousAnswers(answers);
-
-                    answers = null;
-                }
                 CheckIndex();
             }
             catch (Exception ex)
@@ -120,10 +213,11 @@ namespace ExaminationManagement.Forms.Student.Examination
         }
 
         int m = 0, s = 0;
-        int flag = 0;
         // Timer
         private void OnTimedEvent(object sender, EventArgs e)
         {
+            int flag = 0;
+
             testTimeLeft.Interval = 1000;
 
             Invoke(new Action(() =>
@@ -148,7 +242,7 @@ namespace ExaminationManagement.Forms.Student.Examination
                     }
                 }
 
-                if (this.s == 0 && this.flag == 0)
+                if (this.s == 0 && flag == 0)
                 {
                     this.s = 59;
                     this.m -= 1;
@@ -188,7 +282,7 @@ namespace ExaminationManagement.Forms.Student.Examination
 
             examinationControlPanel = new ExaminationControlPanel(this.userID);
             examinationControlPanel.Show();
-            MessageBox.Show(mainExaminationController.ErrorMessage);
+            MessageBox.Show(examinationPresenter.ErrorMessage);
         }
 
         private void Btn_submit_Click(object sender, EventArgs e)
@@ -281,33 +375,67 @@ namespace ExaminationManagement.Forms.Student.Examination
                 if (item.Contains("a"))
                 {
                     ckb_choiceA.Checked = true;
+
+                    if (this.flag == 1)
+                    {
+                        tb_a.BackColor = Color.Green;
+                    }
                 }
                 if (item.Contains("b"))
                 {
                     ckb_choiceB.Checked = true;
+
+                    if (this.flag == 1)
+                    {
+                        tb_b.BackColor = Color.Green;
+                    }
                 }
                 if (item.Contains("c"))
                 {
                     ckb_choiceC.Checked = true;
+
+                    if (this.flag == 1)
+                    {
+                        tb_c.BackColor = Color.Green;
+                    }
                 }
                 if (item.Contains("d"))
                 {
                     ckb_choiceD.Checked = true;
+
+                    if (this.flag == 1)
+                    {
+                        tb_d.BackColor = Color.Green;
+                    }
                 }
                 if (item.Contains("e"))
                 {
                     ckb_choiceE.Checked = true;
+
+                    if (this.flag == 1)
+                    {
+                        tb_e.BackColor = Color.Green;
+                    }
                 }
                 if (item.Contains("f"))
                 {
                     ckb_choiceF.Checked = true;
+
+                    if (this.flag == 1)
+                    {
+                        tb_f.BackColor = Color.Green;
+                    }
                 }
+
             }
+            this.flag = 0;
         }
 
         private void Btn_next_Click(object sender, EventArgs e)
         {
             nav = true;
+
+            this.OnChangeColor();
 
             answer = GetCheckedAnswer();
 
@@ -315,13 +443,13 @@ namespace ExaminationManagement.Forms.Student.Examination
             {
                 NextQuestion?.Invoke(this, null);
 
-                this.answers = this.previousAnswers;
-
-                if (answers != null)
+                if (this.flagShowAllAnswers == 1)
                 {
-                    this.SetPreviousAnswers(answers);
-
-                    answers = null;
+                    this.ShowAnswer();
+                }
+                else
+                {
+                    this.OnSetPreviousAnswer();
                 }
 
                 CheckIndex();
@@ -336,19 +464,21 @@ namespace ExaminationManagement.Forms.Student.Examination
         {
             nav = true;
 
+            this.OnChangeColor();
+
             answer = GetCheckedAnswer();
 
             try
             {
                 PreviousQuestion?.Invoke(this, null);
 
-                this.answers = this.previousAnswers;
-
-                if (answers != null)
+                if (this.flagShowAllAnswers == 1)
                 {
-                    this.SetPreviousAnswers(answers);
-
-                    answers = null;
+                    this.ShowAnswer();
+                }
+                else
+                {
+                    this.OnSetPreviousAnswer();
                 }
 
                 CheckIndex();
@@ -361,7 +491,9 @@ namespace ExaminationManagement.Forms.Student.Examination
 
         int IExaminate.userID => this.userID;
         string IExaminate.testID => this.testID;
-        string IExaminate.testListID => this.testListID;
+        int IExaminate.time { get => this.time; set => this.time = value; }
+        int IExaminate.examinationID => this.examinationID;
+        int IExaminate.examinationType { get => this.examinationType; set => this.examinationType = value; }
 
         public string content { get => tb_content.Text; set => tb_content.Text = value; }
         public string choiceA { get => tb_a.Text; set => tb_a.Text = value; }
@@ -373,12 +505,15 @@ namespace ExaminationManagement.Forms.Student.Examination
         string IExaminate.answer => this.answer;
         int IExaminate.currentIndex { set => this.currentIndex = value; }
         int IExaminate.numberOfQuestion { set => this.maxQuestions = value; }
-        int IExaminate.examineeListID => this.examineeListID;
         string[] IExaminate.previousAnswers { get => this.previousAnswers; set => this.previousAnswers = value; }
+
+        int IExaminate.flagShowAllAnswers { get => this.flagShowAllAnswers; set => this.flagShowAllAnswers = value; }
 
         public event EventHandler NextQuestion;
         public event EventHandler PreviousQuestion;
         public event EventHandler LoadQuestion;
+        public event EventHandler ShowThisAnswer;
+        public event EventHandler ShowAllAnswers;
         public event EventHandler Submit;
         public event EventHandler<SelectedChangedEventArgs> SelectedChangedQuestion;
     }

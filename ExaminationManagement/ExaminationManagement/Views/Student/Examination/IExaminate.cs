@@ -11,7 +11,6 @@ namespace ExaminationManagement.Views.Student.Examination
     {
         int userID { get; }
         string testID { get; }
-        string testListID { get; }
         string content { get; set; }
         string choiceA { get; set; }
         string choiceB { get; set; }
@@ -22,11 +21,17 @@ namespace ExaminationManagement.Views.Student.Examination
         string answer { get; }
         int currentIndex { set; }
         int numberOfQuestion { set; }
-        int examineeListID { get; }
+        int examinationID { get; }
+        int examinationType { get; set; }
+        int time { get; set; }
         string[] previousAnswers { get; set; }
+
+        int flagShowAllAnswers { get; set; }
 
         event EventHandler NextQuestion;
         event EventHandler PreviousQuestion;
+        event EventHandler ShowThisAnswer;
+        event EventHandler ShowAllAnswers;
         event EventHandler LoadQuestion;
         event EventHandler Submit;
         event EventHandler<SelectedChangedEventArgs> SelectedChangedQuestion;

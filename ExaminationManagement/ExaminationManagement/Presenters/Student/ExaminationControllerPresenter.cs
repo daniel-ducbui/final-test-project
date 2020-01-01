@@ -48,13 +48,8 @@ namespace ExaminationManagement.Presenters.Student
 
                     string _testID = _examInfo.TestID.Replace(" ", "");
                     string _testListID = _examInfo.TestListID;
-                    int _examineeID = Convert.ToInt32(_examInfo.ExamineeListID);
-                    int _time = _examInfo.Time;
 
-                    view.testListID = _testListID;
                     view.testID = _testID;
-                    view.examineeListID = _examineeID;
-                    view.time = _time;
                 }
             }
             catch (Exception ex)

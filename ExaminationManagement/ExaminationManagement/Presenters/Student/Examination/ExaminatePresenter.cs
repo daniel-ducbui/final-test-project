@@ -17,15 +17,19 @@ namespace ExaminationManagement.Presenters.Student.Examination
         BaseQuery baseQuery = new BaseQuery();
 
         List<TheQuestion> testQuestionList;
-        List<string[]> userAnswersList = new List<string[]>();
-        List<string> userCurrentAnswers = new List<string>();
+        List<string[]> userAnsweredList = new List<string[]>(); // On table ResultDetails (Splitted)
+        List<string[]> trueAnswersList = new List<string[]>();  // On table TheQuestion (Splitted)
+        List<string> userCurrentAnswers = new List<string>();   // While do the test (Non-split)
         List<string> _tempAnswersList;
 
         int resultID = 0;
-        int flag = 0;
-        int flag2 = 0;
+        int flagFirstLoadQuestion = 0;
+        int flagOnSubmit = 0;
+
         int numberOfQuestion = 0;
         int examinationType = 0;
+        int examineeListID = 0;
+        string testListID = null;
 
         public string ErrorMessage = null;
 
@@ -41,9 +45,12 @@ namespace ExaminationManagement.Presenters.Student.Examination
             view.NextQuestion += View_NextQuestion;
             view.PreviousQuestion += View_PreviousQuestion;
             view.LoadQuestion += View_LoadQuestion;
+            view.ShowThisAnswer += View_ShowThisAnswer;
+            view.ShowAllAnswers += View_ShowAllAnswers;
             view.Submit += View_Submit;
             view.SelectedChangedQuestion += View_SelectedChangedQuestion;
 
+            // Get the examination's information
             using (var _data = new ExaminationManagementDataContext())
             {
                 testQuestionList = new List<TheQuestion>();
@@ -56,25 +63,44 @@ namespace ExaminationManagement.Presenters.Student.Examination
                                      && td.QuestionID == q.QuestionID
 
                                     select q).ToList();
+
+                var examinationInfomation = (from ex in _data.TheExaminations
+                                             where ex.ExaminationID == view.examinationID
+                                             select ex).FirstOrDefault();
+
+                this.examinationType = examinationInfomation.ExaminationType;
+                this.examineeListID = Convert.ToInt32(examinationInfomation.ExamineeListID);
+                this.testListID = examinationInfomation.TestListID;
+
+                view.time = examinationInfomation.Time;
             }
 
-            this.examinationType = baseQuery.GetExaminationType(view.testListID);
-            this.numberOfQuestion = baseQuery.GetNumbersOfQuestion(view.testID);
+            // Get number of questions
+            this.numberOfQuestion = baseQuery.GetNumberOfQuestion(view.testID);
 
             if (this.numberOfQuestion < 1)
             {
                 this.ErrorMessage = "No question found!";
             }
 
-            this.resultID = baseQuery.FindResult(view.userID, view.testID, view.testListID);
-
+            // Transfer to view
             view.numberOfQuestion = this.numberOfQuestion;
-            // 1nd Way
-            //userAnswersList.Add(null);
+            view.examinationType = this.examinationType;
+            view.flagShowAllAnswers = 0;
 
-            // 2nd Way
-            this.userCurrentAnswers.Add(null);
-            this.userAnswersList = baseQuery.GetUserAnsweredList(this.resultID);
+            // Find if result has already existed - if not equals 0 (occur when turned off by accident)
+            this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, view.examinationID);
+            
+            // Initialize user's current answers
+            int _tempNumberOfQuestion = this.numberOfQuestion;
+
+            while (_tempNumberOfQuestion > 0)
+            {
+                this.userCurrentAnswers.Add(null);
+                _tempNumberOfQuestion--;
+            }
+
+            this.userAnsweredList = baseQuery.GetUserAnsweredList(this.resultID);
         }
 
         void LoadQuestion()
@@ -91,13 +117,13 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
             view.currentIndex = currentIndex;
 
-            // 2nd Way
-            this.userAnswersList = baseQuery.GetUserAnsweredList(this.resultID);
+            // Get user existed answers list (occur when turned off by accident) - if not filled by (-)
+            this.userAnsweredList = baseQuery.GetUserAnsweredList(this.resultID);
 
-            if (userAnswersList.Count > 0 && this.flag == 0)
+            if (userAnsweredList.Count > 0 && this.flagFirstLoadQuestion == 0)
             {
-                view.previousAnswers = userAnswersList[currentIndex];
-                this.flag = 1;
+                view.previousAnswers = userAnsweredList[currentIndex];
+                this.flagFirstLoadQuestion = 1;
             }
         }
 
@@ -107,6 +133,35 @@ namespace ExaminationManagement.Presenters.Student.Examination
             {
                 currentIndex = e.Index;
                 LoadQuestion();
+            }
+        }
+
+        private void View_LoadQuestion(object sender, EventArgs e)
+        {
+            try
+            {
+                baseQuery.SaveResult(this.resultID, view.userID, view.testID, 0);
+
+                if (this.resultID == 0)
+                {
+                    this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, view.examinationID);
+                }
+
+                if (userAnsweredList.Count < 1)
+                {
+                    foreach (var item in testQuestionList)
+                    {
+                        baseQuery.SaveResultDetails(item.QuestionID, this.resultID, "-", 0);
+                    }
+                }
+
+                // EnrollExamination maybe here
+
+                LoadQuestion();
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = "Fail!" + ex.Message;
             }
         }
 
@@ -129,35 +184,25 @@ namespace ExaminationManagement.Presenters.Student.Examination
                 trueAnswers = mainFunction.SplitAnswerArray(_trueAnswer);
                 userAnswers = mainFunction.SplitAnswerArray(answer);
 
-                // 1nd Way
                 /* 
                  * 
                  * IMPORTANT == DO NOT DELETE == IMPORTANT
                  * 
                  */
-                // Add this answer to answered list
 
-                //int listIndex = currentIndex;
+                // Add this answer to current answered list
 
-                //userAnswersList.RemoveAt(listIndex);
-                //userAnswersList.Insert(listIndex, userAnswers);
-
-                //if (userAnswersList.Count == ++listIndex)
-                //{
-                //    userAnswersList.Add(null);
-                //}
-
-                if (this.flag2 == 0)
+                if (this.flagOnSubmit == 0) // (Do not remove this flag. Will be raised error: Collection was modified!)
                 {
                     int listIndex = currentIndex;
 
                     userCurrentAnswers.RemoveAt(listIndex);
                     userCurrentAnswers.Insert(listIndex, answer);
 
-                    if (userCurrentAnswers.Count == ++listIndex)
-                    {
-                        userCurrentAnswers.Add(null);
-                    }
+                    //if (userCurrentAnswers.Count == ++listIndex)
+                    //{
+                    //    userCurrentAnswers.Add(null);
+                    //}
                 }
 
                 if (userAnswers.Length == trueAnswers.Length)
@@ -182,49 +227,8 @@ namespace ExaminationManagement.Presenters.Student.Examination
             try
             {
                 int currentScore = Score(questionID, answer);
-                //int previousScore = baseQuery.Score(this.resultID, questionID);
-                //int totalScore = baseQuery.GetTotalScore(this.resultID);
 
                 baseQuery.SaveResultDetails(questionID, this.resultID, (answer == null ? "-" : answer), currentScore);
-
-                // Problem here
-                //if (currentScore == 1 && previousScore == 0)
-                //{
-                //    baseQuery.SaveResult(this.resultID, view.userID, view.testID, totalScore + 1);
-                //}
-                //else if (currentScore == 0 && previousScore == 1 && totalScore > 0)
-                //{
-                //    baseQuery.SaveResult(this.resultID, view.userID, view.testID, totalScore - 1);
-                //}
-            }
-            catch (Exception ex)
-            {
-                this.ErrorMessage = "Fail!" + ex.Message;
-            }
-        }
-
-        private void View_LoadQuestion(object sender, EventArgs e)
-        {
-            try
-            {
-                baseQuery.SaveResult(this.resultID, view.userID, view.testID, 0);
-
-                if (this.resultID == 0)
-                {
-                    this.resultID = baseQuery.FindResult(view.userID, view.testID, view.testListID);
-                }
-
-                if (userAnswersList.Count < 1)
-                {
-                    foreach (var item in testQuestionList)
-                    {
-                        baseQuery.SaveResultDetails(item.QuestionID, this.resultID, "-", 0);
-                    }
-                }
-
-                // EnrollExamination maybe here
-
-                LoadQuestion();
             }
             catch (Exception ex)
             {
@@ -240,8 +244,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
             {
                 currentIndex++;
 
-                // Both Ways
-                view.previousAnswers = userAnswersList[currentIndex];
+                view.previousAnswers = userAnsweredList[currentIndex];
 
                 LoadQuestion();
             }
@@ -255,10 +258,31 @@ namespace ExaminationManagement.Presenters.Student.Examination
             {
                 currentIndex--;
 
-                // Both Ways
-                view.previousAnswers = userAnswersList[currentIndex];
+                view.previousAnswers = userAnsweredList[currentIndex];
 
                 LoadQuestion();
+            }
+        }
+
+        private void View_ShowThisAnswer(object sender, EventArgs e)
+        {
+            // I am here. Trying to get answer for the test examination
+            int _questionID = testQuestionList[currentIndex].QuestionID;
+
+            trueAnswersList = baseQuery.GetTrueAnswersList(view.testID, _questionID);
+
+            view.previousAnswers = trueAnswersList[0];
+        }
+
+        private void View_ShowAllAnswers(object sender, EventArgs e)
+        {
+            if (view.flagShowAllAnswers == 0)
+            {
+                view.flagShowAllAnswers = 1;
+            }
+            else
+            {
+                view.flagShowAllAnswers = 0;
             }
         }
 
@@ -268,13 +292,13 @@ namespace ExaminationManagement.Presenters.Student.Examination
             {
                 CheckResult(testQuestionList[currentIndex].QuestionID, view.answer);
                 // Save all the answers
-                this.userCurrentAnswers.RemoveAt(this.numberOfQuestion);
+                //this.userCurrentAnswers.RemoveAt(this.numberOfQuestion);
 
                 _tempAnswersList = new List<string>();
                 _tempAnswersList = this.userCurrentAnswers;
 
                 this.currentIndex = 0;
-                this.flag2 = 1;
+                this.flagOnSubmit = 1;
 
                 foreach (var item in _tempAnswersList)
                 {
@@ -291,7 +315,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
                 if (this.examinationType == 1)
                 {
                     // Enroll the examination
-                    baseQuery.EnrollExamination(view.userID, view.examineeListID);
+                    baseQuery.EnrollExamination(view.userID, this.examineeListID);
                 }
 
                 this.ErrorMessage = baseQuery.ErrorMessage;

@@ -11,7 +11,10 @@ namespace ExaminationManagement.Functions
 {
     public class BaseQuery
     {
+
+        MainFunction mainFunction = new MainFunction();
         public string ErrorMessage = null;
+
         public void ExecuteAccount(int _userID, string _Name, string _PhoneNumber,
             string _Email, DateTime _DOB, string _Address, string _ClassID, int _GradeID, int _AccountType, string _temp)
         {
@@ -109,22 +112,6 @@ namespace ExaminationManagement.Functions
             {
                 ErrorMessage = e.Message;
             }
-        }
-
-        public int GetExaminationType(string _testListID)
-        {
-            int type = 0;
-
-            using (var _data = new ExaminationManagementDataContext())
-            {
-                var _type = (from ex in _data.TheExaminations
-                             where ex.TestListID == _testListID
-                             select ex.ExaminationType).FirstOrDefault();
-
-                type = _type;
-            }
-
-            return type;
         }
 
         public int TotalScore(int _resultID)
@@ -242,7 +229,7 @@ namespace ExaminationManagement.Functions
             }
         }
 
-        public int FindResult(int _userID, string _testID, string _testListID)
+        public int FindResult(int _userID, string _testID, string _testListID, int _examinationID)
         {
             int resultID = 0;
 
@@ -255,9 +242,17 @@ namespace ExaminationManagement.Functions
                                join tl in _data.TestLists on tld.TestListID equals tl.TestListID
                                join ex in _data.TheExaminations on tld.TestListID equals ex.TestListID
 
-                               where r.UserID == _userID 
-                                && r.TestID == _testID 
-                                && ex.TestListID == _testListID
+                               where
+                                    r.UserID == _userID &&
+                                    r.TestID == _testID &&
+                                    r.TestID == td.TestID &&
+                                    td.TestID == t.TestID &&
+                                    t.TestID == tld.TestID &&
+                                    tld.TestListID == tl.TestListID &&
+                                    tl.TestListID == ex.TestListID &&
+                                    ex.TestListID == _testListID &&
+                                    ex.ExaminationID == _examinationID
+
                                select r.ResultID).FirstOrDefault();
 
                 if (_result != null)
@@ -314,51 +309,79 @@ namespace ExaminationManagement.Functions
             return totalScore;
         }
 
-        public int Score(int _resultID, int _questionID)
-        {
-            int score = 0;
-
-            using (var _data = new ExaminationManagementDataContext())
-            {
-                var _score = (from r in _data.ResultDetails
-                              where r.ResultID == _resultID && r.QuestionID == _questionID
-                              select r.Score).FirstOrDefault();
-
-                if (_score != null)
-                {
-                    score = _score;
-                    this.ErrorMessage = "Success!";
-                }
-            }
-
-            return score;
-        }
-
         public List<string[]> GetUserAnsweredList(int _resultID)
         {
-            MainFunction mainFunction = new MainFunction();
-            List<string> userAnsweredList = new List<string>(); // Answered in database
             List<string[]> userAnswersList = new List<string[]>(); // Answered splitted string list
 
             using (var _data = new ExaminationManagementDataContext())
             {
-                userAnsweredList = (from rd in _data.ResultDetails
-                                    where rd.ResultID == _resultID
-                                    select rd.Answer).ToList();
-            }
+                var _userAnsweredList = (from rd in _data.ResultDetails
+                                         where rd.ResultID == _resultID
+                                         select rd.Answer).ToList();
 
-            if (userAnsweredList != null)
-            {
-                foreach (var item in userAnsweredList)
+                if (_userAnsweredList != null)
                 {
-                    string[] _temp = mainFunction.SplitAnswerArray(item);
-                    userAnswersList.Add(_temp);
-                }
+                    foreach (var item in _userAnsweredList)
+                    {
+                        string[] _temp = mainFunction.SplitAnswerArray(item);
+                        userAnswersList.Add(_temp);
+                    }
 
-                this.ErrorMessage = "Success!";
+                    this.ErrorMessage = "Success!";
+                }
             }
 
             return userAnswersList;
+        }
+
+        public List<string[]> GetTrueAnswersList(string _testID, int _questionID)
+        {
+            List<string[]> trueAnswersList = new List<string[]>();
+            string[] _temp = null;
+
+            using (var _data = new ExaminationManagementDataContext())
+            {
+                if (_questionID == 0)
+                {
+                    var _trueAnswersList = (from td in _data.TestDetails
+                                            join q in _data.TheQuestions on td.QuestionID equals q.QuestionID
+
+                                            where
+                                                td.QuestionID == q.QuestionID &&
+                                                td.TestID == _testID
+
+                                            select q.Answer).ToList();
+
+                    if (_trueAnswersList != null)
+                    {
+                        foreach (var item in _trueAnswersList)
+                        {
+                            _temp = mainFunction.SplitAnswerArray(item);
+                            trueAnswersList.Add(_temp);
+                        }
+                    }
+                }
+                else
+                {
+                    var _trueAnswer = (from td in _data.TestDetails
+                                       join q in _data.TheQuestions on td.QuestionID equals q.QuestionID
+
+                                       where
+                                            td.QuestionID == q.QuestionID &&
+                                            td.TestID == _testID &&
+                                            q.QuestionID == _questionID
+
+                                       select q.Answer).FirstOrDefault();
+
+                    if (_trueAnswer != null)
+                    {
+                        _temp = mainFunction.SplitAnswerArray(_trueAnswer);
+                        trueAnswersList.Add(_temp);
+                    }
+                }
+            }
+
+            return trueAnswersList;
         }
     }
 }

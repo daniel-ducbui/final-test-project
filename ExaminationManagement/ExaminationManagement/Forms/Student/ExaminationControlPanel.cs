@@ -35,11 +35,8 @@ namespace ExaminationManagement.Forms.Student
         }
 
         string testID;
-        string testListID;
         int userID;
-        int examineeListID;
         int examID;
-        int time;
 
         public ExaminationControlPanel(int userID) : this()
         {
@@ -57,8 +54,8 @@ namespace ExaminationManagement.Forms.Student
                 GetExamInfo?.Invoke(this, null);
 
                 this.Hide();
-                Examinate mainExamination = new Examinate(this.userID, this.testID, this.testListID, this.examineeListID, this.time);
-                mainExamination.Show();
+                Examinate examinate = new Examinate(this.userID, this.examID, this.testID);
+                examinate.Show();
             }
             catch (Exception ex)
             {
@@ -154,9 +151,6 @@ namespace ExaminationManagement.Forms.Student
         int IExaminationController.userID => this.userID;
         object IExaminationController.examList { get => dgv_examInfo.DataSource; set => dgv_examInfo.DataSource = value; }
         string IExaminationController.testID { get => this.testID; set => this.testID = value; }
-        string IExaminationController.testListID { set => this.testListID = value; }
-        int IExaminationController.examineeListID { get => this.examineeListID; set => this.examineeListID = value; }
         int IExaminationController.examID => this.examID;
-        int IExaminationController.time { get => this.time; set => this.time = value; }
     }
 }
