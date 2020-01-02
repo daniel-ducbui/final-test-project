@@ -25,6 +25,8 @@ namespace ExaminationManagement.Presenters.Student.Examination
         int resultID = 0;
         int flagFirstLoadQuestion = 0;
         int flagOnSubmit = 0;
+        int flagAnswered = 0;
+        string flagNullAnswer = null;
 
         int numberOfQuestion = 0;
         int examinationType = 0;
@@ -90,7 +92,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
             // Find if result has already existed - if not equals 0 (occur when turned off by accident)
             this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, view.examinationID);
-            
+
             // Initialize user's current answers
             int _tempNumberOfQuestion = this.numberOfQuestion;
 
@@ -100,7 +102,11 @@ namespace ExaminationManagement.Presenters.Student.Examination
                 _tempNumberOfQuestion--;
             }
 
-            this.userAnsweredList = baseQuery.GetUserAnsweredList(this.resultID);
+            // Check if user have already enrolled
+            if (this.resultID != 0)
+            {
+                view.flagAnswered = 1; // Enrolled
+            }
         }
 
         void LoadQuestion()
@@ -142,16 +148,26 @@ namespace ExaminationManagement.Presenters.Student.Examination
             {
                 baseQuery.SaveResult(this.resultID, view.userID, view.testID, 0);
 
+                // If first enroll
                 if (this.resultID == 0)
                 {
                     this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, view.examinationID);
+                    this.InitializeResultDetails();
+                    this.flagAnswered = 0;
                 }
-
-                if (userAnsweredList.Count < 1)
+                else
                 {
-                    foreach (var item in testQuestionList)
+                    // Get sign if user want to continue or start again
+                    this.flagAnswered = view.flagAnswered;
+                    // Get user's answered answers list
+                    if (this.flagAnswered == 1) // User want to get old answers
                     {
-                        baseQuery.SaveResultDetails(item.QuestionID, this.resultID, "-", 0);
+                        this.userAnsweredList = baseQuery.GetUserAnsweredList(this.resultID);
+                    }
+                    else // User want to start again
+                    {
+                        this.InitializeResultDetails();
+                        this.flagAnswered = 0;
                     }
                 }
 
@@ -162,6 +178,14 @@ namespace ExaminationManagement.Presenters.Student.Examination
             catch (Exception ex)
             {
                 this.ErrorMessage = "Fail!" + ex.Message;
+            }
+        }
+
+        void InitializeResultDetails()
+        {
+            foreach (var item in testQuestionList)
+            {
+                baseQuery.SaveResultDetails(item.QuestionID, this.resultID, "-", 0);
             }
         }
 
@@ -266,7 +290,6 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
         private void View_ShowThisAnswer(object sender, EventArgs e)
         {
-            // I am here. Trying to get answer for the test examination
             int _questionID = testQuestionList[currentIndex].QuestionID;
 
             trueAnswersList = baseQuery.GetTrueAnswersList(view.testID, _questionID);
@@ -286,39 +309,101 @@ namespace ExaminationManagement.Presenters.Student.Examination
             }
         }
 
+        void CheckNullAnswer()
+        {
+            // Check answer that user answered
+            // For second enroll or else
+            if (this.flagAnswered == 1)
+            {
+                string[] choices = { "a", "b", "c", "d", "e", "f" };
+                foreach (var item in this.userAnsweredList)
+                {
+                    if (!choices.Any(item.Contains))
+                    {
+                        this.flagNullAnswer += "a"; // Have null answer
+                        break;
+                    }
+                }
+            }
+
+            // For all
+            foreach (var item in this.userCurrentAnswers)
+            {
+                if (item.Contains("null"))
+                {
+                    this.flagNullAnswer += "b";
+                    break;
+                }
+            }
+
+            if (this.flagNullAnswer == "b")
+            {
+                // Concatenate each answer in database to userCurrentList
+                // then call CheckResult()
+                int _index = 0;
+
+                foreach (var item in this.userAnsweredList)
+                {
+                    string _temp = string.Join(" ", item);
+
+                    this.userCurrentAnswers.RemoveAt(_index);
+                    this.userCurrentAnswers.Insert(_index, _temp);
+                }
+            }
+        }
+
         private void View_Submit(object sender, EventArgs e)
         {
             try
             {
                 CheckResult(testQuestionList[currentIndex].QuestionID, view.answer);
-                // Save all the answers
-                //this.userCurrentAnswers.RemoveAt(this.numberOfQuestion);
 
-                _tempAnswersList = new List<string>();
-                _tempAnswersList = this.userCurrentAnswers;
-
-                this.currentIndex = 0;
-                this.flagOnSubmit = 1;
-
-                foreach (var item in _tempAnswersList)
+                // Check if answer is null (normal submit)
+                if (view.flagForceSubmit == 1)
                 {
-                    CheckResult(testQuestionList[this.currentIndex].QuestionID, item);
-                    this.currentIndex++;
+                    this.CheckNullAnswer();
                 }
 
-                // Calculate total score 
-                int _totalScore = baseQuery.TotalScore(this.resultID);
-
-                // Save total score
-                baseQuery.SaveResult(this.resultID, view.userID, view.testID, _totalScore);
-
-                if (this.examinationType == 1)
+                // If time is up or user want to submit anyway
+                if (view.flagForceSubmit == 2)
                 {
-                    // Enroll the examination
-                    baseQuery.EnrollExamination(view.userID, this.examineeListID);
+                    this.flagNullAnswer = null;
                 }
 
-                this.ErrorMessage = baseQuery.ErrorMessage;
+                // Have one or more question that have not answer yet
+                if (this.flagNullAnswer == "ab" || this.flagNullAnswer == "a")
+                {
+                    view.flagForceSubmit = 3;
+                }
+                else if (view.flagForceSubmit == 2 || this.flagNullAnswer != "ab" || this.flagNullAnswer != "a" || this.flagNullAnswer != "b")
+                {
+                    _tempAnswersList = new List<string>();
+                    _tempAnswersList = this.userCurrentAnswers;
+
+                    this.currentIndex = 0;
+                    this.flagOnSubmit = 1;
+
+                    // Save all answer
+                    foreach (var item in _tempAnswersList)
+                    {
+                        CheckResult(testQuestionList[this.currentIndex].QuestionID, item);
+                        this.currentIndex++;
+                    }
+
+                    // Calculate total score 
+                    int _totalScore = baseQuery.TotalScore(this.resultID);
+
+                    // Save total score
+                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, _totalScore);
+
+                    if (this.examinationType == 1)
+                    {
+                        // Enroll the examination
+                        baseQuery.EnrollExamination(view.userID, this.examineeListID, 2);
+                    }
+
+                    this.ErrorMessage = baseQuery.ErrorMessage;
+                }
             }
             catch (Exception ex)
             {

@@ -65,10 +65,6 @@ namespace ExaminationManagement.Forms.Student
 
         private void Btn_testExam_Click(object sender, EventArgs e)
         {
-            //TestExamination testExamination = new TestExamination(this.userID);
-            //testExamination.ShowDialog();
-
-
             pnl_exam.Size = new Size(1019, 449);
             pnl_mainExam.Visible = true;
             pnl_mainExam.Location = new Point(3, 76);

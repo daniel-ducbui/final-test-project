@@ -166,23 +166,23 @@ namespace ExaminationManagement.Functions
             }
         }
 
-        public void EnrollExamination(int _userID, int _examineeListID)
+        public void EnrollExamination(int _userID, int _examineeListID, int _status)
         {
             using (var _data = new ExaminationManagementDataContext())
             {
                 var isExists = (from exld in _data.ExamineeListDetails
-                                where exld.UserID == _userID && exld.ExamineeListID == _examineeListID
+
+                                where
+                                    exld.UserID == _userID &&
+                                    exld.ExamineeListID == _examineeListID
+
                                 select exld).FirstOrDefault();
 
                 if (isExists != null)
                 {
-                    int _status = isExists.Status;
+                    isExists.Status = _status;
+                    _data.SubmitChanges();
 
-                    if (_status == 0)
-                    {
-                        isExists.Status = 1;
-                        _data.SubmitChanges();
-                    }
                     this.ErrorMessage = "Success!";
                 }
                 else
@@ -265,7 +265,7 @@ namespace ExaminationManagement.Functions
             return resultID;
         }
 
-        public int GetNumbersOfQuestion(string _testID)
+        public int GetNumberOfQuestion(string _testID)
         {
             int number = 0;
 
@@ -341,43 +341,20 @@ namespace ExaminationManagement.Functions
 
             using (var _data = new ExaminationManagementDataContext())
             {
-                if (_questionID == 0)
+                var _trueAnswer = (from td in _data.TestDetails
+                                   join q in _data.TheQuestions on td.QuestionID equals q.QuestionID
+
+                                   where
+                                        td.QuestionID == q.QuestionID &&
+                                        td.TestID == _testID &&
+                                        q.QuestionID == _questionID
+
+                                   select q.Answer).FirstOrDefault();
+
+                if (_trueAnswer != null)
                 {
-                    var _trueAnswersList = (from td in _data.TestDetails
-                                            join q in _data.TheQuestions on td.QuestionID equals q.QuestionID
-
-                                            where
-                                                td.QuestionID == q.QuestionID &&
-                                                td.TestID == _testID
-
-                                            select q.Answer).ToList();
-
-                    if (_trueAnswersList != null)
-                    {
-                        foreach (var item in _trueAnswersList)
-                        {
-                            _temp = mainFunction.SplitAnswerArray(item);
-                            trueAnswersList.Add(_temp);
-                        }
-                    }
-                }
-                else
-                {
-                    var _trueAnswer = (from td in _data.TestDetails
-                                       join q in _data.TheQuestions on td.QuestionID equals q.QuestionID
-
-                                       where
-                                            td.QuestionID == q.QuestionID &&
-                                            td.TestID == _testID &&
-                                            q.QuestionID == _questionID
-
-                                       select q.Answer).FirstOrDefault();
-
-                    if (_trueAnswer != null)
-                    {
-                        _temp = mainFunction.SplitAnswerArray(_trueAnswer);
-                        trueAnswersList.Add(_temp);
-                    }
+                    _temp = mainFunction.SplitAnswerArray(_trueAnswer);
+                    trueAnswersList.Add(_temp);
                 }
             }
 

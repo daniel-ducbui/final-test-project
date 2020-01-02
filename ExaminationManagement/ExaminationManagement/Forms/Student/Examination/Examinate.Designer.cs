@@ -57,6 +57,7 @@
             this.btn_showThisAnswer = new System.Windows.Forms.Button();
             this.btn_next = new System.Windows.Forms.Button();
             this.testTimeLeft = new System.Windows.Forms.Timer(this.components);
+            this.tb_questionIndex = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.pnl_1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -101,6 +102,7 @@
             // 
             this.pnl_1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.pnl_1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_1.Controls.Add(this.tb_questionIndex);
             this.pnl_1.Controls.Add(this.ckb_choiceF);
             this.pnl_1.Controls.Add(this.ckb_choiceE);
             this.pnl_1.Controls.Add(this.ckb_choiceD);
@@ -361,6 +363,16 @@
             this.btn_next.Text = "Next";
             this.btn_next.UseVisualStyleBackColor = false;
             // 
+            // tb_questionIndex
+            // 
+            this.tb_questionIndex.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tb_questionIndex.Font = new System.Drawing.Font("Maven Pro", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_questionIndex.Location = new System.Drawing.Point(54, 32);
+            this.tb_questionIndex.Name = "tb_questionIndex";
+            this.tb_questionIndex.ReadOnly = true;
+            this.tb_questionIndex.Size = new System.Drawing.Size(39, 30);
+            this.tb_questionIndex.TabIndex = 15;
+            // 
             // Examinate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -415,5 +427,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btn_showAllAnswers;
         private System.Windows.Forms.Button btn_showThisAnswer;
+        private System.Windows.Forms.TextBox tb_questionIndex;
     }
 }
