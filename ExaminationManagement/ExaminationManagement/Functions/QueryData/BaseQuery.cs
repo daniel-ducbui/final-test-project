@@ -138,7 +138,7 @@ namespace ExaminationManagement.Functions
             return score;
         }
 
-        public void SaveResult(int _resultID, int _userID, string _testID, int _totalScore)
+        public void SaveResult(int _resultID, int _userID, string _testID, int _totalScore, int _times)
         {
             using (var _data = new ExaminationManagementDataContext())
             {
@@ -153,6 +153,7 @@ namespace ExaminationManagement.Functions
                         UserID = _userID,
                         TestID = _testID,
                         TotalScore = _totalScore,
+                        Times = _times,
                     };
                     _data.Results.InsertOnSubmit(newResult);
                     _data.SubmitChanges();
@@ -252,6 +253,7 @@ namespace ExaminationManagement.Functions
                                     tl.TestListID == ex.TestListID &&
                                     ex.TestListID == _testListID &&
                                     ex.ExaminationID == _examinationID
+                                orderby r.ResultID descending
 
                                select r.ResultID).FirstOrDefault();
 
@@ -263,6 +265,22 @@ namespace ExaminationManagement.Functions
             }
 
             return resultID;
+        }
+
+        public int FindTimes(int _resultID)
+        {
+            int times = 0;
+
+            using (var _data = new ExaminationManagementDataContext())
+            {
+                var _times = (from r in _data.Results
+                              where r.ResultID == _resultID
+                              select r.Times).FirstOrDefault();
+
+                times = _times;
+            }
+
+            return times;
         }
 
         public int GetNumberOfQuestion(string _testID)

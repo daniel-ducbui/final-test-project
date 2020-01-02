@@ -22,16 +22,18 @@ namespace ExaminationManagement.Presenters.Student.Examination
         List<string> userCurrentAnswers = new List<string>();   // While do the test (Non-split)
         List<string> _tempAnswersList;
 
-        int resultID = 0;
-        int flagFirstLoadQuestion = 0;
-        int flagOnSubmit = 0;
-        int flagAnswered = 0;
-        string flagNullAnswer = null;
-
         int numberOfQuestion = 0;
         int examinationType = 0;
         int examineeListID = 0;
         string testListID = null;
+
+        int resultID = 0;
+        int times = 0;
+
+        int flagFirstLoadQuestion = 0;
+        int flagOnSubmit = 0;
+        int flagAnswered = 0;
+        string flagNullAnswer = null;
 
         public string ErrorMessage = null;
 
@@ -106,6 +108,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
             if (this.resultID != 0)
             {
                 view.flagAnswered = 1; // Enrolled
+                this.times = baseQuery.FindTimes(this.resultID);
             }
         }
 
@@ -146,12 +149,15 @@ namespace ExaminationManagement.Presenters.Student.Examination
         {
             try
             {
-                baseQuery.SaveResult(this.resultID, view.userID, view.testID, 0);
+                // Initialize Result
+                baseQuery.SaveResult(this.resultID, view.userID, view.testID, 0, 1);
 
                 // If first enroll
                 if (this.resultID == 0)
                 {
                     this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, view.examinationID);
+                    this.times = baseQuery.FindTimes(this.resultID);
+
                     this.InitializeResultDetails();
                     this.flagAnswered = 0;
                 }
@@ -163,9 +169,17 @@ namespace ExaminationManagement.Presenters.Student.Examination
                     if (this.flagAnswered == 1) // User want to get old answers
                     {
                         this.userAnsweredList = baseQuery.GetUserAnsweredList(this.resultID);
+                        this.times = baseQuery.FindTimes(this.resultID);
                     }
                     else // User want to start again
                     {
+                        int _times = this.times;
+                        // Initialize Result
+                        baseQuery.SaveResult(0, view.userID, view.testID, 0, ++_times);
+
+                        this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, this.examineeListID);
+                        this.times = baseQuery.FindTimes(this.resultID);
+
                         this.InitializeResultDetails();
                         this.flagAnswered = 0;
                     }
@@ -311,11 +325,13 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
         void CheckNullAnswer()
         {
+            string[] choices = { "a", "b", "c", "d", "e", "f" };
+            this.flagNullAnswer = null;
+
             // Check answer that user answered
             // For second enroll or else
             if (this.flagAnswered == 1)
             {
-                string[] choices = { "a", "b", "c", "d", "e", "f" };
                 foreach (var item in this.userAnsweredList)
                 {
                     if (!choices.Any(item.Contains))
@@ -326,10 +342,11 @@ namespace ExaminationManagement.Presenters.Student.Examination
                 }
             }
 
+            // Check answer
             // For all
             foreach (var item in this.userCurrentAnswers)
             {
-                if (item.Contains("null"))
+                if (!choices.Any(item.Contains))
                 {
                     this.flagNullAnswer += "b";
                     break;
@@ -348,6 +365,15 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
                     this.userCurrentAnswers.RemoveAt(_index);
                     this.userCurrentAnswers.Insert(_index, _temp);
+                }
+
+                if (this.flagNullAnswer == "ab")
+                {
+                    this.flagNullAnswer = "a";
+                }
+                else
+                {
+                    this.flagNullAnswer = null;
                 }
             }
         }
@@ -371,7 +397,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
                 }
 
                 // Have one or more question that have not answer yet
-                if (this.flagNullAnswer == "ab" || this.flagNullAnswer == "a")
+                if (this.flagNullAnswer == "ab" || this.flagNullAnswer == "a" || this.flagNullAnswer == "b")
                 {
                     view.flagForceSubmit = 3;
                 }
@@ -394,7 +420,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
                     int _totalScore = baseQuery.TotalScore(this.resultID);
 
                     // Save total score
-                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, _totalScore);
+                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, _totalScore, this.times);
 
                     if (this.examinationType == 1)
                     {

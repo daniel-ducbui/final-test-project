@@ -1278,6 +1278,8 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		private int _TotalScore;
 		
+		private int _Times;
+		
 		private EntitySet<ResultDetail> _ResultDetails;
 		
 		private EntityRef<Account> _Account;
@@ -1296,6 +1298,8 @@ namespace ExaminationManagement.Functions.ConnectDatabase
     partial void OnTestIDChanged();
     partial void OnTotalScoreChanging(int value);
     partial void OnTotalScoreChanged();
+    partial void OnTimesChanging(int value);
+    partial void OnTimesChanged();
     #endregion
 		
 		public Result()
@@ -1390,6 +1394,26 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 					this._TotalScore = value;
 					this.SendPropertyChanged("TotalScore");
 					this.OnTotalScoreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Times", DbType="Int NOT NULL")]
+		public int Times
+		{
+			get
+			{
+				return this._Times;
+			}
+			set
+			{
+				if ((this._Times != value))
+				{
+					this.OnTimesChanging(value);
+					this.SendPropertyChanging();
+					this._Times = value;
+					this.SendPropertyChanged("Times");
+					this.OnTimesChanged();
 				}
 			}
 		}
@@ -2313,7 +2337,7 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestListID", DbType="Char(10) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestListID", DbType="Char(10)")]
 		public string TestListID
 		{
 			get

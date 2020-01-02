@@ -59,6 +59,7 @@
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="TestID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
       <Column Name="TotalScore" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Times" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Result_ResultDetail" Member="ResultDetails" ThisKey="ResultID" OtherKey="ResultID" Type="ResultDetail" />
       <Association Name="Account_Result" Member="Account" ThisKey="UserID" OtherKey="UserID" Type="Account" IsForeignKey="true" />
       <Association Name="TheTest_Result" Member="TheTest" ThisKey="TestID" OtherKey="TestID" Type="TheTest" IsForeignKey="true" />
@@ -102,7 +103,7 @@
   <Table Name="dbo.TheExamination" Member="TheExaminations">
     <Type Name="TheExamination">
       <Column Name="ExaminationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TestListID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="TestListID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
       <Column Name="ExamineeListID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ExaminationName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="ExaminationType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
