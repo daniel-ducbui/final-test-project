@@ -72,6 +72,12 @@ namespace ExaminationManagement.Presenters.Student.Examination
                                              where ex.ExaminationID == view.examinationID
                                              select ex).FirstOrDefault();
 
+                var _username = (from a in _data.AccountDetails
+                                 where a.UserID == view.userID
+                                 select a.Name).FirstOrDefault();
+
+                view.username = _username;
+
                 this.examinationType = examinationInfomation.ExaminationType;
                 this.examineeListID = Convert.ToInt32(examinationInfomation.ExamineeListID);
                 this.testListID = examinationInfomation.TestListID;
@@ -149,12 +155,13 @@ namespace ExaminationManagement.Presenters.Student.Examination
         {
             try
             {
-                // Initialize Result
-                baseQuery.SaveResult(this.resultID, view.userID, view.testID, 0, 1);
 
                 // If first enroll
                 if (this.resultID == 0)
                 {
+                    // Initialize Result
+                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, 0, 1);
+
                     this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, view.examinationID);
                     this.times = baseQuery.FindTimes(this.resultID);
 

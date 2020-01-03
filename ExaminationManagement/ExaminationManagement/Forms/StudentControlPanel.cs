@@ -1,17 +1,12 @@
-﻿using ExaminationManagement.Forms.Student;
+﻿using ExaminationManagement.Forms.CustomMessageBox;
+using ExaminationManagement.Forms.Student;
+using MaterialSkin.Controls;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ExaminationManagement.Forms
 {
-    public partial class StudentControlPanel : Form
+    public partial class StudentControlPanel : MaterialForm
     {
         int userID;
         public delegate void UserID(int _userID);
@@ -19,16 +14,21 @@ namespace ExaminationManagement.Forms
         ProfileControlPanel profileControl;
         ExaminationControlPanel examinationControl;
         QuestionControlPanel questionControl;
-        ResultControlPanel resultControl;
 
         public StudentControlPanel()
         {
+            MaterialSkin.MaterialSkinManager manager = MaterialSkin.MaterialSkinManager.Instance;
+            manager.AddFormToManage(this);
+            manager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            manager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Blue300, MaterialSkin.Primary.Blue500, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.LightBlue400, MaterialSkin.TextShade.WHITE);
+
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             InitializeComponent();
 
             btn_profile.Click += Btn_profile_Click;
             btn_exam.Click += Btn_exam_Click;
             btn_question.Click += Btn_question_Click;
-            btn_back.Click += Btn_back_Click;
+            btn_logout.Click += Btn_logout_Click;
         }
 
         public StudentControlPanel(int userID) : this()
@@ -36,21 +36,13 @@ namespace ExaminationManagement.Forms
             this.userID = userID;
         }
 
-        private void Btn_back_Click(object sender, EventArgs e)
+        private void Btn_logout_Click(object sender, EventArgs e)
         {
             this.Hide();
 
             LoginForm loginForm = new LoginForm();
             loginForm.FormClosed += (s, args) => this.Close();
             loginForm.Show();
-        }
-
-        private void Btn_result_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-
-            resultControl = new ResultControlPanel(this.userID);
-            resultControl.Show();
         }
 
         private void Btn_question_Click(object sender, EventArgs e)

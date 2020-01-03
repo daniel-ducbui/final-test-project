@@ -1,6 +1,7 @@
 ﻿using ExaminationManagement.Forms.Student.Examination;
 using ExaminationManagement.Presenters.Student;
 using ExaminationManagement.Views.Student;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,15 +14,20 @@ using System.Windows.Forms;
 
 namespace ExaminationManagement.Forms.Student
 {
-    public partial class ExaminationControlPanel : Form, IExaminationController
+    public partial class ExaminationControlPanel : MaterialForm, IExaminationController
     {
         ExaminationControllerPresenter examController;
         public ExaminationControlPanel()
         {
+            MaterialSkin.MaterialSkinManager manager = MaterialSkin.MaterialSkinManager.Instance;
+            manager.AddFormToManage(this);
+            manager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            manager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Blue300, MaterialSkin.Primary.Blue500, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.LightBlue400, MaterialSkin.TextShade.WHITE);
+
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             InitializeComponent();
 
             btn_back.Click += Btn_back_Click;
-            btn_exam.Click += Btn_exam_Click;
             btn_result.Click += Btn_result_Click;
             btn_mainExam.Click += Btn_mainExam_Click;
             btn_testExam.Click += Btn_testExam_Click;
@@ -65,13 +71,6 @@ namespace ExaminationManagement.Forms.Student
 
         private void Btn_testExam_Click(object sender, EventArgs e)
         {
-            pnl_exam.Size = new Size(1019, 449);
-            pnl_mainExam.Visible = true;
-            pnl_mainExam.Location = new Point(3, 76);
-            pnl_mainExam.Size = new Size(1011, 368);
-            btn_enroll.Location = new Point(870, 300);
-            btn_enroll.Size = new Size(136, 63);
-
             try
             {
                 GetTestExamList?.Invoke(this, null);
@@ -80,21 +79,10 @@ namespace ExaminationManagement.Forms.Student
             {
                 MessageBox.Show("There is no examination found! \nDetails: " + ex.Message);
             }
-
-            dgv_examInfo.Location = new Point(3, 3);
-            dgv_examInfo.Size = new Size(860, 360);
         }
 
         private void Btn_mainExam_Click(object sender, EventArgs e)
         {
-
-            pnl_exam.Size = new Size(1019, 449);
-            pnl_mainExam.Visible = true;
-            pnl_mainExam.Location = new Point(3, 76);
-            pnl_mainExam.Size = new Size(1011, 368);
-            btn_enroll.Location = new Point(870, 300);
-            btn_enroll.Size = new Size(136, 63);
-
             try
             {
                 GetMainExamList?.Invoke(this, null);
@@ -103,33 +91,12 @@ namespace ExaminationManagement.Forms.Student
             {
                 MessageBox.Show("There is no examination found! \nDetails: " + ex.Message);
             }
-
-            dgv_examInfo.Location = new Point(3, 3);
-            dgv_examInfo.Size = new Size(860, 360);
         }
 
         private void Btn_result_Click(object sender, EventArgs e)
         {
             ResultControlPanel resultControlPanel = new ResultControlPanel(this.userID);
             resultControlPanel.ShowDialog();
-        }
-
-        private void Btn_exam_Click(object sender, EventArgs e)
-        {
-            if (!pnl_exam.Visible)
-            {
-                pnl_exam.Visible = true;
-                pnl_exam.Location = new Point(12, 86);
-
-                if (pnl_mainExam.Visible)
-                {
-                    pnl_exam.Size = new Size(1019, 449);
-                }
-                else
-                {
-                    pnl_exam.Size = new Size(1019, 80);
-                }
-            }
         }
 
         private void Btn_back_Click(object sender, EventArgs e)

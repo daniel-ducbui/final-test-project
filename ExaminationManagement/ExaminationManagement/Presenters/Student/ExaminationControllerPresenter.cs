@@ -126,11 +126,15 @@ namespace ExaminationManagement.Presenters.Student
                     var _getUserGradeID = _data.AccountDetails.Where(a => a.UserID == view.userID).Select(a => a.GradeID).FirstOrDefault();
 
                     var _examList = (from ex in _data.TheExaminations
+                                     join exld in _data.ExamineeListDetails on ex.ExamineeListID equals exld.ExamineeListID
                                      join tl in _data.TestLists on ex.TestListID equals tl.TestListID
                                      join tld in _data.TestListDetails on tl.TestListID equals tld.TestListID
 
-                                     where ex.ExaminationType == 2
-                                        && ex.GradeID == _getUserGradeID
+                                     where ex.ExamineeListID == exld.ExamineeListID
+                                     && exld.UserID == view.userID
+                                     && exld.Status == 0
+                                     && ex.ExaminationType == 2
+                                     && ex.GradeID == _getUserGradeID
 
                                      select new { ex.ExaminationID, tld.TestID, ex.ExaminationName, ex.GradeID, ex.StartDate, ex.EndDate }).ToList();
 

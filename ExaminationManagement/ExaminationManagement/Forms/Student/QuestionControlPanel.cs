@@ -1,5 +1,8 @@
-﻿using ExaminationManagement.Presenters.Student;
+﻿using ExaminationManagement.Forms.CustomMessageBox;
+using ExaminationManagement.Presenters.Student;
 using ExaminationManagement.Views.Student;
+using MaterialSkin.Controls;
+using MetroFramework.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,13 +15,19 @@ using System.Windows.Forms;
 
 namespace ExaminationManagement.Forms.Student
 {
-    public partial class QuestionControlPanel : Form, IQuestion
+    public partial class QuestionControlPanel : MaterialForm, IQuestion
     {
         QuestionPresenter questionPresenter;
         string ErrorMessage = null;
 
         public QuestionControlPanel()
         {
+            MaterialSkin.MaterialSkinManager manager = MaterialSkin.MaterialSkinManager.Instance;
+            manager.AddFormToManage(this);
+            manager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            manager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Blue300, MaterialSkin.Primary.Blue500, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.LightBlue400, MaterialSkin.TextShade.WHITE);
+
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             InitializeComponent();
 
             Load += QuestionControlPanel_Load;
@@ -44,11 +53,13 @@ namespace ExaminationManagement.Forms.Student
             try
             {
                 AddQuestion?.Invoke(this, null);
-                MessageBox.Show(questionPresenter.ErrorMessage);
+                //MessageBox.Show(questionPresenter.ErrorMessage);
+                MaterialMessageBox.Show(questionPresenter.ErrorMessage, "Caption", MessageBoxButtons.OK);
             }
             catch (Exception)
             {
-                MessageBox.Show(questionPresenter.ErrorMessage);
+                MaterialMessageBox.Show(questionPresenter.ErrorMessage, "Caption", MessageBoxButtons.OK);
+                //MessageBox.Show(questionPresenter.ErrorMessage);
             }
         }
 

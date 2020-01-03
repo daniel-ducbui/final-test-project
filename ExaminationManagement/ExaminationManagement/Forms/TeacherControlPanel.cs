@@ -16,6 +16,7 @@ namespace ExaminationManagement.Forms
 
         public TeacherControlPanel()
         {
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             InitializeComponent();
         }
 

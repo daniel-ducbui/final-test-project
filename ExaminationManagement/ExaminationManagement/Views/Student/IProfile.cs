@@ -11,19 +11,19 @@ namespace ExaminationManagement.Views.Student
     {
         int _userID { get; }
 
-        TextBox name { get; set; }
+        LollipopTextBox name { get; set; }
 
-        TextBox phoneNumber { get; set; }
+        LollipopTextBox phoneNumber { get; set; }
 
-        TextBox email { get; set; }
+        LollipopTextBox email { get; set; }
 
         MaskedTextBox dob { get; set; }
 
-        TextBox address { get; set; }
+        LollipopTextBox address { get; set; }
 
-        TextBox classID { get; set; }
+        LollipopTextBox classID { get; set; }
 
-        TextBox gradeID { get; set; }
+        LollipopTextBox gradeID { get; set; }
 
         //string name { get; set; }
 

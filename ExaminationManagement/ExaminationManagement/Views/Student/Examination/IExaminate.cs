@@ -10,6 +10,7 @@ namespace ExaminationManagement.Views.Student.Examination
     interface IExaminate
     {
         int userID { get; }
+        string username { get; set; }
         string testID { get; }
         string content { get; set; }
         string choiceA { get; set; }

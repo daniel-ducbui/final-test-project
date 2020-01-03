@@ -1,7 +1,6 @@
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\ExaminationManagement.exe.config
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\ExaminationManagement.exe
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\ExaminationManagement.pdb
-C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csprojAssemblyReference.cache
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csproj.ResolveComReference.cache
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.AdminControlPanel.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.LoginForm.resources
@@ -15,3 +14,12 @@ C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\ob
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.QuestionControlPanel.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.ExaminationControlPanel.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.Examination.Examinate.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\SplashScreen.dll
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csproj.CopyComplete
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\MetroFramework.Design.dll
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\MetroFramework.dll
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\MetroFramework.Fonts.dll
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\MaterialSkin.dll
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.CustomMessageBox.frmOK.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.CustomMessageBox.frmYesNo.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csprojAssemblyReference.cache

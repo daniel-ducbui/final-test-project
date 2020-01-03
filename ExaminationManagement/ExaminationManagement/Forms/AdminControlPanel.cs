@@ -1,5 +1,6 @@
 ﻿using ExaminationManagement.Presenters;
 using ExaminationManagement.Views;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace ExaminationManagement.Forms
 {
-    public partial class AdminControlPanel : Form, IAccountManagement
+    public partial class AdminControlPanel : MaterialForm, IAccountManagement
     {
         AccountManagementPresenter accountManagementPresenter;
         string ErrorMessage = null;
@@ -21,7 +22,14 @@ namespace ExaminationManagement.Forms
 
         public AdminControlPanel()
         {
+            MaterialSkin.MaterialSkinManager manager = MaterialSkin.MaterialSkinManager.Instance;
+            manager.AddFormToManage(this);
+            manager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            manager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Blue300, MaterialSkin.Primary.Blue500, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.LightBlue400, MaterialSkin.TextShade.WHITE);
+
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             InitializeComponent();
+
             Load += AdminControlPanel_Load;
 
             btn_loadData.Click += Btn_loadData_Click;

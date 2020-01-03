@@ -1,6 +1,8 @@
-﻿using ExaminationManagement.Functions.Events;
+﻿using ExaminationManagement.Forms.CustomMessageBox;
+using ExaminationManagement.Functions.Events;
 using ExaminationManagement.Presenters.Student.Examination;
 using ExaminationManagement.Views.Student.Examination;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +16,12 @@ using System.Windows.Forms;
 
 namespace ExaminationManagement.Forms.Student.Examination
 {
-    public partial class Examinate : Form, IExaminate
+    public partial class Examinate : MaterialForm, IExaminate
     {
         ExaminatePresenter examinationPresenter;
         ExaminationControlPanel examinationControlPanel;
         int userID = 0;
+        string username = null;
         int time = 0;
         int examinationID = 0;
         int examinationType = 0;
@@ -37,6 +40,13 @@ namespace ExaminationManagement.Forms.Student.Examination
 
         public Examinate()
         {
+            MaterialSkin.MaterialSkinManager manager = MaterialSkin.MaterialSkinManager.Instance;
+            manager.AddFormToManage(this);
+            manager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            manager.ColorScheme = new MaterialSkin.ColorScheme(
+                MaterialSkin.Primary.Blue300, MaterialSkin.Primary.Blue500, 
+                MaterialSkin.Primary.Blue500, MaterialSkin.Accent.LightBlue400, MaterialSkin.TextShade.WHITE);
+
             InitializeComponent();
 
             Load += MainExamination_Load;
@@ -56,7 +66,7 @@ namespace ExaminationManagement.Forms.Student.Examination
             // If not first enroll
             if (this.flagAnswered == 1)
             {
-                if (MessageBox.Show("Do you want to continue? \n\n-Yes to Continue \n-No to Start again?", "You have already enroll this test!", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No)
+                if (MessageBox.Show("Do you want to continue? \n\n-Yes to Continue \n-No to Start again?", "You have already enroll this test!", MessageBoxButtons.YesNo) == DialogResult.No)
                 {
                     this.flagAnswered = 0;
                 }
@@ -97,6 +107,9 @@ namespace ExaminationManagement.Forms.Student.Examination
                     nav = false;
                 }
             };
+
+            this.lsc_info.Text = this.username;
+            this.lsc_info.Info = Convert.ToString(this.userID);
         }
 
         void OnSetPreviousAnswer()
@@ -132,7 +145,7 @@ namespace ExaminationManagement.Forms.Student.Examination
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong! \nDetails: " + ex.Message);
+                MaterialMessageBox.Show("Something wrong! \nDetails: " + ex.Message, "Error", MessageBoxButtons.OK);
             }
         }
 
@@ -152,19 +165,19 @@ namespace ExaminationManagement.Forms.Student.Examination
                 {
                     this.ShowAnswer();
                     btn_showThisAnswer.Enabled = false;
-                    btn_showAllAnswers.BackColor = Color.Green;
+                    btn_showAllAnswers.BGColor = "#00cc1c";
                 }
                 else
                 {
                     this.OnChangeColor();
                     btn_showThisAnswer.Enabled = true;
-                    btn_showAllAnswers.BackColor = Color.WhiteSmoke;
+                    btn_showAllAnswers.BGColor = "#508ef5";
                 }
                 this.OnSetPreviousAnswer();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something wrong! \nDetails: " + ex.Message);
+                MaterialMessageBox.Show("Something wrong! \nDetails: " + ex.Message, "Error", MessageBoxButtons.OK);
             }
         }
 
@@ -425,7 +438,7 @@ namespace ExaminationManagement.Forms.Student.Examination
 
                     if (this.flagChangeColor == 1)
                     {
-                        tb_a.BackColor = Color.Green;
+                        tb_a.BackColor = Color.Lime;
                     }
                 }
                 if (item.Contains("b"))
@@ -434,7 +447,7 @@ namespace ExaminationManagement.Forms.Student.Examination
 
                     if (this.flagChangeColor == 1)
                     {
-                        tb_b.BackColor = Color.Green;
+                        tb_b.BackColor = Color.Lime;
                     }
                 }
                 if (item.Contains("c"))
@@ -443,7 +456,7 @@ namespace ExaminationManagement.Forms.Student.Examination
 
                     if (this.flagChangeColor == 1)
                     {
-                        tb_c.BackColor = Color.Green;
+                        tb_c.BackColor = Color.Lime;
                     }
                 }
                 if (item.Contains("d"))
@@ -452,7 +465,7 @@ namespace ExaminationManagement.Forms.Student.Examination
 
                     if (this.flagChangeColor == 1)
                     {
-                        tb_d.BackColor = Color.Green;
+                        tb_d.BackColor = Color.Lime;
                     }
                 }
                 if (item.Contains("e"))
@@ -461,7 +474,7 @@ namespace ExaminationManagement.Forms.Student.Examination
 
                     if (this.flagChangeColor == 1)
                     {
-                        tb_e.BackColor = Color.Green;
+                        tb_e.BackColor = Color.Lime;
                     }
                 }
                 if (item.Contains("f"))
@@ -470,7 +483,7 @@ namespace ExaminationManagement.Forms.Student.Examination
 
                     if (this.flagChangeColor == 1)
                     {
-                        tb_f.BackColor = Color.Green;
+                        tb_f.BackColor = Color.Lime;
                     }
                 }
 
@@ -541,6 +554,7 @@ namespace ExaminationManagement.Forms.Student.Examination
         }
 
         int IExaminate.userID => this.userID;
+        string IExaminate.username { get => this.username; set => this.username = value; }
         string IExaminate.testID => this.testID;
         int IExaminate.time { get => this.time; set => this.time = value; }
         int IExaminate.examinationID => this.examinationID;
@@ -568,6 +582,7 @@ namespace ExaminationManagement.Forms.Student.Examination
         public event EventHandler ShowThisAnswer;
         public event EventHandler ShowAllAnswers;
         public event EventHandler Submit;
+
         public event EventHandler<SelectedChangedEventArgs> SelectedChangedQuestion;
     }
 }

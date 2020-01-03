@@ -14,6 +14,7 @@ namespace ExaminationManagement.Forms.Student
     {
         public ResultControlPanel()
         {
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             InitializeComponent();
         }
 

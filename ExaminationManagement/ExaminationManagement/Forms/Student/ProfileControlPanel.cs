@@ -1,5 +1,6 @@
 ﻿using ExaminationManagement.Presenters.Student;
 using ExaminationManagement.Views.Student;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,12 +13,18 @@ using System.Windows.Forms;
 
 namespace ExaminationManagement.Forms.Student
 {
-    public partial class ProfileControlPanel : Form, IProfile
+    public partial class ProfileControlPanel : MaterialForm, IProfile
     {
         ProfilePresenter profilePresenter;
 
         public ProfileControlPanel()
         {
+            MaterialSkin.MaterialSkinManager manager = MaterialSkin.MaterialSkinManager.Instance;
+            manager.AddFormToManage(this);
+            manager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            manager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Blue300, MaterialSkin.Primary.Blue500, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.LightBlue400, MaterialSkin.TextShade.WHITE);
+
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             InitializeComponent();
         }
 
@@ -34,17 +41,10 @@ namespace ExaminationManagement.Forms.Student
             LoadInfo?.Invoke(this, null);
 
             btn_cancel.Click += Btn_cancel_Click;
+            btn_save.Click += Btn_save_Click;
         }
 
-        private void Btn_cancel_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-
-            StudentControlPanel studentControlPanel = new StudentControlPanel(this.userID);
-            studentControlPanel.Show();
-        }
-
-        private void btn_save_Click(object sender, EventArgs e)
+        private void Btn_save_Click(object sender, EventArgs e)
         {
             try
             {
@@ -57,15 +57,23 @@ namespace ExaminationManagement.Forms.Student
             }
         }
 
+        private void Btn_cancel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            StudentControlPanel studentControlPanel = new StudentControlPanel(this.userID);
+            studentControlPanel.Show();
+        }
+
         public int _userID => this.userID;
 
-        public TextBox name { get => tb_name; set => tb_name = value; }
-        public TextBox phoneNumber { get => tb_phoneNumber; set => tb_phoneNumber = value; }
-        public TextBox email { get => tb_email; set => tb_email = value; }
+        public LollipopTextBox name { get => tb_name; set => tb_name = value; }
+        public LollipopTextBox phoneNumber { get => tb_phoneNumber; set => tb_phoneNumber = value; }
+        public LollipopTextBox email { get => tb_email; set => tb_email = value; }
         public MaskedTextBox dob { get => mtb_dob; set => mtb_dob = value; }
-        public TextBox address { get => tb_address; set => tb_address = value; }
-        public TextBox classID { get => tb_class; set => tb_class = value; }
-        public TextBox gradeID { get => tb_grade; set => tb_grade = value; }
+        public LollipopTextBox address { get => tb_address; set => tb_address = value; }
+        public LollipopTextBox classID { get => tb_class; set => tb_class = value; }
+        public LollipopTextBox gradeID { get => tb_grade; set => tb_grade = value; }
 
         public event EventHandler SaveInfo;
         public event EventHandler LoadInfo;

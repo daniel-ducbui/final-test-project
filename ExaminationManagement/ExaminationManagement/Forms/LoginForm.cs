@@ -11,10 +11,14 @@ using System.Windows.Forms;
 using ExaminationManagement.Functions;
 using ExaminationManagement.Views;
 using ExaminationManagement.Presenters;
+using System.Threading;
+using SplashScreen;
+using MetroFramework.Forms;
+using MaterialSkin.Controls;
 
 namespace ExaminationManagement
 {
-    public partial class LoginForm : Form, ILogin
+    public partial class LoginForm : MaterialForm, ILogin
     {
         // Call login presenter
         LoginPresenter loginPresenter;
@@ -28,8 +32,38 @@ namespace ExaminationManagement
 
         public LoginForm()
         {
+            MaterialSkin.MaterialSkinManager manager = MaterialSkin.MaterialSkinManager.Instance;
+            manager.AddFormToManage(this);
+            manager.Theme = MaterialSkin.MaterialSkinManager.Themes.LIGHT;
+            manager.ColorScheme = new MaterialSkin.ColorScheme(MaterialSkin.Primary.Blue300, MaterialSkin.Primary.Blue500, MaterialSkin.Primary.Blue500, MaterialSkin.Accent.LightBlue400, MaterialSkin.TextShade.WHITE);
+
             InitializeComponent();
-            Load += LoginForm_Load;
+
+            try
+            {
+                TopMost = true;
+                var _thread = new Thread(() =>
+                {
+                    var splashForm = new SplashForm();
+                    splashForm.AppName = "Examination";
+                    Application.Run(splashForm);
+                });
+
+                _thread.Start();
+                Thread.Sleep(1000);
+                _thread.Abort();
+
+                Load += (sender, e) =>
+                {
+                    Focus();
+                    BringToFront();
+                    LoginForm_Load(sender, e);
+                };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fail to launch application!" + ex.Message);
+            }
             btn_quit.Click += Btn_quit_Click;
         }
 
