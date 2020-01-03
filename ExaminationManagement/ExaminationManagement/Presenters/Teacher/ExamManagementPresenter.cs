@@ -99,7 +99,7 @@ namespace ExaminationManagement.Presenters.Teacher
                 using (var _data = new ExaminationManagementDataContext())
                 {
 
-                    var countTheTest = _data.TestLists.Where(t => t.TestID == view.dgv_listOfAllTheQuestion.CurrentRow.Cells[0].Value.ToString()).ToList();
+                    var countTheTest = _data.TestLists.Where(t => t.TestListID == view.dgv_listOfAllTheQuestion.CurrentRow.Cells[0].Value.ToString()).ToList();
                     if (countTheTest.Count() == 0)
                     {
                         var testDetails = _data.TestDetails.Where(t => t.TestID == view.dgv_listOfAllTheQuestion.CurrentRow.Cells[0].Value.ToString()).ToList();

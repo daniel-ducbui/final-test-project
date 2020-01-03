@@ -83,8 +83,5 @@ namespace ExaminationManagement.Forms.Teacher
         TextBox IManageTheListOfContestants.txt_listingCode { get => txt_listingCode; set => txt_listingCode = value; }
         TextBox IManageTheListOfContestants.txt_listName { get => txt_listName; set => txt_listName = value; }
 
-
-
-
     }
 }

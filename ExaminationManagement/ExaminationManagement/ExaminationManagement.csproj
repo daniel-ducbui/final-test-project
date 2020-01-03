@@ -116,6 +116,12 @@
     <Compile Include="Forms\Teacher\QuestionManagementControlPanel.Designer.cs">
       <DependentUpon>QuestionManagementControlPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Teacher\TestListControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher\TestListControlPanel.Designer.cs">
+      <DependentUpon>TestListControlPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Functions\ConnectDatabase\ExaminationManagement.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -142,6 +148,7 @@
     <Compile Include="Presenters\Teacher\ExamManagementPresenter.cs" />
     <Compile Include="Presenters\Teacher\ManageTheListOfContestantsPresenter.cs" />
     <Compile Include="Presenters\Teacher\QuestionManagementPresenter.cs" />
+    <Compile Include="Presenters\Teacher\TestListPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\IAccountManagement.cs" />
@@ -153,6 +160,7 @@
     <Compile Include="Views\Tearcher\IManageTheListOfContestants.cs" />
     <Compile Include="Views\Tearcher\IProfile.cs" />
     <Compile Include="Views\Tearcher\IQuestionManagement.cs" />
+    <Compile Include="Views\Tearcher\ITestList.cs" />
     <EmbeddedResource Include="Forms\AdminControlPanel.resx">
       <DependentUpon>AdminControlPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -185,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teacher\QuestionManagementControlPanel.resx">
       <DependentUpon>QuestionManagementControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher\TestListControlPanel.resx">
+      <DependentUpon>TestListControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

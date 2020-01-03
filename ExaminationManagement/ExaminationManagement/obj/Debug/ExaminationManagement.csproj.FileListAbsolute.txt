@@ -66,3 +66,4 @@ C:\Users\Song_Du\Desktop\Project\final-test-project\ExaminationManagement\Examin
 C:\Users\Song_Du\Desktop\Project\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.pdb
 C:\Users\Song_Du\Desktop\Project\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.ExamManagementControlPanel.resources
 C:\Users\Song_Du\Desktop\Project\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.ManageTheListOfContestantsControlPanel.resources
+C:\Users\Song_Du\Desktop\Project\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.TestListControlPanel.resources
