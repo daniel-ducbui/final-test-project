@@ -28,7 +28,7 @@ namespace ExaminationManagement.Views.Student.Examination
         string[] previousAnswers { get; set; }
 
         int flagShowAllAnswers { get; set; }
-        int flagAnswered { get; set; }
+        int flagSubmitted { get; set; }
         int flagForceSubmit { get; set; }
 
         event EventHandler NextQuestion;

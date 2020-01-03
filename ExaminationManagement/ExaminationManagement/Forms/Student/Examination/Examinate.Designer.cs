@@ -341,7 +341,8 @@
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.panel2);
-            this.panel3.Location = new System.Drawing.Point(0, 618);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel3.Location = new System.Drawing.Point(0, 616);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1305, 57);
             this.panel3.TabIndex = 4;
@@ -450,7 +451,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1305, 761);
+            this.ClientSize = new System.Drawing.Size(1305, 673);
             this.Controls.Add(this.lsc_info);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.pnl_1);

@@ -19,8 +19,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
         List<TheQuestion> testQuestionList;
         List<string[]> userAnsweredList = new List<string[]>(); // On table ResultDetails (Splitted)
         List<string[]> trueAnswersList = new List<string[]>();  // On table TheQuestion (Splitted)
-        List<string> userCurrentAnswers = new List<string>();   // While do the test (Non-split)
-        List<string> _tempAnswersList;
+        //List<string> userCurrentAnswers = new List<string>();   // While do the test (Non-split)
 
         int numberOfQuestion = 0;
         int examinationType = 0;
@@ -29,10 +28,11 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
         int resultID = 0;
         int times = 0;
+        bool isSubmitted = false;
 
         int flagFirstLoadQuestion = 0;
         int flagOnSubmit = 0;
-        int flagAnswered = 0;
+        int flagSubmitted = 0;
         string flagNullAnswer = null;
 
         public string ErrorMessage = null;
@@ -68,9 +68,9 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
                                     select q).ToList();
 
-                var examinationInfomation = (from ex in _data.TheExaminations
-                                             where ex.ExaminationID == view.examinationID
-                                             select ex).FirstOrDefault();
+                var _examinationInfomation = (from ex in _data.TheExaminations
+                                              where ex.ExaminationID == view.examinationID
+                                              select ex).FirstOrDefault();
 
                 var _username = (from a in _data.AccountDetails
                                  where a.UserID == view.userID
@@ -78,11 +78,11 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
                 view.username = _username;
 
-                this.examinationType = examinationInfomation.ExaminationType;
-                this.examineeListID = Convert.ToInt32(examinationInfomation.ExamineeListID);
-                this.testListID = examinationInfomation.TestListID;
+                this.examinationType = _examinationInfomation.ExaminationType;
+                this.examineeListID = Convert.ToInt32(_examinationInfomation.ExamineeListID);
+                this.testListID = _examinationInfomation.TestListID;
 
-                view.time = examinationInfomation.Time;
+                view.time = _examinationInfomation.Time;
             }
 
             // Get number of questions
@@ -102,18 +102,28 @@ namespace ExaminationManagement.Presenters.Student.Examination
             this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, view.examinationID);
 
             // Initialize user's current answers
-            int _tempNumberOfQuestion = this.numberOfQuestion;
+            //int _tempNumberOfQuestion = this.numberOfQuestion;
 
-            while (_tempNumberOfQuestion > 0)
-            {
-                this.userCurrentAnswers.Add(null);
-                _tempNumberOfQuestion--;
-            }
+            //while (_tempNumberOfQuestion > 0)
+            //{
+            //    this.userCurrentAnswers.Add(null);
+            //    _tempNumberOfQuestion--;
+            //}
 
-            // Check if user have already enrolled
+            this.isSubmitted = baseQuery.IsSubmitted(this.resultID);
+
+            // Check if user have already enrolled and not submit
             if (this.resultID != 0)
             {
-                view.flagAnswered = 1; // Enrolled
+                if (!this.isSubmitted) // and isSubmitted == false
+                {
+                    view.flagSubmitted = 1; // Enrolled
+                }
+                else // and isSubmitted == true
+                {
+                    // this.flagSubmitted = 0 -- force create new result
+                    this.flagSubmitted = 0;
+                }
                 this.times = baseQuery.FindTimes(this.resultID);
             }
         }
@@ -155,40 +165,39 @@ namespace ExaminationManagement.Presenters.Student.Examination
         {
             try
             {
-
                 // If first enroll
                 if (this.resultID == 0)
                 {
                     // Initialize Result
-                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, 0, 1);
+                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, 0, 1, 0);
 
                     this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, view.examinationID);
                     this.times = baseQuery.FindTimes(this.resultID);
 
                     this.InitializeResultDetails();
-                    this.flagAnswered = 0;
+                    this.flagSubmitted = 0;
                 }
                 else
                 {
                     // Get sign if user want to continue or start again
-                    this.flagAnswered = view.flagAnswered;
+                    this.flagSubmitted = view.flagSubmitted;
                     // Get user's answered answers list
-                    if (this.flagAnswered == 1) // User want to get old answers
+                    if (this.flagSubmitted == 1) // User want to get old answers
                     {
                         this.userAnsweredList = baseQuery.GetUserAnsweredList(this.resultID);
                         this.times = baseQuery.FindTimes(this.resultID);
                     }
-                    else // User want to start again
+                    else // User want to start again/user has submitted in the last time
                     {
                         int _times = this.times;
                         // Initialize Result
-                        baseQuery.SaveResult(0, view.userID, view.testID, 0, ++_times);
+                        baseQuery.SaveResult(0, view.userID, view.testID, 0, ++_times, 0);
 
                         this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, this.examineeListID);
                         this.times = baseQuery.FindTimes(this.resultID);
 
                         this.InitializeResultDetails();
-                        this.flagAnswered = 0;
+                        this.flagSubmitted = 0;
                     }
                 }
 
@@ -237,18 +246,18 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
                 // Add this answer to current answered list
 
-                if (this.flagOnSubmit == 0) // (Do not remove this flag. Will be raised error: Collection was modified!)
-                {
-                    int listIndex = currentIndex;
+                //if (this.flagOnSubmit == 0)
+                //{
+                //    int listIndex = currentIndex;
 
-                    userCurrentAnswers.RemoveAt(listIndex);
-                    userCurrentAnswers.Insert(listIndex, answer);
+                //    userCurrentAnswers.RemoveAt(listIndex);
+                //    userCurrentAnswers.Insert(listIndex, answer);
 
-                    //if (userCurrentAnswers.Count == ++listIndex)
-                    //{
-                    //    userCurrentAnswers.Add(null);
-                    //}
-                }
+                //    //if (userCurrentAnswers.Count == ++listIndex)
+                //    //{
+                //    //    userCurrentAnswers.Add(null);
+                //    //}
+                //}
 
                 if (userAnswers.Length == trueAnswers.Length)
                 {
@@ -337,52 +346,52 @@ namespace ExaminationManagement.Presenters.Student.Examination
 
             // Check answer that user answered
             // For second enroll or else
-            if (this.flagAnswered == 1)
+            foreach (var item in this.userAnsweredList)
             {
-                foreach (var item in this.userAnsweredList)
+                if (!choices.Any(item.Contains))
                 {
-                    if (!choices.Any(item.Contains))
-                    {
-                        this.flagNullAnswer += "a"; // Have null answer
-                        break;
-                    }
+                    this.flagNullAnswer += "a"; // Have null answer
+                    break;
                 }
             }
 
             // Check answer
             // For all
-            foreach (var item in this.userCurrentAnswers)
-            {
-                if (!choices.Any(item.Contains))
-                {
-                    this.flagNullAnswer += "b";
-                    break;
-                }
-            }
+            //if (this.flagSubmitted != 1 && this.times == 1)
+            //{
+            //    foreach (var item in this.userCurrentAnswers)
+            //    {
+            //        if (!choices.Any(item.Contains))
+            //        {
+            //            this.flagNullAnswer += "b";
+            //            break;
+            //        }
+            //    }
+            //}
 
-            if (this.flagNullAnswer == "b")
-            {
-                // Concatenate each answer in database to userCurrentList
-                // then call CheckResult()
-                int _index = 0;
+            //if (this.flagNullAnswer == "b")
+            //{
+            //    // Concatenate each answer in database to userCurrentList
+            //    // then call CheckResult()
+            //    int _index = 0;
 
-                foreach (var item in this.userAnsweredList)
-                {
-                    string _temp = string.Join(" ", item);
+            //    foreach (var item in this.userAnsweredList)
+            //    {
+            //        string _temp = string.Join(" ", item);
 
-                    this.userCurrentAnswers.RemoveAt(_index);
-                    this.userCurrentAnswers.Insert(_index, _temp);
-                }
+            //        this.userCurrentAnswers.RemoveAt(_index);
+            //        this.userCurrentAnswers.Insert(_index, _temp);
+            //    }
 
-                if (this.flagNullAnswer == "ab")
-                {
-                    this.flagNullAnswer = "a";
-                }
-                else
-                {
-                    this.flagNullAnswer = null;
-                }
-            }
+            //    if (this.flagNullAnswer == "ab")
+            //    {
+            //        this.flagNullAnswer = "a";
+            //    }
+            //    else
+            //    {
+            //        this.flagNullAnswer = null;
+            //    }
+            //}
         }
 
         private void View_Submit(object sender, EventArgs e)
@@ -394,6 +403,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
                 // Check if answer is null (normal submit)
                 if (view.flagForceSubmit == 1)
                 {
+                    this.userAnsweredList = baseQuery.GetUserAnsweredList(this.resultID);
                     this.CheckNullAnswer();
                 }
 
@@ -404,30 +414,33 @@ namespace ExaminationManagement.Presenters.Student.Examination
                 }
 
                 // Have one or more question that have not answer yet
-                if (this.flagNullAnswer == "ab" || this.flagNullAnswer == "a" || this.flagNullAnswer == "b")
+                if (this.flagNullAnswer == "a")
                 {
                     view.flagForceSubmit = 3;
                 }
-                else if (view.flagForceSubmit == 2 || this.flagNullAnswer != "ab" || this.flagNullAnswer != "a" || this.flagNullAnswer != "b")
+                else
                 {
-                    _tempAnswersList = new List<string>();
-                    _tempAnswersList = this.userCurrentAnswers;
+                    //_tempAnswersList = new List<string>();
+                    //_tempAnswersList = this.userCurrentAnswers;
 
-                    this.currentIndex = 0;
-                    this.flagOnSubmit = 1;
+                    //this.currentIndex = 0;
+                    //this.flagOnSubmit = 1;
 
                     // Save all answer
-                    foreach (var item in _tempAnswersList)
-                    {
-                        CheckResult(testQuestionList[this.currentIndex].QuestionID, item);
-                        this.currentIndex++;
-                    }
+                    //foreach (var item in _tempAnswersList)
+                    //{
+                    //    CheckResult(testQuestionList[this.currentIndex].QuestionID, item);
+                    //    this.currentIndex++;
+                    //}
 
                     // Calculate total score 
                     int _totalScore = baseQuery.TotalScore(this.resultID);
 
+                    // Force Submit = 1 => Normal submit
+                    // Force Submit = 2 => Time Up/User want to submit anyway
+
                     // Save total score
-                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, _totalScore, this.times);
+                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, _totalScore, this.times, view.flagForceSubmit);
 
                     if (this.examinationType == 1)
                     {

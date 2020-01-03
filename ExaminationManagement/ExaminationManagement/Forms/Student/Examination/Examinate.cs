@@ -31,8 +31,11 @@ namespace ExaminationManagement.Forms.Student.Examination
         bool nav = false;
 
         int flagChangeColor = 0;
-        int flagAnswered = 0;
+        int flagSubmitted = 0;
         int flagForceSubmit = 0;
+        int flagShowAllAnswers = 0;
+
+        int m = 0, s = 0;
 
         int currentIndex = 0;
         int maxQuestions = 0;
@@ -64,11 +67,11 @@ namespace ExaminationManagement.Forms.Student.Examination
             examinationPresenter = new ExaminatePresenter(this);
 
             // If not first enroll
-            if (this.flagAnswered == 1)
+            if (this.flagSubmitted == 1)
             {
                 if (MessageBox.Show("Do you want to continue? \n\n-Yes to Continue \n-No to Start again?", "You have already enroll this test!", MessageBoxButtons.YesNo) == DialogResult.No)
                 {
-                    this.flagAnswered = 0;
+                    this.flagSubmitted = 0;
                 }
             }
 
@@ -154,7 +157,6 @@ namespace ExaminationManagement.Forms.Student.Examination
             this.ShowAnswer();
         }
 
-        int flagShowAllAnswers = 0;
         private void Btn_showAllAnswers_Click(object sender, EventArgs e)
         {
             try
@@ -237,7 +239,6 @@ namespace ExaminationManagement.Forms.Student.Examination
             }
         }
 
-        int m = 0, s = 0;
         // Timer
         private void OnTimedEvent(object sender, EventArgs e)
         {
@@ -330,6 +331,15 @@ namespace ExaminationManagement.Forms.Student.Examination
                     Submit?.Invoke(this, null);
 
                     testTimeLeft.Stop();
+
+                    MessageBox.Show(examinationPresenter.ErrorMessage);
+
+                    answer = null;
+
+                    this.Close();
+
+                    examinationControlPanel = new ExaminationControlPanel(this.userID);
+                    examinationControlPanel.Show();
                 }
             }
             else
@@ -386,7 +396,7 @@ namespace ExaminationManagement.Forms.Student.Examination
         string GetCheckedAnswer()
         {
             answer = null;
-            //ckb_choiceA.Checked ? answer = 'A' : null;
+
             if (!ckb_choiceA.Checked && !ckb_choiceB.Checked && !ckb_choiceC.Checked && !ckb_choiceD.Checked && !ckb_choiceE.Checked && !ckb_choiceF.Checked)
             {
                 answer = "null";
@@ -567,13 +577,14 @@ namespace ExaminationManagement.Forms.Student.Examination
         public string choiceD { get => tb_d.Text; set => tb_d.Text = value; }
         public string choiceE { get => tb_e.Text; set => tb_e.Text = value; }
         public string choiceF { get => tb_f.Text; set => tb_f.Text = value; }
+
         string IExaminate.answer => this.answer;
         int IExaminate.currentIndex { set => this.currentIndex = value; }
         int IExaminate.numberOfQuestion { set => this.maxQuestions = value; }
         string[] IExaminate.previousAnswers { get => this.previousAnswers; set => this.previousAnswers = value; }
 
         int IExaminate.flagShowAllAnswers { get => this.flagShowAllAnswers; set => this.flagShowAllAnswers = value; }
-        int IExaminate.flagAnswered { get => this.flagAnswered; set => this.flagAnswered = value; }
+        int IExaminate.flagSubmitted { get => this.flagSubmitted; set => this.flagSubmitted = value; }
         int IExaminate.flagForceSubmit { get => this.flagForceSubmit; set => this.flagForceSubmit = value; }
 
         public event EventHandler NextQuestion;

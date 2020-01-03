@@ -138,7 +138,7 @@ namespace ExaminationManagement.Functions
             return score;
         }
 
-        public void SaveResult(int _resultID, int _userID, string _testID, int _totalScore, int _times)
+        public void SaveResult(int _resultID, int _userID, string _testID, int _totalScore, int _times, int _isSubmitted)
         {
             using (var _data = new ExaminationManagementDataContext())
             {
@@ -154,6 +154,7 @@ namespace ExaminationManagement.Functions
                         TestID = _testID,
                         TotalScore = _totalScore,
                         Times = _times,
+                        IsSubmitted = _isSubmitted,
                     };
                     _data.Results.InsertOnSubmit(newResult);
                     _data.SubmitChanges();
@@ -161,6 +162,7 @@ namespace ExaminationManagement.Functions
                 else
                 {
                     isExists.TotalScore = _totalScore;
+                    isExists.IsSubmitted = _isSubmitted;
                     _data.SubmitChanges();
                 }
                 this.ErrorMessage = "Success!";
@@ -265,6 +267,23 @@ namespace ExaminationManagement.Functions
             }
 
             return resultID;
+        }
+
+        public bool IsSubmitted(int _resultID)
+        {
+            using (var _data = new ExaminationManagementDataContext())
+            {
+                var _isSubmitted = (from r in _data.Results
+                                    where r.ResultID == _resultID
+                                    select r.IsSubmitted).FirstOrDefault();
+
+                if (_isSubmitted == 0)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public int FindTimes(int _resultID)

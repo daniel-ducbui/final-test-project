@@ -60,6 +60,7 @@
       <Column Name="TestID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
       <Column Name="TotalScore" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Times" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsSubmitted" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Result_ResultDetail" Member="ResultDetails" ThisKey="ResultID" OtherKey="ResultID" Type="ResultDetail" />
       <Association Name="Account_Result" Member="Account" ThisKey="UserID" OtherKey="UserID" Type="Account" IsForeignKey="true" />
       <Association Name="TheTest_Result" Member="TheTest" ThisKey="TestID" OtherKey="TestID" Type="TheTest" IsForeignKey="true" />
