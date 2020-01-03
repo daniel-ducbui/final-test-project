@@ -138,7 +138,7 @@ namespace ExaminationManagement.Functions
             return score;
         }
 
-        public void SaveResult(int _resultID, int _userID, string _testID, int _totalScore, int _times, int _isSubmitted)
+        public void SaveResult(int _resultID, int _userID, string _testID, int _totalScore, int _times, int _isSubmitted, int _examinationID)
         {
             using (var _data = new ExaminationManagementDataContext())
             {
@@ -155,6 +155,7 @@ namespace ExaminationManagement.Functions
                         TotalScore = _totalScore,
                         Times = _times,
                         IsSubmitted = _isSubmitted,
+                        ExaminationID = _examinationID,
                     };
                     _data.Results.InsertOnSubmit(newResult);
                     _data.SubmitChanges();

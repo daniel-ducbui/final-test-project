@@ -31,7 +31,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
         bool isSubmitted = false;
 
         int flagFirstLoadQuestion = 0;
-        int flagOnSubmit = 0;
+        //int flagOnSubmit = 0;
         int flagSubmitted = 0;
         string flagNullAnswer = null;
 
@@ -169,7 +169,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
                 if (this.resultID == 0)
                 {
                     // Initialize Result
-                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, 0, 1, 0);
+                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, 0, 1, 0, this.examineeListID);
 
                     this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, view.examinationID);
                     this.times = baseQuery.FindTimes(this.resultID);
@@ -191,7 +191,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
                     {
                         int _times = this.times;
                         // Initialize Result
-                        baseQuery.SaveResult(0, view.userID, view.testID, 0, ++_times, 0);
+                        baseQuery.SaveResult(0, view.userID, view.testID, 0, ++_times, 0, view.examinationID);
 
                         this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, this.examineeListID);
                         this.times = baseQuery.FindTimes(this.resultID);
@@ -440,7 +440,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
                     // Force Submit = 2 => Time Up/User want to submit anyway
 
                     // Save total score
-                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, _totalScore, this.times, view.flagForceSubmit);
+                    baseQuery.SaveResult(this.resultID, view.userID, view.testID, _totalScore, this.times, view.flagForceSubmit, view.examinationID);
 
                     if (this.examinationType == 1)
                     {

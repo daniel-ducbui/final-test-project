@@ -1282,6 +1282,8 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		private int _IsSubmitted;
 		
+		private int _ExaminationID;
+		
 		private EntitySet<ResultDetail> _ResultDetails;
 		
 		private EntityRef<Account> _Account;
@@ -1304,6 +1306,8 @@ namespace ExaminationManagement.Functions.ConnectDatabase
     partial void OnTimesChanged();
     partial void OnIsSubmittedChanging(int value);
     partial void OnIsSubmittedChanged();
+    partial void OnExaminationIDChanging(int value);
+    partial void OnExaminationIDChanged();
     #endregion
 		
 		public Result()
@@ -1438,6 +1442,26 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 					this._IsSubmitted = value;
 					this.SendPropertyChanged("IsSubmitted");
 					this.OnIsSubmittedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ExaminationID", DbType="Int NOT NULL")]
+		public int ExaminationID
+		{
+			get
+			{
+				return this._ExaminationID;
+			}
+			set
+			{
+				if ((this._ExaminationID != value))
+				{
+					this.OnExaminationIDChanging(value);
+					this.SendPropertyChanging();
+					this._ExaminationID = value;
+					this.SendPropertyChanged("ExaminationID");
+					this.OnExaminationIDChanged();
 				}
 			}
 		}
