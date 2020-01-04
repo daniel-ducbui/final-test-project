@@ -26,9 +26,7 @@ namespace ExaminationManagement
         TeacherControlPanel teacherControlPanel;
         StudentControlPanel studentControlPanel;
 
-        // Khởi tạo delegate truyền userID
-        int _userID;
-        public delegate void UserID(int _userID);
+        int userID = 0;
 
         public LoginForm()
         {
@@ -103,36 +101,25 @@ namespace ExaminationManagement
                 // 2 ~ student
                 // Then show Form according to the permission
                 this.Hide();
+
                 if (checking == 0)
                 {
-                    adminControlPanel = new AdminControlPanel();
+                    adminControlPanel = new AdminControlPanel(this.userID);
                     adminControlPanel.FormClosed += (s, args) => this.Close();
-
-                    // Truyền userID hiện tại
-                    UserID userID = new UserID(adminControlPanel.GetUserID);
-                    userID(this._userID);
 
                     adminControlPanel.Show();
                 }
                 else if (checking == 1)
                 {
-                    teacherControlPanel = new TeacherControlPanel();
+                    teacherControlPanel = new TeacherControlPanel(this.userID);
                     teacherControlPanel.FormClosed += (s, args) => this.Close();
-
-                    // Truyền userID hiện tại
-                    UserID userID = new UserID(teacherControlPanel.GetUserID);
-                    userID(this._userID);
 
                     teacherControlPanel.Show();
                 }
                 else if (checking == 2)
                 {
-                    studentControlPanel = new StudentControlPanel();
+                    studentControlPanel = new StudentControlPanel(this.userID);
                     studentControlPanel.FormClosed += (s, args) => this.Close();
-
-                    // Truyền userID hiện tại
-                    UserID userID = new UserID(studentControlPanel.GetUserID);
-                    userID(this._userID);
 
                     studentControlPanel.Show();
                 }
@@ -143,7 +130,7 @@ namespace ExaminationManagement
             }
         }
 
-        public int userID { get => this._userID; set => this._userID = value; }
+        int ILogin.userID { get => this.userID; set => this.userID = value; }
         public string username { get => tb_username.Text; }
         public string password { get => tb_password.Text; }
 

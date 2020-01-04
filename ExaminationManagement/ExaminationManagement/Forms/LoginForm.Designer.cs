@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.tb_username = new LollipopTextBox();
-            this.tb_password = new LollipopTextBox();
-            this.btn_login = new LollipopButton();
-            this.lollipopLabel1 = new LollipopLabel();
             this.lollipopLabel2 = new LollipopLabel();
+            this.lollipopLabel1 = new LollipopLabel();
+            this.tb_password = new LollipopTextBox();
+            this.tb_username = new LollipopTextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.btn_quit = new LollipopFlatButton();
+            this.btn_login = new LollipopButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -51,30 +51,29 @@
             this.panel1.Size = new System.Drawing.Size(313, 114);
             this.panel1.TabIndex = 2;
             // 
-            // panel2
+            // lollipopLabel2
             // 
-            this.panel2.Controls.Add(this.btn_quit);
-            this.panel2.Controls.Add(this.btn_login);
-            this.panel2.Location = new System.Drawing.Point(12, 233);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(313, 47);
-            this.panel2.TabIndex = 3;
+            this.lollipopLabel2.AutoSize = true;
+            this.lollipopLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.lollipopLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lollipopLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lollipopLabel2.Location = new System.Drawing.Point(3, 59);
+            this.lollipopLabel2.Name = "lollipopLabel2";
+            this.lollipopLabel2.Size = new System.Drawing.Size(69, 17);
+            this.lollipopLabel2.TabIndex = 4;
+            this.lollipopLabel2.Text = "Password";
             // 
-            // tb_username
+            // lollipopLabel1
             // 
-            this.tb_username.FocusedColor = "#508ef5";
-            this.tb_username.FontColor = "#999999";
-            this.tb_username.IsEnabled = true;
-            this.tb_username.Location = new System.Drawing.Point(3, 32);
-            this.tb_username.MaxLength = 32767;
-            this.tb_username.Multiline = false;
-            this.tb_username.Name = "tb_username";
-            this.tb_username.ReadOnly = false;
-            this.tb_username.Size = new System.Drawing.Size(307, 24);
-            this.tb_username.TabIndex = 2;
-            this.tb_username.Text = "ducbui2991@gmail.com";
-            this.tb_username.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
-            this.tb_username.UseSystemPasswordChar = false;
+            this.lollipopLabel1.AutoSize = true;
+            this.lollipopLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.lollipopLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lollipopLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.lollipopLabel1.Location = new System.Drawing.Point(3, 11);
+            this.lollipopLabel1.Name = "lollipopLabel1";
+            this.lollipopLabel1.Size = new System.Drawing.Size(73, 17);
+            this.lollipopLabel1.TabIndex = 4;
+            this.lollipopLabel1.Text = "Username";
             // 
             // tb_password
             // 
@@ -88,9 +87,45 @@
             this.tb_password.ReadOnly = false;
             this.tb_password.Size = new System.Drawing.Size(307, 24);
             this.tb_password.TabIndex = 3;
-            this.tb_password.Text = "090212A1";
+            this.tb_password.Text = "admin";
             this.tb_password.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_password.UseSystemPasswordChar = true;
+            // 
+            // tb_username
+            // 
+            this.tb_username.FocusedColor = "#508ef5";
+            this.tb_username.FontColor = "#999999";
+            this.tb_username.IsEnabled = true;
+            this.tb_username.Location = new System.Drawing.Point(3, 32);
+            this.tb_username.MaxLength = 32767;
+            this.tb_username.Multiline = false;
+            this.tb_username.Name = "tb_username";
+            this.tb_username.ReadOnly = false;
+            this.tb_username.Size = new System.Drawing.Size(307, 24);
+            this.tb_username.TabIndex = 2;
+            this.tb_username.Text = "admin";
+            this.tb_username.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
+            this.tb_username.UseSystemPasswordChar = false;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.btn_quit);
+            this.panel2.Controls.Add(this.btn_login);
+            this.panel2.Location = new System.Drawing.Point(12, 233);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(313, 47);
+            this.panel2.TabIndex = 3;
+            // 
+            // btn_quit
+            // 
+            this.btn_quit.BackColor = System.Drawing.Color.Transparent;
+            this.btn_quit.FontColor = "#508ef5";
+            this.btn_quit.Location = new System.Drawing.Point(3, 3);
+            this.btn_quit.Name = "btn_quit";
+            this.btn_quit.Size = new System.Drawing.Size(143, 41);
+            this.btn_quit.TabIndex = 4;
+            this.btn_quit.Text = "Quit";
+            this.btn_quit.Click += new System.EventHandler(this.Btn_quit_Click);
             // 
             // btn_login
             // 
@@ -103,41 +138,6 @@
             this.btn_login.TabIndex = 4;
             this.btn_login.Text = "Login";
             this.btn_login.Click += new System.EventHandler(this.Btn_login_Click);
-            // 
-            // lollipopLabel1
-            // 
-            this.lollipopLabel1.AutoSize = true;
-            this.lollipopLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.lollipopLabel1.Font = new System.Drawing.Font("Roboto Medium", 10F);
-            this.lollipopLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lollipopLabel1.Location = new System.Drawing.Point(3, 11);
-            this.lollipopLabel1.Name = "lollipopLabel1";
-            this.lollipopLabel1.Size = new System.Drawing.Size(73, 18);
-            this.lollipopLabel1.TabIndex = 4;
-            this.lollipopLabel1.Text = "Username";
-            // 
-            // lollipopLabel2
-            // 
-            this.lollipopLabel2.AutoSize = true;
-            this.lollipopLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.lollipopLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lollipopLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.lollipopLabel2.Location = new System.Drawing.Point(3, 59);
-            this.lollipopLabel2.Name = "lollipopLabel2";
-            this.lollipopLabel2.Size = new System.Drawing.Size(69, 17);
-            this.lollipopLabel2.TabIndex = 4;
-            this.lollipopLabel2.Text = "Password";
-            // 
-            // btn_quit
-            // 
-            this.btn_quit.BackColor = System.Drawing.Color.Transparent;
-            this.btn_quit.FontColor = "#508ef5";
-            this.btn_quit.Location = new System.Drawing.Point(3, 3);
-            this.btn_quit.Name = "btn_quit";
-            this.btn_quit.Size = new System.Drawing.Size(143, 41);
-            this.btn_quit.TabIndex = 4;
-            this.btn_quit.Text = "Quit";
-            this.btn_quit.Click += new System.EventHandler(this.Btn_quit_Click);
             // 
             // LoginForm
             // 

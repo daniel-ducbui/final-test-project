@@ -50,6 +50,7 @@ namespace ExaminationManagement.Functions
                         isExists.Address = _Address;
                         isExists.ClassID = _ClassID;
                         isExists.GradeID = _GradeID;
+                        isExists.AccountType = _AccountType;
                         _data.SubmitChanges();
                     }
                 }

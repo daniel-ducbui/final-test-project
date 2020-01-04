@@ -49,6 +49,18 @@
     <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1400.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1400.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1400.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="SplashScreen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SplashScreen.Winforms.1.0.0\lib\SplashScreen.dll</HintPath>
     </Reference>
@@ -104,15 +116,16 @@
     <Compile Include="Controls\LollipopToggle.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ExaminationManagementDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ExaminationManagementDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AdminControlPanel.cs">
+    <Compile Include="Forms\Administrator\AddAccount.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AdminControlPanel.Designer.cs">
+    <Compile Include="Forms\Administrator\AddAccount.Designer.cs">
+      <DependentUpon>AddAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Administrator\AdminControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Administrator\AdminControlPanel.Designer.cs">
       <DependentUpon>AdminControlPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CustomMessageBox\frmOK.cs">
@@ -140,10 +153,10 @@
     <Compile Include="Forms\Report\StudentResultReport.Designer.cs">
       <DependentUpon>StudentResultReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\StudentControlPanel.cs">
+    <Compile Include="Forms\Student\StudentControlPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\StudentControlPanel.Designer.cs">
+    <Compile Include="Forms\Student\StudentControlPanel.Designer.cs">
       <DependentUpon>StudentControlPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Student\ExaminationControlPanel.cs">
@@ -176,10 +189,10 @@
     <Compile Include="Forms\Student\ResultControlPanel.Designer.cs">
       <DependentUpon>ResultControlPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TeacherControlPanel.cs">
+    <Compile Include="Forms\Teacher\TeacherControlPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\TeacherControlPanel.Designer.cs">
+    <Compile Include="Forms\Teacher\TeacherControlPanel.Designer.cs">
       <DependentUpon>TeacherControlPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Functions\Events\SelectedChangedEventArgs.cs" />
@@ -198,13 +211,15 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Functions\UploadFile\UploadFileExcel.cs" />
-    <Compile Include="Presenters\AccountManagementPresenter.cs" />
+    <Compile Include="Presenters\Administator\AccountManagementPresenter.cs" />
     <Compile Include="Functions\ConnectDatabase\ExaminationManagement.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ExaminationManagement.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Presenters\Administator\AddAccountPresenter.cs" />
     <Compile Include="Presenters\LoginPresenter.cs" />
+    <Compile Include="Presenters\Report\StudentResultReportPresenter.cs" />
     <Compile Include="Presenters\Student\ExaminationControllerPresenter.cs" />
     <Compile Include="Presenters\Student\Examination\ExaminatePresenter.cs" />
     <Compile Include="Presenters\Student\ProfilePresenter.cs" />
@@ -212,16 +227,22 @@
     <Compile Include="Presenters\Student\ResultPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="UIManagers\DrawHelper.cs" />
     <Compile Include="UIManagers\FontManager.cs" />
-    <Compile Include="Views\IAccountManagement.cs" />
+    <Compile Include="Views\Administator\IAccountManagement.cs" />
+    <Compile Include="Views\Administator\IAddAccount.cs" />
     <Compile Include="Views\ILogin.cs" />
+    <Compile Include="Views\Report\IStudentResultReport.cs" />
     <Compile Include="Views\Student\Examination\IExaminate.cs" />
     <Compile Include="Views\Student\IResult.cs" />
     <Compile Include="Views\Student\IExaminationController.cs" />
     <Compile Include="Views\Student\IProfile.cs" />
     <Compile Include="Views\Student\IQuestion.cs" />
-    <EmbeddedResource Include="Forms\AdminControlPanel.resx">
+    <EmbeddedResource Include="Forms\Administrator\AddAccount.resx">
+      <DependentUpon>AddAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Administrator\AdminControlPanel.resx">
       <DependentUpon>AdminControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomMessageBox\frmOK.resx">
@@ -233,10 +254,13 @@
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Report\StudentResultReport.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\StudentResultReport.resx">
       <DependentUpon>StudentResultReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\StudentControlPanel.resx">
+    <EmbeddedResource Include="Forms\Student\StudentControlPanel.resx">
       <DependentUpon>StudentControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Student\ExaminationControlPanel.resx">
@@ -254,7 +278,7 @@
     <EmbeddedResource Include="Forms\Student\ResultControlPanel.resx">
       <DependentUpon>ResultControlPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TeacherControlPanel.resx">
+    <EmbeddedResource Include="Forms\Teacher\TeacherControlPanel.resx">
       <DependentUpon>TeacherControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -267,17 +291,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="ExaminationManagementDataSet.xsc">
-      <DependentUpon>ExaminationManagementDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="ExaminationManagementDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ExaminationManagementDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ExaminationManagementDataSet.xss">
-      <DependentUpon>ExaminationManagementDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Functions\ConnectDatabase\ExaminationManagement.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>ExaminationManagement.designer.cs</LastGenOutput>
@@ -287,6 +300,20 @@
       <DependentUpon>ExaminationManagement.dbml</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.Account.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.AccountDetail.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.BaseConnection.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.ExaminationManagementDataContext.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.ExamineeList.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.ExamineeListDetail.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.Result.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.ResultDetail.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.TestDetail.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.TestList.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.TestListDetail.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.TheExamination.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.TheQuestion.datasource" />
+    <None Include="Properties\DataSources\ExaminationManagement.Functions.ConnectDatabase.TheTest.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -341,6 +368,19 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\Icons\icons8-exam-48.png" />
     <Content Include="Resources\Icons\icons8-help-48.png" />
     <Content Include="Resources\Icons\icons8-male-user-48.png" />
