@@ -31,8 +31,15 @@ namespace ExaminationManagement.Forms.Student
             btn_result.Click += Btn_result_Click;
             btn_mainExam.Click += Btn_mainExam_Click;
             btn_testExam.Click += Btn_testExam_Click;
-            btn_enroll.Click += Btn_enroll_Click;
+            btn_control.Click += Btn_control_Click;
             Load += ExaminationControlPanel_Load;
+
+            dgv_data.DoubleClick += Dgv_data_DoubleClick;
+        }
+
+        private void Dgv_data_DoubleClick(object sender, EventArgs e)
+        {
+            Btn_control_Click(sender, e);
         }
 
         private void ExaminationControlPanel_Load(object sender, EventArgs e)
@@ -40,28 +47,43 @@ namespace ExaminationManagement.Forms.Student
             examController = new ExaminationControllerPresenter(this);
         }
 
-        string testID;
         int userID;
         int examID;
+        int resultID;
+        string testID;
+
+        bool flagChangeTab = false;
 
         public ExaminationControlPanel(int userID) : this()
         {
             this.userID = userID;
         }
 
-        private void Btn_enroll_Click(object sender, EventArgs e)
+        private void Btn_control_Click(object sender, EventArgs e)
         {
             try
             {
-                int index = dgv_examInfo.SelectedCells[0].RowIndex;
-                this.examID = Convert.ToInt32(dgv_examInfo.Rows[index].Cells[0].Value.ToString());
-                this.testID = dgv_examInfo.Rows[index].Cells[1].Value.ToString();
+                int index = dgv_data.SelectedCells[0].RowIndex;
 
-                GetExamInfo?.Invoke(this, null);
+                if (this.flagChangeTab)
+                {
+                    this.examID = Convert.ToInt32(dgv_data.Rows[index].Cells[0].Value.ToString());
+                    this.testID = dgv_data.Rows[index].Cells[1].Value.ToString();
 
-                this.Hide();
-                Examinate examinate = new Examinate(this.userID, this.examID, this.testID);
-                examinate.Show();
+                    GetExamInfo?.Invoke(this, null);
+
+                    this.Hide();
+                    Examinate examinate = new Examinate(this.userID, this.examID, this.testID);
+                    examinate.Show();
+                }
+                else
+                {
+                    this.resultID = Convert.ToInt32(dgv_data.Rows[index].Cells[0].Value.ToString());
+
+                    this.Hide();
+                    ResultControlPanel resultControlPanel = new ResultControlPanel(this.userID, this.resultID);
+                    resultControlPanel.Show();
+                }
             }
             catch (Exception ex)
             {
@@ -73,6 +95,10 @@ namespace ExaminationManagement.Forms.Student
         {
             try
             {
+                this.flagChangeTab = true;
+
+                btn_control.Text = "Enroll";
+
                 GetTestExamList?.Invoke(this, null);
             }
             catch (Exception ex)
@@ -85,6 +111,10 @@ namespace ExaminationManagement.Forms.Student
         {
             try
             {
+                this.flagChangeTab = true;
+
+                btn_control.Text = "Enroll";
+
                 GetMainExamList?.Invoke(this, null);
             }
             catch (Exception ex)
@@ -95,8 +125,18 @@ namespace ExaminationManagement.Forms.Student
 
         private void Btn_result_Click(object sender, EventArgs e)
         {
-            ResultControlPanel resultControlPanel = new ResultControlPanel(this.userID);
-            resultControlPanel.ShowDialog();
+            try
+            {
+                this.flagChangeTab = false;
+
+                btn_control.Text = "Review";
+
+                GetResult?.Invoke(this, null);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("There is no examination found! \nDetails: " + ex.Message);
+            }
         }
 
         private void Btn_back_Click(object sender, EventArgs e)
@@ -109,10 +149,11 @@ namespace ExaminationManagement.Forms.Student
 
         public event EventHandler GetMainExamList;
         public event EventHandler GetTestExamList;
+        public event EventHandler GetResult;
         public event EventHandler GetExamInfo;
 
         int IExaminationController.userID => this.userID;
-        object IExaminationController.examList { get => dgv_examInfo.DataSource; set => dgv_examInfo.DataSource = value; }
+        object IExaminationController.dataSource { get => dgv_data.DataSource; set => dgv_data.DataSource = value; }
         string IExaminationController.testID { get => this.testID; set => this.testID = value; }
         int IExaminationController.examID => this.examID;
     }

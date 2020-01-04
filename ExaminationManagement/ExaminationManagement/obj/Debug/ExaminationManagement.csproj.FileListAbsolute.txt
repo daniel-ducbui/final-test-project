@@ -23,3 +23,4 @@ C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bi
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.CustomMessageBox.frmOK.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.CustomMessageBox.frmYesNo.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csprojAssemblyReference.cache
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.ResultControlPanel.resources

@@ -74,16 +74,16 @@
             this.panel1.Location = new System.Drawing.Point(0, 64);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1305, 44);
+            this.panel1.Size = new System.Drawing.Size(1306, 44);
             this.panel1.TabIndex = 0;
             // 
             // btn_back
             // 
             this.btn_back.BackColor = System.Drawing.Color.Transparent;
             this.btn_back.FontColor = "#ff271d";
-            this.btn_back.Location = new System.Drawing.Point(3, 3);
+            this.btn_back.Location = new System.Drawing.Point(3, 2);
             this.btn_back.Name = "btn_back";
-            this.btn_back.Size = new System.Drawing.Size(105, 36);
+            this.btn_back.Size = new System.Drawing.Size(105, 38);
             this.btn_back.TabIndex = 2;
             this.btn_back.Text = "Back";
             // 
@@ -91,7 +91,7 @@
             // 
             this.tb_time.Enabled = false;
             this.tb_time.Font = new System.Drawing.Font("Maven Pro", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_time.Location = new System.Drawing.Point(555, 7);
+            this.tb_time.Location = new System.Drawing.Point(553, 3);
             this.tb_time.Name = "tb_time";
             this.tb_time.ReadOnly = true;
             this.tb_time.Size = new System.Drawing.Size(166, 32);
@@ -118,7 +118,6 @@
             this.pnl_1.Controls.Add(this.ckb_choiceB);
             this.pnl_1.Controls.Add(this.ckb_choiceA);
             this.pnl_1.Location = new System.Drawing.Point(0, 174);
-            this.pnl_1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.pnl_1.Name = "pnl_1";
             this.pnl_1.Size = new System.Drawing.Size(1305, 437);
             this.pnl_1.TabIndex = 1;
@@ -134,7 +133,7 @@
             this.lollipopTextBox1.Name = "lollipopTextBox1";
             this.lollipopTextBox1.ReadOnly = true;
             this.lollipopTextBox1.Size = new System.Drawing.Size(90, 24);
-            this.lollipopTextBox1.TabIndex = 28;
+            this.lollipopTextBox1.TabIndex = 30;
             this.lollipopTextBox1.Text = "Question";
             this.lollipopTextBox1.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.lollipopTextBox1.UseSystemPasswordChar = false;
@@ -150,7 +149,7 @@
             this.tb_questionIndex.Name = "tb_questionIndex";
             this.tb_questionIndex.ReadOnly = true;
             this.tb_questionIndex.Size = new System.Drawing.Size(37, 24);
-            this.tb_questionIndex.TabIndex = 27;
+            this.tb_questionIndex.TabIndex = 29;
             this.tb_questionIndex.Text = "1";
             this.tb_questionIndex.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
             this.tb_questionIndex.UseSystemPasswordChar = false;
@@ -167,7 +166,7 @@
             this.tb_f.Name = "tb_f";
             this.tb_f.ReadOnly = true;
             this.tb_f.Size = new System.Drawing.Size(888, 24);
-            this.tb_f.TabIndex = 26;
+            this.tb_f.TabIndex = 28;
             this.tb_f.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_f.UseSystemPasswordChar = false;
             // 
@@ -183,7 +182,7 @@
             this.tb_e.Name = "tb_e";
             this.tb_e.ReadOnly = true;
             this.tb_e.Size = new System.Drawing.Size(888, 24);
-            this.tb_e.TabIndex = 25;
+            this.tb_e.TabIndex = 27;
             this.tb_e.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_e.UseSystemPasswordChar = false;
             // 
@@ -199,7 +198,7 @@
             this.tb_d.Name = "tb_d";
             this.tb_d.ReadOnly = true;
             this.tb_d.Size = new System.Drawing.Size(888, 24);
-            this.tb_d.TabIndex = 24;
+            this.tb_d.TabIndex = 26;
             this.tb_d.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_d.UseSystemPasswordChar = false;
             // 
@@ -215,7 +214,7 @@
             this.tb_c.Name = "tb_c";
             this.tb_c.ReadOnly = true;
             this.tb_c.Size = new System.Drawing.Size(888, 24);
-            this.tb_c.TabIndex = 23;
+            this.tb_c.TabIndex = 25;
             this.tb_c.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_c.UseSystemPasswordChar = false;
             // 
@@ -231,7 +230,7 @@
             this.tb_b.Name = "tb_b";
             this.tb_b.ReadOnly = true;
             this.tb_b.Size = new System.Drawing.Size(889, 24);
-            this.tb_b.TabIndex = 5;
+            this.tb_b.TabIndex = 24;
             this.tb_b.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_b.UseSystemPasswordChar = false;
             // 
@@ -247,7 +246,7 @@
             this.tb_a.Name = "tb_a";
             this.tb_a.ReadOnly = true;
             this.tb_a.Size = new System.Drawing.Size(889, 24);
-            this.tb_a.TabIndex = 5;
+            this.tb_a.TabIndex = 23;
             this.tb_a.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_a.UseSystemPasswordChar = false;
             // 
@@ -257,13 +256,14 @@
             this.tb_content.FocusedColor = "#508ef5";
             this.tb_content.FontColor = "#000000";
             this.tb_content.IsEnabled = true;
-            this.tb_content.Location = new System.Drawing.Point(99, 4);
+            this.tb_content.Location = new System.Drawing.Point(100, 4);
             this.tb_content.MaxLength = 32767;
             this.tb_content.Multiline = true;
             this.tb_content.Name = "tb_content";
             this.tb_content.ReadOnly = true;
-            this.tb_content.Size = new System.Drawing.Size(1198, 147);
+            this.tb_content.Size = new System.Drawing.Size(1197, 147);
             this.tb_content.TabIndex = 22;
+            this.tb_content.Text = "asd";
             this.tb_content.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_content.UseSystemPasswordChar = false;
             // 
@@ -460,6 +460,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "Examinate";
+            this.Sizable = false;
             this.Text = "Examinate";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

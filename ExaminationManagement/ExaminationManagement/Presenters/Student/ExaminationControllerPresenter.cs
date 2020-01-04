@@ -23,8 +23,9 @@ namespace ExaminationManagement.Presenters.Student
         private void Initialize()
         {
             view.GetMainExamList += View_GetMainExamList;
-            view.GetExamInfo += View_GetExamInfo;
             view.GetTestExamList += View_GetTestExamList;
+            view.GetResult += View_GetResult;
+            view.GetExamInfo += View_GetExamInfo;
         }
 
         private void View_GetExamInfo(object sender, EventArgs e)
@@ -64,7 +65,7 @@ namespace ExaminationManagement.Presenters.Student
             {
                 using (var _data = new ExaminationManagementDataContext())
                 {
-                    view.examList = null;
+                    view.dataSource = null;
                     // Check if this user have in TheExamineeList
                     //var _isExists = (from exLiD in _data.ExamineeListDetails
                     //                where exLiD.UserID == view.userID
@@ -85,7 +86,7 @@ namespace ExaminationManagement.Presenters.Student
                     var _getUserGradeID = _data.AccountDetails.Where(a => a.UserID == view.userID).Select(a => a.GradeID).FirstOrDefault();
 
                     // Get the schedule
-                    //var examList = (from ex in _data.TheExaminations
+                    //var dataSource = (from ex in _data.TheExaminations
                     //                where ex.GradeID == _getUserGradeID
                     //                where ex.ExamineeListID == _getExamListID
                     //                select new { ex.ExaminationID, ex.ExaminationName, ex.GradeID, ex.StartDate, ex.EndDate, ex.TestLists[0].TestID }).ToList();
@@ -106,7 +107,7 @@ namespace ExaminationManagement.Presenters.Student
 
                                      select new { ex.ExaminationID, tld.TestID, ex.ExaminationName, ex.GradeID, ex.StartDate, ex.EndDate }).ToList();
 
-                    view.examList = _examList;
+                    view.dataSource = _examList;
                 }
             }
             catch (Exception ex)
@@ -121,7 +122,7 @@ namespace ExaminationManagement.Presenters.Student
             {
                 using (var _data = new ExaminationManagementDataContext())
                 {
-                    view.examList = null;
+                    view.dataSource = null;
                     // Get user's Grade
                     var _getUserGradeID = _data.AccountDetails.Where(a => a.UserID == view.userID).Select(a => a.GradeID).FirstOrDefault();
 
@@ -138,7 +139,34 @@ namespace ExaminationManagement.Presenters.Student
 
                                      select new { ex.ExaminationID, tld.TestID, ex.ExaminationName, ex.GradeID, ex.StartDate, ex.EndDate }).ToList();
 
-                    view.examList = _examList;
+                    view.dataSource = _examList;
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
+        }
+
+        private void View_GetResult(object sender, EventArgs e)
+        {
+            try
+            {
+                using (var _data = new ExaminationManagementDataContext())
+                {
+                    view.dataSource = null;
+                    // Get results
+                    var _result = (from r in _data.Results
+                                   join a in _data.Accounts on r.UserID equals a.UserID
+                                   join t in _data.TheTests on r.TestID equals t.TestID
+
+                                   where r.UserID == a.UserID &&
+                                   r.TestID == t.TestID &&
+                                   a.UserID == view.userID
+                                   
+                                   select new { r.ResultID, r.ExaminationID, r.TestID, r.Times, r.TotalScore }).ToList();
+
+                    view.dataSource = _result;
                 }
             }
             catch (Exception ex)

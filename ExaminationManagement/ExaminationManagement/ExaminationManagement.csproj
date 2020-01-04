@@ -198,6 +198,7 @@
     <Compile Include="Presenters\Student\Examination\ExaminatePresenter.cs" />
     <Compile Include="Presenters\Student\ProfilePresenter.cs" />
     <Compile Include="Presenters\Student\QuestionPresenter.cs" />
+    <Compile Include="Presenters\Student\ResultPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIManagers\DrawHelper.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Views\IAccountManagement.cs" />
     <Compile Include="Views\ILogin.cs" />
     <Compile Include="Views\Student\Examination\IExaminate.cs" />
+    <Compile Include="Views\Student\IResult.cs" />
     <Compile Include="Views\Student\IExaminationController.cs" />
     <Compile Include="Views\Student\IProfile.cs" />
     <Compile Include="Views\Student\IQuestion.cs" />
@@ -234,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Student\QuestionControlPanel.resx">
       <DependentUpon>QuestionControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Student\ResultControlPanel.resx">
+      <DependentUpon>ResultControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeacherControlPanel.resx">
       <DependentUpon>TeacherControlPanel.cs</DependentUpon>

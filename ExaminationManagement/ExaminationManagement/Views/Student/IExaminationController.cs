@@ -9,12 +9,13 @@ namespace ExaminationManagement.Views.Student
     interface IExaminationController
     {
         int userID { get; }
-        object examList { get; set; }
+        object dataSource { get; set; }
         string testID { get; set; }
         int examID { get; }
 
         event EventHandler GetMainExamList;
         event EventHandler GetTestExamList;
+        event EventHandler GetResult;
         event EventHandler GetExamInfo;
     }
 }

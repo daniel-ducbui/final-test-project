@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.pnl_exam = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.dgv_examInfo = new MetroFramework.Controls.MetroGrid();
-            this.btn_enroll = new LollipopFlatButton();
             this.btn_back = new LollipopFlatButton();
+            this.pnl_exam = new System.Windows.Forms.Panel();
+            this.dgv_data = new MetroFramework.Controls.MetroGrid();
+            this.btn_control = new LollipopFlatButton();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.btn_result = new LollipopFlatButton();
             this.btn_testExam = new LollipopButton();
             this.btn_mainExam = new LollipopButton();
             this.panel2.SuspendLayout();
             this.pnl_exam.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_data)).BeginInit();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_examInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -56,14 +56,82 @@
             this.panel2.Size = new System.Drawing.Size(1194, 45);
             this.panel2.TabIndex = 2;
             // 
+            // btn_back
+            // 
+            this.btn_back.BackColor = System.Drawing.Color.Transparent;
+            this.btn_back.FontColor = "#ff271d";
+            this.btn_back.Location = new System.Drawing.Point(3, 3);
+            this.btn_back.Name = "btn_back";
+            this.btn_back.Size = new System.Drawing.Size(105, 36);
+            this.btn_back.TabIndex = 0;
+            this.btn_back.Text = "Back";
+            // 
             // pnl_exam
             // 
-            this.pnl_exam.Controls.Add(this.dgv_examInfo);
-            this.pnl_exam.Controls.Add(this.btn_enroll);
+            this.pnl_exam.Controls.Add(this.dgv_data);
+            this.pnl_exam.Controls.Add(this.btn_control);
             this.pnl_exam.Location = new System.Drawing.Point(0, 182);
             this.pnl_exam.Name = "pnl_exam";
             this.pnl_exam.Size = new System.Drawing.Size(1194, 419);
             this.pnl_exam.TabIndex = 3;
+            // 
+            // dgv_data
+            // 
+            this.dgv_data.AllowUserToResizeRows = false;
+            this.dgv_data.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_data.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgv_data.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.dgv_data.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgv_data.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgv_data.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_data.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv_data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_data.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgv_data.EnableHeadersVisualStyles = false;
+            this.dgv_data.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.dgv_data.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.dgv_data.Location = new System.Drawing.Point(0, 0);
+            this.dgv_data.MultiSelect = false;
+            this.dgv_data.Name = "dgv_data";
+            this.dgv_data.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.RoyalBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_data.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgv_data.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgv_data.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.dgv_data.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_data.Size = new System.Drawing.Size(1194, 346);
+            this.dgv_data.TabIndex = 4;
+            // 
+            // btn_control
+            // 
+            this.btn_control.BackColor = System.Drawing.Color.Transparent;
+            this.btn_control.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btn_control.FontColor = "#508ef5";
+            this.btn_control.Location = new System.Drawing.Point(0, 352);
+            this.btn_control.Name = "btn_control";
+            this.btn_control.Size = new System.Drawing.Size(1194, 67);
+            this.btn_control.TabIndex = 2;
+            this.btn_control.Text = "Enroll";
             // 
             // panel3
             // 
@@ -75,77 +143,10 @@
             this.panel3.Size = new System.Drawing.Size(1194, 71);
             this.panel3.TabIndex = 2;
             // 
-            // dgv_examInfo
-            // 
-            this.dgv_examInfo.AllowUserToResizeRows = false;
-            this.dgv_examInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgv_examInfo.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgv_examInfo.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.dgv_examInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgv_examInfo.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dgv_examInfo.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.DarkBlue;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.RoyalBlue;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_examInfo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgv_examInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.CornflowerBlue;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_examInfo.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dgv_examInfo.EnableHeadersVisualStyles = false;
-            this.dgv_examInfo.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.dgv_examInfo.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.dgv_examInfo.Location = new System.Drawing.Point(0, 0);
-            this.dgv_examInfo.Name = "dgv_examInfo";
-            this.dgv_examInfo.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.DarkBlue;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_examInfo.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dgv_examInfo.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgv_examInfo.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dgv_examInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_examInfo.Size = new System.Drawing.Size(1194, 346);
-            this.dgv_examInfo.TabIndex = 4;
-            // 
-            // btn_enroll
-            // 
-            this.btn_enroll.BackColor = System.Drawing.Color.Transparent;
-            this.btn_enroll.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.btn_enroll.FontColor = "#508ef5";
-            this.btn_enroll.Location = new System.Drawing.Point(0, 352);
-            this.btn_enroll.Name = "btn_enroll";
-            this.btn_enroll.Size = new System.Drawing.Size(1194, 67);
-            this.btn_enroll.TabIndex = 2;
-            this.btn_enroll.Text = "Enroll";
-            // 
-            // btn_back
-            // 
-            this.btn_back.BackColor = System.Drawing.Color.Transparent;
-            this.btn_back.FontColor = "#ff271d";
-            this.btn_back.Location = new System.Drawing.Point(3, 3);
-            this.btn_back.Name = "btn_back";
-            this.btn_back.Size = new System.Drawing.Size(105, 36);
-            this.btn_back.TabIndex = 0;
-            this.btn_back.Text = "Back";
-            // 
             // btn_result
             // 
             this.btn_result.BackColor = System.Drawing.Color.Transparent;
-            this.btn_result.FontColor = "#508ef5";
+            this.btn_result.FontColor = "#00ff1f";
             this.btn_result.Location = new System.Drawing.Point(381, 3);
             this.btn_result.Name = "btn_result";
             this.btn_result.Size = new System.Drawing.Size(183, 63);
@@ -189,8 +190,8 @@
             this.Text = "ExaminationControlPanel";
             this.panel2.ResumeLayout(false);
             this.pnl_exam.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_data)).EndInit();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_examInfo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -204,7 +205,7 @@
         private LollipopFlatButton btn_back;
         private LollipopFlatButton btn_result;
         private LollipopButton btn_testExam;
-        private LollipopFlatButton btn_enroll;
-        private MetroFramework.Controls.MetroGrid dgv_examInfo;
+        private LollipopFlatButton btn_control;
+        private MetroFramework.Controls.MetroGrid dgv_data;
     }
 }
