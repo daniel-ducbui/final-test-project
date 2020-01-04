@@ -104,6 +104,11 @@
     <Compile Include="Controls\LollipopToggle.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ExaminationManagementDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExaminationManagementDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Forms\AdminControlPanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +133,12 @@
     </Compile>
     <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Report\StudentResultReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Report\StudentResultReport.Designer.cs">
+      <DependentUpon>StudentResultReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\StudentControlPanel.cs">
       <SubType>Form</SubType>
@@ -222,6 +233,9 @@
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Report\StudentResultReport.resx">
+      <DependentUpon>StudentResultReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\StudentControlPanel.resx">
       <DependentUpon>StudentControlPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -253,6 +267,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ExaminationManagementDataSet.xsc">
+      <DependentUpon>ExaminationManagementDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ExaminationManagementDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ExaminationManagementDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ExaminationManagementDataSet.xss">
+      <DependentUpon>ExaminationManagementDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Functions\ConnectDatabase\ExaminationManagement.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>ExaminationManagement.designer.cs</LastGenOutput>
