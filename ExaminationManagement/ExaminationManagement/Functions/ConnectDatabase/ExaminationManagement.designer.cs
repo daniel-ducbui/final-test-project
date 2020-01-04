@@ -69,7 +69,7 @@ namespace ExaminationManagement.Functions.ConnectDatabase
     #endregion
 		
 		public ExaminationManagementDataContext() : 
-				base(global::ExaminationManagement.Properties.Settings.Default.ExaminationManagementConnectionString, mappingSource)
+				base(global::ExaminationManagement.Properties.Settings.Default.ExaminationManagementConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -2385,7 +2385,7 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestListID", DbType="Char(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TestListID", DbType="Char(10) NOT NULL", CanBeNull=false)]
 		public string TestListID
 		{
 			get

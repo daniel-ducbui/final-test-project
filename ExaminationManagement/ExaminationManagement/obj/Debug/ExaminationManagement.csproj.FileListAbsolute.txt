@@ -25,3 +25,31 @@ C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\ob
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csprojAssemblyReference.cache
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.ResultControlPanel.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Report.StudentResultReport.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csprojAssemblyReference.cache
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.exe
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.pdb
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\ExaminationManagement.exe.config
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\ExaminationManagement.exe
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\ExaminationManagement.pdb
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\MaterialSkin.dll
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\MetroFramework.Design.dll
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\MetroFramework.dll
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\MetroFramework.Fonts.dll
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\SplashScreen.dll
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\Interop.ExcelAdaptorLib.dll
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csproj.ResolveComReference.cache
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.AdminControlPanel.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.CustomMessageBox.frmOK.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.CustomMessageBox.frmYesNo.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.LoginForm.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Report.StudentResultReport.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.StudentControlPanel.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.ExaminationControlPanel.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.Examination.Examinate.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.ProfileControlPanel.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.QuestionControlPanel.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.ResultControlPanel.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.TeacherControlPanel.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Properties.Resources.resources
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csproj.GenerateResource.cache
+D:\Study\LT QL ứng dụng 1\_GIT_GitHub\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csproj.CopyComplete

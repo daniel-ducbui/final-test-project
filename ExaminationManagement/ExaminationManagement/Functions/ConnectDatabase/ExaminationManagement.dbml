@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ExaminationManagement" Class="ExaminationManagementDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DANIELPC\SQLEXPRESS;Initial Catalog=ExaminationManagement;Persist Security Info=True;User ID=sa" SettingsObjectName="ExaminationManagement.Properties.Settings" SettingsPropertyName="ExaminationManagementConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-P36EI8CN\SNAKE;Initial Catalog=ExaminationManagement;Integrated Security=True" SettingsObjectName="ExaminationManagement.Properties.Settings" SettingsPropertyName="ExaminationManagementConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Account" Member="Accounts">
     <Type Name="Account">
       <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -105,7 +105,7 @@
   <Table Name="dbo.TheExamination" Member="TheExaminations">
     <Type Name="TheExamination">
       <Column Name="ExaminationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TestListID" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="TestListID" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
       <Column Name="ExamineeListID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ExaminationName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="ExaminationType" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
