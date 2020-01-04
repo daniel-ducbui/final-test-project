@@ -1,4 +1,5 @@
-﻿using MaterialSkin.Controls;
+﻿using ExaminationManagement.Forms.Student;
+using MaterialSkin.Controls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,13 +17,25 @@ namespace ExaminationManagement.Forms.Report
         public StudentResultReport()
         {
             InitializeComponent();
+
+            btn_back.Click += Btn_back_Click;
         }
 
         int userID;
+        int resultID;
         
-        public StudentResultReport(int userID) : this()
+        public StudentResultReport(int userID, int resultID) : this()
         {
-            this.userID = userID;    
+            this.userID = userID;
+            this.resultID = resultID;
+        }
+
+        private void Btn_back_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            ResultControlPanel resultControlPanel = new ResultControlPanel(this.userID, this.resultID);
+            resultControlPanel.Show();
         }
     }
 }

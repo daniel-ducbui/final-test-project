@@ -1,4 +1,5 @@
-﻿using ExaminationManagement.Presenters.Student;
+﻿using ExaminationManagement.Forms.Report;
+using ExaminationManagement.Presenters.Student;
 using ExaminationManagement.Views.Student.Examination;
 using MaterialSkin.Controls;
 using System;
@@ -97,7 +98,10 @@ namespace ExaminationManagement.Forms.Student
 
         private void Btn_print_Click(object sender, EventArgs e)
         {
+            this.Hide();
 
+            StudentResultReport studentResultReport = new StudentResultReport(this.userID, this.resultID);
+            studentResultReport.Show();
         }
 
         private void Btn_back_Click(object sender, EventArgs e)

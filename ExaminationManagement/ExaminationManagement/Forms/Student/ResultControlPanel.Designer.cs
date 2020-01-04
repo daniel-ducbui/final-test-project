@@ -54,10 +54,11 @@
             // 
             // lsc_info
             // 
+            this.lsc_info.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lsc_info.FontColor = "#508ef5";
             this.lsc_info.Image = global::ExaminationManagement.Properties.Resources.icons8_male_user_48;
             this.lsc_info.Info = "Info";
-            this.lsc_info.Location = new System.Drawing.Point(0, 114);
+            this.lsc_info.Location = new System.Drawing.Point(0, 102);
             this.lsc_info.Name = "lsc_info";
             this.lsc_info.Size = new System.Drawing.Size(640, 52);
             this.lsc_info.TabIndex = 0;
@@ -67,7 +68,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.dgv_data);
-            this.panel1.Location = new System.Drawing.Point(0, 302);
+            this.panel1.Location = new System.Drawing.Point(0, 290);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(640, 325);
             this.panel1.TabIndex = 1;
@@ -112,6 +113,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgv_data.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgv_data.RowHeadersWidth = 51;
             this.dgv_data.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgv_data.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_data.Size = new System.Drawing.Size(616, 319);
@@ -119,10 +121,11 @@
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.btn_print);
             this.panel2.Controls.Add(this.btn_back);
-            this.panel2.Location = new System.Drawing.Point(0, 64);
+            this.panel2.Location = new System.Drawing.Point(0, 52);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(640, 44);
             this.panel2.TabIndex = 2;
@@ -149,6 +152,7 @@
             // 
             // panel3
             // 
+            this.panel3.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel3.Controls.Add(this.lb_totalScore);
             this.panel3.Controls.Add(this.tb_examinationName);
             this.panel3.Controls.Add(this.tb_times);
@@ -157,8 +161,8 @@
             this.panel3.Controls.Add(this.lollipopLabel3);
             this.panel3.Controls.Add(this.lollipopLabel2);
             this.panel3.Controls.Add(this.lollipopLabel1);
-            this.panel3.Font = new System.Drawing.Font("Maven Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel3.Location = new System.Drawing.Point(0, 172);
+            this.panel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel3.Location = new System.Drawing.Point(0, 160);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(640, 124);
             this.panel3.TabIndex = 3;
@@ -170,7 +174,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lb_totalScore.BackColor = System.Drawing.Color.Transparent;
             this.lb_totalScore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lb_totalScore.Font = new System.Drawing.Font("Maven Pro", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_totalScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_totalScore.ForeColor = System.Drawing.Color.Blue;
             this.lb_totalScore.Location = new System.Drawing.Point(498, 33);
             this.lb_totalScore.Name = "lb_totalScore";
@@ -205,7 +209,7 @@
             this.tb_times.Multiline = false;
             this.tb_times.Name = "tb_times";
             this.tb_times.ReadOnly = true;
-            this.tb_times.Size = new System.Drawing.Size(54, 24);
+            this.tb_times.Size = new System.Drawing.Size(72, 24);
             this.tb_times.TabIndex = 3;
             this.tb_times.Text = "10";
             this.tb_times.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
@@ -221,7 +225,7 @@
             this.tb_testID.Multiline = false;
             this.tb_testID.Name = "tb_testID";
             this.tb_testID.ReadOnly = true;
-            this.tb_testID.Size = new System.Drawing.Size(54, 24);
+            this.tb_testID.Size = new System.Drawing.Size(72, 24);
             this.tb_testID.TabIndex = 2;
             this.tb_testID.Text = "TM01";
             this.tb_testID.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
@@ -237,7 +241,7 @@
             this.tb_resultID.Multiline = false;
             this.tb_resultID.Name = "tb_resultID";
             this.tb_resultID.ReadOnly = true;
-            this.tb_resultID.Size = new System.Drawing.Size(54, 24);
+            this.tb_resultID.Size = new System.Drawing.Size(72, 24);
             this.tb_resultID.TabIndex = 1;
             this.tb_resultID.Text = "1";
             this.tb_resultID.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
@@ -247,11 +251,11 @@
             // 
             this.lollipopLabel3.AutoSize = true;
             this.lollipopLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.lollipopLabel3.Font = new System.Drawing.Font("Maven Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lollipopLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lollipopLabel3.ForeColor = System.Drawing.Color.Black;
             this.lollipopLabel3.Location = new System.Drawing.Point(3, 93);
             this.lollipopLabel3.Name = "lollipopLabel3";
-            this.lollipopLabel3.Size = new System.Drawing.Size(53, 21);
+            this.lollipopLabel3.Size = new System.Drawing.Size(51, 20);
             this.lollipopLabel3.TabIndex = 0;
             this.lollipopLabel3.Text = "Times";
             // 
@@ -259,11 +263,11 @@
             // 
             this.lollipopLabel2.AutoSize = true;
             this.lollipopLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.lollipopLabel2.Font = new System.Drawing.Font("Maven Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lollipopLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lollipopLabel2.ForeColor = System.Drawing.Color.Black;
             this.lollipopLabel2.Location = new System.Drawing.Point(3, 63);
             this.lollipopLabel2.Name = "lollipopLabel2";
-            this.lollipopLabel2.Size = new System.Drawing.Size(54, 21);
+            this.lollipopLabel2.Size = new System.Drawing.Size(57, 20);
             this.lollipopLabel2.TabIndex = 0;
             this.lollipopLabel2.Text = "TestID";
             // 
@@ -271,11 +275,11 @@
             // 
             this.lollipopLabel1.AutoSize = true;
             this.lollipopLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.lollipopLabel1.Font = new System.Drawing.Font("Maven Pro", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lollipopLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lollipopLabel1.ForeColor = System.Drawing.Color.Black;
             this.lollipopLabel1.Location = new System.Drawing.Point(3, 33);
             this.lollipopLabel1.Name = "lollipopLabel1";
-            this.lollipopLabel1.Size = new System.Drawing.Size(70, 21);
+            this.lollipopLabel1.Size = new System.Drawing.Size(72, 20);
             this.lollipopLabel1.TabIndex = 0;
             this.lollipopLabel1.Text = "ResultID";
             // 
