@@ -104,6 +104,12 @@
     <Compile Include="Forms\Teacher\ExamManagementControlPanel.Designer.cs">
       <DependentUpon>ExamManagementControlPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Teacher\ManagingQuestionsInTheExamControlPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher\ManagingQuestionsInTheExamControlPanel.Designer.cs">
+      <DependentUpon>ManagingQuestionsInTheExamControlPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Teacher\ManageTheListOfContestantsControlPanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,7 @@
     <Compile Include="Presenters\Student\AddQuestionPresenter.cs" />
     <Compile Include="Presenters\Student\ExaminationPresenter.cs" />
     <Compile Include="Presenters\Teacher\ExamManagementPresenter.cs" />
+    <Compile Include="Presenters\Teacher\ManagingQuestionsInTheExamPresenter.cs" />
     <Compile Include="Presenters\Teacher\ManageTheListOfContestantsPresenter.cs" />
     <Compile Include="Presenters\Teacher\QuestionManagementPresenter.cs" />
     <Compile Include="Presenters\Teacher\TestListPresenter.cs" />
@@ -157,6 +164,7 @@
     <Compile Include="Views\Student\IExamination.cs" />
     <Compile Include="Views\Student\IProfile.cs" />
     <Compile Include="Views\Tearcher\IExamManagement.cs" />
+    <Compile Include="Views\Tearcher\IManagingQuestionsInTheExam.cs" />
     <Compile Include="Views\Tearcher\IManageTheListOfContestants.cs" />
     <Compile Include="Views\Tearcher\IProfile.cs" />
     <Compile Include="Views\Tearcher\IQuestionManagement.cs" />
@@ -187,6 +195,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teacher\ExamManagementControlPanel.resx">
       <DependentUpon>ExamManagementControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher\ManagingQuestionsInTheExamControlPanel.resx">
+      <DependentUpon>ManagingQuestionsInTheExamControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teacher\ManageTheListOfContestantsControlPanel.resx">
       <DependentUpon>ManageTheListOfContestantsControlPanel.cs</DependentUpon>

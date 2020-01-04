@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             this.btn_questionManagement = new System.Windows.Forms.Button();
+            this.btn_managingQuestionsInTheExam = new System.Windows.Forms.Button();
             this.btn_examManagement = new System.Windows.Forms.Button();
-            this.btn_manageTheListOfContestants = new System.Windows.Forms.Button();
-            this.btn_testList = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_questionManagement
@@ -44,44 +43,33 @@
             this.btn_questionManagement.Text = "Question Management";
             this.btn_questionManagement.UseVisualStyleBackColor = true;
             // 
+            // btn_managingQuestionsInTheExam
+            // 
+            this.btn_managingQuestionsInTheExam.Location = new System.Drawing.Point(330, 14);
+            this.btn_managingQuestionsInTheExam.Margin = new System.Windows.Forms.Padding(5);
+            this.btn_managingQuestionsInTheExam.Name = "btn_managingQuestionsInTheExam";
+            this.btn_managingQuestionsInTheExam.Size = new System.Drawing.Size(297, 109);
+            this.btn_managingQuestionsInTheExam.TabIndex = 1;
+            this.btn_managingQuestionsInTheExam.Text = "Managing Questions In The Exam";
+            this.btn_managingQuestionsInTheExam.UseVisualStyleBackColor = true;
+            // 
             // btn_examManagement
             // 
-            this.btn_examManagement.Location = new System.Drawing.Point(330, 14);
+            this.btn_examManagement.Location = new System.Drawing.Point(637, 14);
             this.btn_examManagement.Margin = new System.Windows.Forms.Padding(5);
             this.btn_examManagement.Name = "btn_examManagement";
             this.btn_examManagement.Size = new System.Drawing.Size(297, 109);
-            this.btn_examManagement.TabIndex = 1;
+            this.btn_examManagement.TabIndex = 4;
             this.btn_examManagement.Text = "Exam Management";
             this.btn_examManagement.UseVisualStyleBackColor = true;
-            // 
-            // btn_manageTheListOfContestants
-            // 
-            this.btn_manageTheListOfContestants.Location = new System.Drawing.Point(650, 14);
-            this.btn_manageTheListOfContestants.Margin = new System.Windows.Forms.Padding(5);
-            this.btn_manageTheListOfContestants.Name = "btn_manageTheListOfContestants";
-            this.btn_manageTheListOfContestants.Size = new System.Drawing.Size(297, 109);
-            this.btn_manageTheListOfContestants.TabIndex = 2;
-            this.btn_manageTheListOfContestants.Text = "Manage The List Of Contestants";
-            this.btn_manageTheListOfContestants.UseVisualStyleBackColor = true;
-            // 
-            // btn_testList
-            // 
-            this.btn_testList.Location = new System.Drawing.Point(967, 14);
-            this.btn_testList.Margin = new System.Windows.Forms.Padding(5);
-            this.btn_testList.Name = "btn_testList";
-            this.btn_testList.Size = new System.Drawing.Size(297, 109);
-            this.btn_testList.TabIndex = 3;
-            this.btn_testList.Text = "Test List";
-            this.btn_testList.UseVisualStyleBackColor = true;
             // 
             // TeacherControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1273, 540);
-            this.Controls.Add(this.btn_testList);
-            this.Controls.Add(this.btn_manageTheListOfContestants);
+            this.ClientSize = new System.Drawing.Size(941, 133);
             this.Controls.Add(this.btn_examManagement);
+            this.Controls.Add(this.btn_managingQuestionsInTheExam);
             this.Controls.Add(this.btn_questionManagement);
             this.Font = new System.Drawing.Font("Times New Roman", 13.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(6);
@@ -94,8 +82,7 @@
         #endregion
 
         private System.Windows.Forms.Button btn_questionManagement;
+        private System.Windows.Forms.Button btn_managingQuestionsInTheExam;
         private System.Windows.Forms.Button btn_examManagement;
-        private System.Windows.Forms.Button btn_manageTheListOfContestants;
-        private System.Windows.Forms.Button btn_testList;
     }
 }

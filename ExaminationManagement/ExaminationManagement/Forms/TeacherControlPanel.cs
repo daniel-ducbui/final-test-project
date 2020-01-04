@@ -15,30 +15,16 @@ namespace ExaminationManagement.Forms
     public partial class TeacherControlPanel : Form, IProfile
     {
         QuestionManagementControlPanel questionManagementControlPanel;
+        ManagingQuestionsInTheExamControlPanel managingQuestionsInTheExamControlPanel;
         ExamManagementControlPanel examManagementControlPanel;
-        ManageTheListOfContestantsControlPanel manageTheListOfContestantsControlPanel;
-        TestListControlPanel testListControlPanel;
         int userID;
 
         public TeacherControlPanel()
         {
             InitializeComponent();
             btn_questionManagement.Click += Btn_questionManagement_Click;
+            btn_managingQuestionsInTheExam.Click += Btn_managingQuestionsInTheExam_Click;
             btn_examManagement.Click += Btn_examManagement_Click;
-            btn_manageTheListOfContestants.Click += Btn_manageTheListOfContestants_Click;
-            btn_testList.Click += Btn_testList_Click;
-        }
-
-        private void Btn_testList_Click(object sender, EventArgs e)
-        {
-            testListControlPanel = new TestListControlPanel(this.userID);
-            testListControlPanel.ShowDialog();
-        }
-
-        private void Btn_manageTheListOfContestants_Click(object sender, EventArgs e)
-        {
-            manageTheListOfContestantsControlPanel = new ManageTheListOfContestantsControlPanel(this.userID);
-            manageTheListOfContestantsControlPanel.ShowDialog();
         }
 
         private void Btn_examManagement_Click(object sender, EventArgs e)
@@ -47,6 +33,11 @@ namespace ExaminationManagement.Forms
             examManagementControlPanel.ShowDialog();
         }
 
+        private void Btn_managingQuestionsInTheExam_Click(object sender, EventArgs e)
+        {
+            managingQuestionsInTheExamControlPanel = new ManagingQuestionsInTheExamControlPanel(this.userID);
+            managingQuestionsInTheExamControlPanel.ShowDialog();
+        }
         public TeacherControlPanel(int userID) : this()
         {
             this.userID = userID;

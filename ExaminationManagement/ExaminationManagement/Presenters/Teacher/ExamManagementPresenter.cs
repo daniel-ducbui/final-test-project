@@ -1,7 +1,9 @@
-﻿using ExaminationManagement.Functions.ConnectDatabase;
+﻿using ExaminationManagement.Forms.Teacher;
+using ExaminationManagement.Functions.ConnectDatabase;
 using ExaminationManagement.Views.Tearcher;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +14,12 @@ namespace ExaminationManagement.Presenters.Teacher
     public class ExamManagementPresenter
     {
         IExamManagement view;
-        BindingSource bsQuestion;
-        BindingSource bsTestDetails;
-        BindingSource bsTheTest;
+        BindingSource bsTestList;
+        BindingSource bsExamineeList;
+        BindingSource bsExamination;
+
+        ManageTheListOfContestantsControlPanel manageTheListOfContestantsControlPanel;
+        TestListControlPanel testListControlPanel;
         public ExamManagementPresenter(IExamManagement examManagement)
         {
             view = examManagement;
@@ -23,106 +28,47 @@ namespace ExaminationManagement.Presenters.Teacher
 
         private void Initialize()
         {
-            view.LoadAllQuestion += View_LoadAllQuestion;
-            view.LoadAllTheTest += View_LoadAllTheTest;
-            view.LoadQuestionOfTheTest += View_LoadQuestionOfTheTest;
-            view.txt_examPaperCode.TextChanged += Txt_examPaperCode_TextChanged;
-            view.CreateTest += View_CreateTest;
+            view.ccb_chooseGrade.SelectedIndex = 0;
+            view.ccb_kindOfExam.SelectedIndex = 0;
+            view.ComboboxOnlySelect += View_ComboboxOnlySelect;
+            view.LoadAllExamination += View_LoadAllExamination;
+            view.LoadAllExamineeList += View_LoadAllExamineeList;
+            view.LoadAllTestList += View_LoadAllTestList;
+            view.CreateExam += View_CreateExam;
             view.Update += View_Update;
-            view.DeleteTheTest += View_DeleteTheTest;
-            view.AddTheQuestion += View_AddTheQuestion;
-            view.DeleteTheQuestion += View_DeleteTheQuestion;
+            view.Delete += View_Delete;
+            view.CreateExamList += View_CreateExamList;
+            view.CreateTheExamSet += View_CreateTheExamSet;
         }
 
-        private void Txt_examPaperCode_TextChanged(object sender, EventArgs e)
+        private void View_CreateTheExamSet(object sender, EventArgs e)
         {
-            LoadQuestionOfTheTest();
+            testListControlPanel = new TestListControlPanel(view.userID);
+            testListControlPanel.ShowDialog();
         }
 
-        private void View_DeleteTheQuestion(object sender, EventArgs e)
+        private void View_CreateExamList(object sender, EventArgs e)
+        {
+            manageTheListOfContestantsControlPanel = new ManageTheListOfContestantsControlPanel( view.userID);
+            manageTheListOfContestantsControlPanel.ShowDialog();
+        }
+
+        private void View_Delete(object sender, EventArgs e)
         {
             try
             {
                 using (var _data = new ExaminationManagementDataContext())
                 {
-                    var question = _data.TestDetails.SingleOrDefault(t => t.TestID == view.dgv_examInformation.CurrentRow.Cells[0].Value.ToString()
-                                    && t.QuestionID == int.Parse(view.dgv_examInformation.CurrentRow.Cells[1].Value.ToString()));
-                    _data.TestDetails.DeleteOnSubmit(question);
+                    var exam = _data.TheExaminations.SingleOrDefault(t => t.ExaminationID == int.Parse(view.dgv_allExams.CurrentRow.Cells[0].Value.ToString()));
+                    _data.TheExaminations.DeleteOnSubmit(exam);
                     _data.SubmitChanges();
-                    LoadQuestionOfTheTest();
+                    LoadAllExamination();
+                    MessageBox.Show("Delete successful...");
                 }
             }
             catch
             {
-                MessageBox.Show("You have not selected the question to delete");
-            }
-        }
-
-        private void View_AddTheQuestion(object sender, EventArgs e)
-        {
-            try
-            {
-                using (var _data = new ExaminationManagementDataContext())
-                {
-                    var question = _data.TestDetails.Where(t => t.TestID == view.txt_examPaperCode.Text
-                                       && t.QuestionID == int.Parse(view.dgv_questionSection.CurrentRow.Cells[0].Value.ToString())).ToList();
-
-                    if (question.Count() == 0)
-                    {
-                        var testDetail = new TestDetail
-                        {
-                            TestID = view.txt_examPaperCode.Text,
-                            QuestionID = int.Parse(view.dgv_questionSection.CurrentRow.Cells[0].Value.ToString()),
-                        };
-
-                        _data.TestDetails.InsertOnSubmit(testDetail);
-                        _data.SubmitChanges();
-                        LoadQuestionOfTheTest();
-                    }
-
-                    if (question.Count() > 0)
-                    {
-                        MessageBox.Show("The question has this sentence");
-                    }
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Not created the exam");
-            }
-        }
-
-        private void View_DeleteTheTest(object sender, EventArgs e)
-        {
-            try
-            {
-                using (var _data = new ExaminationManagementDataContext())
-                {
-
-                    var countTheTest = _data.TestLists.Where(t => t.TestListID == view.dgv_listOfAllTheQuestion.CurrentRow.Cells[0].Value.ToString()).ToList();
-                    if (countTheTest.Count() == 0)
-                    {
-                        var testDetails = _data.TestDetails.Where(t => t.TestID == view.dgv_listOfAllTheQuestion.CurrentRow.Cells[0].Value.ToString()).ToList();
-                        foreach (var item in testDetails)
-                        {
-                            _data.TestDetails.DeleteOnSubmit(item);
-                            _data.SubmitChanges();
-                        }
-                        var theTest = _data.TheTests.SingleOrDefault(t => t.TestID == view.dgv_listOfAllTheQuestion.CurrentRow.Cells[0].Value.ToString());
-                        _data.TheTests.DeleteOnSubmit(theTest);
-                        _data.SubmitChanges();
-                        MessageBox.Show("Delete successful");
-                        LoadAllTheTest();
-                        LoadQuestionOfTheTest();
-                    }
-                    else
-                    {
-                        MessageBox.Show("The test is used so it cannot be deleted");
-                    }
-                }
-            }
-            catch
-            {
+                MessageBox.Show("Exam has taken place. Cannot be deleted");
             }
         }
 
@@ -130,107 +76,177 @@ namespace ExaminationManagement.Presenters.Teacher
         {
             try
             {
-                using (var examination = new ExaminationManagementDataContext())
+                using (var _data = new ExaminationManagementDataContext())
                 {
-                    var testList = examination.TheTests.SingleOrDefault(t => t.TestID == view.dgv_listOfAllTheQuestion.CurrentRow.Cells[0].Value.ToString());
-                    if (testList != null)
+                    var exam = _data.TheExaminations.SingleOrDefault(t => t.ExaminationID == int.Parse(view.dgv_allExams.CurrentRow.Cells[0].Value.ToString()));
+
+                    DateTime startDate, endDate;
+                    DateTime.TryParseExact(view.mtb_startDay.Text, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate);
+                    DateTime.TryParseExact(view.mtb_endDay.Text, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate);
+
+                    if (exam != null)
                     {
-                        testList.TestName = view.txt_examName.Text;
+                        exam.ExaminationName = view.txt_examName.Text;
+                        exam.ExaminationType = int.Parse(view.ccb_kindOfExam.Text);
+                        exam.ExamineeListID = int.Parse(view.ccb_selectTheExamList.Text);
+                        exam.TestListID = view.ccb_chooseTheTestSet.Text;
+                        exam.GradeID = int.Parse(view.ccb_chooseGrade.Text);
+                        exam.StartDate = startDate;
+                        exam.EndDate = endDate;
+                        exam.Time = int.Parse(view.txt_time.Text);
                     }
-                    examination.SubmitChanges();
-                    MessageBox.Show("Update success!");
-                    LoadAllTheTest();
+                    _data.SubmitChanges();
+                    LoadAllExamination();
+                    MessageBox.Show("Update successful...");
                 }
             }
             catch
             {
+                MessageBox.Show("Fail update...");
             }
         }
 
-        private void View_CreateTest(object sender, EventArgs e)
+        private void View_CreateExam(object sender, EventArgs e)
         {
             try
             {
-                if (view.txt_examPaperCode.Text.Trim().Length > 0 && view.txt_examName.Text.Trim().Length > 0)
+                if (view.txt_examName.Text.Length > 0 && view.ccb_kindOfExam.Text.Length > 0 && view.ccb_chooseTheTestSet.Text.Length > 0
+                    && view.ccb_selectTheExamList.Text.Length > 0 && view.mtb_endDay.Text.Length > 0 && view.txt_time.Text.Length > 0)
                 {
-                    using (var _data = new ExaminationManagementDataContext())
+                    using (var examination = new ExaminationManagementDataContext())
                     {
-                        var theTest = new TheTest
+                        DateTime startDate, endDate;
+                        DateTime.TryParseExact(view.mtb_startDay.Text, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out startDate);
+                        DateTime.TryParseExact(view.mtb_endDay.Text, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out endDate);
+
+                        var exam = new TheExamination
                         {
-                            TestID = view.txt_examPaperCode.Text,
-                            TestName = view.txt_examName.Text,
+                            ExaminationName = view.txt_examName.Text,
+                            ExaminationType = int.Parse(view.ccb_kindOfExam.Text),
+                            TestListID = view.ccb_chooseTheTestSet.Text,
+                            ExamineeListID = int.Parse(view.ccb_selectTheExamList.Text),
+                            CreateDate = DateTime.Now,
+                            StartDate = startDate,
+                            EndDate = endDate,
+                            Time = int.Parse(view.txt_time.Text),
+                            Creator = view.userID.ToString(),
+                            GradeID = int.Parse(view.ccb_chooseGrade.Text),
                         };
-                        _data.TheTests.InsertOnSubmit(theTest);
-                        _data.SubmitChanges();
+                        examination.TheExaminations.InsertOnSubmit(exam);
+                        examination.SubmitChanges();
                     }
-                    MessageBox.Show("Create success!");
-                    LoadQuestionOfTheTest();
-                    LoadAllTheTest();
+                    MessageBox.Show("Create success..!");
+                    LoadAllExamination();
                 }
                 else
                 {
-                    MessageBox.Show("Please enter full information!!!");
-                    view.txt_examPaperCode.Focus();
+                    MessageBox.Show("Please enter enough information");
+                    view.txt_examName.Focus();
                 }
             }
             catch
             {
-                MessageBox.Show("Existing exam questions..");
+                MessageBox.Show("Please enter again..");
             }
         }
 
-        private void View_LoadQuestionOfTheTest(object sender, EventArgs e)
+        private void View_LoadAllTestList(object sender, EventArgs e)
         {
-            LoadQuestionOfTheTest();
-
+            LoadAllTestList();
         }
-        private void LoadQuestionOfTheTest()
+
+        private void LoadAllTestList()
         {
-            using (var _data = new ExaminationManagementDataContext())
+            try
             {
-                bsTestDetails = new BindingSource();
-                var testDetails = _data.TestDetails.Where(t => t.TestID == view.txt_examPaperCode.Text).Select(t => new { t.TestID, t.QuestionID }).ToList();
-                bsTestDetails.DataSource = testDetails;
-                view.dgv_examInformation.DataSource = bsTestDetails;
+                using (var examination = new ExaminationManagementDataContext())
+                {
+                    bsTestList = new BindingSource();
+                    var testList = examination.TestLists.Select(t => t.TestListID).ToList();
+
+                    bsTestList.DataSource = testList;
+                    view.ccb_chooseTheTestSet.DataSource = bsTestList;
+                }
+            }
+            catch
+            {
             }
         }
 
-        private void View_LoadAllTheTest(object sender, EventArgs e)
+        private void View_LoadAllExamineeList(object sender, EventArgs e)
         {
-            LoadAllTheTest();
+            LoadAllExamineeList();                
         }
 
-        private void LoadAllTheTest()
+        private void LoadAllExamineeList()
         {
             using (var _data = new ExaminationManagementDataContext())
             {
-                bsTheTest = new BindingSource();
-                var theTests = _data.TheTests.Select(t => new { t.TestID, t.TestName });
-                bsTheTest.DataSource = theTests;
-                view.dgv_listOfAllTheQuestion.DataSource = bsTheTest;
+                var listExaminee = _data.ExamineeLists.Select(e => e.ExamineeListID).ToList();
 
-                view.txt_examPaperCode.DataBindings.Clear();
+                bsExamineeList = new BindingSource();
+                bsExamineeList.DataSource = listExaminee;
+                view.ccb_selectTheExamList.DataSource = bsExamineeList;
+            }
+        }
+
+        private void View_LoadAllExamination(object sender, EventArgs e)
+        {
+            LoadAllExamination();
+        }
+
+        private void LoadAllExamination()
+        {
+            using (var _data = new ExaminationManagementDataContext())
+            {
+                var theExaminations = _data.TheExaminations.Select(e => new
+                {
+                    e.ExaminationID,
+                    e.ExaminationName,
+                    e.ExaminationType,
+                    e.ExamineeListID,
+                    e.TestListID,
+                    e.GradeID,
+                    e.StartDate,
+                    e.EndDate,
+                    e.Time,
+                }).ToList();
+
+                bsExamination = new BindingSource();
+                bsExamination.DataSource = theExaminations;
+                view.dgv_allExams.DataSource = bsExamination;
+
                 view.txt_examName.DataBindings.Clear();
+                view.ccb_kindOfExam.DataBindings.Clear();
+                view.ccb_chooseTheTestSet.DataBindings.Clear();
+                view.ccb_selectTheExamList.DataBindings.Clear();
+                view.ccb_chooseGrade.DataBindings.Clear();
+                view.mtb_startDay.DataBindings.Clear();
+                view.mtb_endDay.DataBindings.Clear();
+                view.txt_time.DataBindings.Clear();
 
-                view.txt_examPaperCode.DataBindings.Add("Text", bsTheTest, "TestID");
-                view.txt_examName.DataBindings.Add("Text", bsTheTest, "TestName");
+                view.txt_examName.DataBindings.Add("Text", bsExamination, "ExaminationName");
+                view.ccb_kindOfExam.DataBindings.Add("Text", bsExamination, "ExaminationType");
+                view.ccb_chooseTheTestSet.DataBindings.Add("Text", bsExamination, "TestListID");
+                view.ccb_selectTheExamList.DataBindings.Add("Text", bsExamination, "ExamineeListID");
+                view.ccb_chooseGrade.DataBindings.Add("Text", bsExamination, "GradeID");
+                view.mtb_startDay.DataBindings.Add("Text", bsExamination, "StartDate");
+                view.mtb_endDay.DataBindings.Add("Text", bsExamination, "EndDate");
+                view.txt_time.DataBindings.Add("Text", bsExamination, "Time");
             }
         }
 
-        private void View_LoadAllQuestion(object sender, EventArgs e)
+        private void View_ComboboxOnlySelect(object sender, EventArgs e)
         {
-            LoadAllQuestion();
+            ComboboxOnlySelect();
         }
 
-        private void LoadAllQuestion()
+        private void ComboboxOnlySelect()
         {
-            using (var _data = new ExaminationManagementDataContext())
-            {
-                bsQuestion = new BindingSource();
-                var questions = _data.TheQuestions.Where(q => q.Status == 1).Select(q => new { q.QuestionID, q.QuestionContent }).ToList();
-                bsQuestion.DataSource = questions;
-                view.dgv_questionSection.DataSource = bsQuestion;
-            }
+            view.ccb_chooseGrade.DropDownStyle = ComboBoxStyle.DropDownList;
+            view.ccb_chooseTheTestSet.DropDownStyle = ComboBoxStyle.DropDownList;
+            view.ccb_kindOfExam.DropDownStyle = ComboBoxStyle.DropDownList;
+            view.ccb_selectTheExamList.DropDownStyle = ComboBoxStyle.DropDownList;
         }
     }
 }
