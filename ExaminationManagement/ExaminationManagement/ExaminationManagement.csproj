@@ -147,6 +147,12 @@
     <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Password\ChangePassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Password\ChangePassword.Designer.cs">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Report\StudentResultReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -219,6 +225,7 @@
     </Compile>
     <Compile Include="Presenters\Administator\AddAccountPresenter.cs" />
     <Compile Include="Presenters\LoginPresenter.cs" />
+    <Compile Include="Presenters\Password\ChangePasswordPresenter.cs" />
     <Compile Include="Presenters\Report\StudentResultReportPresenter.cs" />
     <Compile Include="Presenters\Student\ExaminationControllerPresenter.cs" />
     <Compile Include="Presenters\Student\Examination\ExaminatePresenter.cs" />
@@ -233,6 +240,7 @@
     <Compile Include="Views\Administator\IAccountManagement.cs" />
     <Compile Include="Views\Administator\IAddAccount.cs" />
     <Compile Include="Views\ILogin.cs" />
+    <Compile Include="Views\Password\IChangePassword.cs" />
     <Compile Include="Views\Report\IStudentResultReport.cs" />
     <Compile Include="Views\Student\Examination\IExaminate.cs" />
     <Compile Include="Views\Student\IResult.cs" />
@@ -253,6 +261,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Password\ChangePassword.resx">
+      <DependentUpon>ChangePassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\StudentResultReport.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

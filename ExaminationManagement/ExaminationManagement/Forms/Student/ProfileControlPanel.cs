@@ -1,4 +1,5 @@
-﻿using ExaminationManagement.Presenters.Student;
+﻿using ExaminationManagement.Forms.Password;
+using ExaminationManagement.Presenters.Student;
 using ExaminationManagement.Views.Student;
 using MaterialSkin.Controls;
 using System;
@@ -42,6 +43,13 @@ namespace ExaminationManagement.Forms.Student
 
             btn_cancel.Click += Btn_cancel_Click;
             btn_save.Click += Btn_save_Click;
+            btn_changePassword.Click += Btn_changePassword_Click;
+        }
+
+        private void Btn_changePassword_Click(object sender, EventArgs e)
+        {
+            ChangePassword changePassword = new ChangePassword(this.userID);
+            changePassword.ShowDialog();
         }
 
         private void Btn_save_Click(object sender, EventArgs e)

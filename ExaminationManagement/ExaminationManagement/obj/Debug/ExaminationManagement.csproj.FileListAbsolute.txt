@@ -87,3 +87,4 @@ C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bi
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Administrator.AddAccount.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Password.ChangePassword.resources

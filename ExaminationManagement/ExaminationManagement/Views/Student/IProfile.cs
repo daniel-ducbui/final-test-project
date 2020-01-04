@@ -25,20 +25,6 @@ namespace ExaminationManagement.Views.Student
 
         LollipopTextBox gradeID { get; set; }
 
-        //string name { get; set; }
-
-        //string phoneNumber { get; set; }
-
-        //string email { get; set; }
-
-        //string dob { get; set; }
-
-        //string address { get; set; }
-
-        //string classID { get; set; }
-
-        //string gradeID { get; set; }
-
         event EventHandler LoadInfo;
         event EventHandler SaveInfo;
     }
