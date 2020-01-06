@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExaminationManagement.Views.Teacher.TestController
 {
-    interface ITheTestManagement
+    interface ITestListManagement
     {
         int userID { get; }
         string errorMessage { get; set; }

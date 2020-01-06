@@ -113,7 +113,7 @@ namespace ExaminationManagement.Forms.Teacher
         {
             this.Hide();
 
-            TheTestManagement theTest = new TheTestManagement(this.userID);
+            TestListManagement theTest = new TestListManagement(this.userID);
             theTest.Show();
         }
 

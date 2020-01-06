@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace ExaminationManagement.Presenters.Teacher.TestController
 {
-    class TheTestManagementPresenter
+    class TestListManagementPresenter
     {
-        ITheTestManagement view;
+        ITestListManagement view;
         BaseQuery baseQuery = new BaseQuery();
 
         int userID;
 
-        public TheTestManagementPresenter(ITheTestManagement theTestManagement)
+        public TestListManagementPresenter(ITestListManagement theTestManagement)
         {
             this.view = theTestManagement;
 

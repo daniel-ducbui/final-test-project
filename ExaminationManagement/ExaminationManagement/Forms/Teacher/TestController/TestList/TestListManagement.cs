@@ -13,16 +13,16 @@ using System.Windows.Forms;
 
 namespace ExaminationManagement.Forms.Teacher.TestController
 {
-    public partial class TheTestManagement : MaterialForm, ITheTestManagement
+    public partial class TestListManagement : MaterialForm, ITestListManagement
     {
-        TheTestManagementPresenter testManagementPresenter;
+        TestListManagementPresenter testManagementPresenter;
 
         int userID = 0;
         string errorMessage = null;
         bool signal = true;
         bool flagEdit = false;
 
-        public TheTestManagement()
+        public TestListManagement()
         {
             MaterialSkin.MaterialSkinManager manager = MaterialSkin.MaterialSkinManager.Instance;
             manager.AddFormToManage(this);
@@ -43,14 +43,20 @@ namespace ExaminationManagement.Forms.Teacher.TestController
             dgv_testList.DoubleClick += Dgv_testList_DoubleClick;
         }
 
-        public TheTestManagement(int userID) : this()
+        public TestListManagement(int userID) : this()
         {
             this.userID = userID;
         }
 
         private void Btn_testManager_Click(object sender, EventArgs e)
         {
+            this.Hide();
 
+            int index = dgv_testList.SelectedCells[0].RowIndex;
+            this.testListID = dgv_testList.Rows[index].Cells[0].Value.ToString();
+
+            TestListDetailsManagement testListDetailsManagement = new TestListDetailsManagement(this.userID, this.testListID);
+            testListDetailsManagement.Show();
         }
 
         private void Btn_create_Click(object sender, EventArgs e)
@@ -165,7 +171,7 @@ namespace ExaminationManagement.Forms.Teacher.TestController
 
         private void TheTestManagement_Load(object sender, EventArgs e)
         {
-            testManagementPresenter = new TheTestManagementPresenter(this);
+            testManagementPresenter = new TestListManagementPresenter(this);
 
             btn_back.Click += Btn_back_Click;
         }
@@ -178,13 +184,13 @@ namespace ExaminationManagement.Forms.Teacher.TestController
             examinationManager.Show();
         }
 
-        string ITheTestManagement.errorMessage { get => this.errorMessage; set => this.errorMessage = value; }
+        string ITestListManagement.errorMessage { get => this.errorMessage; set => this.errorMessage = value; }
         public object testList { get => dgv_testList.DataSource; set => dgv_testList.DataSource = value; }
 
-        int ITheTestManagement.userID => this.userID;
+        int ITestListManagement.userID => this.userID;
         public string testListID { get => tb_testListID.Text; set => tb_testListID.Text = value; }
         public string testListName { get => tb_testListName.Text; set => tb_testListName.Text = value; }
-        bool ITheTestManagement.signal { get => this.signal; set => this.signal = value; }
+        bool ITestListManagement.signal { get => this.signal; set => this.signal = value; }
 
         public event EventHandler Execute;
         public event EventHandler ShowTestList;
