@@ -61,6 +61,7 @@
             this.btn_back = new LollipopFlatButton();
             this.openQuestionDataFile = new System.Windows.Forms.OpenFileDialog();
             this.cb_questionType = new MetroFramework.Controls.MetroComboBox();
+            this.btn_export = new LollipopButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_data)).BeginInit();
             this.panel2.SuspendLayout();
@@ -69,6 +70,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel1.Controls.Add(this.btn_export);
             this.panel1.Controls.Add(this.btn_import);
             this.panel1.Controls.Add(this.btn_edit);
             this.panel1.Controls.Add(this.btn_add);
@@ -115,7 +117,7 @@
             this.btn_edit.BackColor = System.Drawing.Color.Transparent;
             this.btn_edit.BGColor = "#508ef5";
             this.btn_edit.FontColor = "#ffffff";
-            this.btn_edit.Location = new System.Drawing.Point(1202, 72);
+            this.btn_edit.Location = new System.Drawing.Point(1202, 13);
             this.btn_edit.Name = "btn_edit";
             this.btn_edit.Size = new System.Drawing.Size(115, 49);
             this.btn_edit.TabIndex = 29;
@@ -486,6 +488,17 @@
             this.cb_questionType.TabIndex = 30;
             this.cb_questionType.UseSelectable = true;
             // 
+            // btn_export
+            // 
+            this.btn_export.BackColor = System.Drawing.Color.Transparent;
+            this.btn_export.BGColor = "#508ef5";
+            this.btn_export.FontColor = "#ffffff";
+            this.btn_export.Location = new System.Drawing.Point(1202, 70);
+            this.btn_export.Name = "btn_export";
+            this.btn_export.Size = new System.Drawing.Size(115, 51);
+            this.btn_export.TabIndex = 31;
+            this.btn_export.Text = "Export";
+            // 
             // QuestionControlPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -539,5 +552,6 @@
         private LollipopButton btn_import;
         private System.Windows.Forms.OpenFileDialog openQuestionDataFile;
         private MetroFramework.Controls.MetroComboBox cb_questionType;
+        private LollipopButton btn_export;
     }
 }

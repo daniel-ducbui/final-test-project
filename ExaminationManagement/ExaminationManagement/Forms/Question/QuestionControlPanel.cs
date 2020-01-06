@@ -64,11 +64,17 @@ namespace ExaminationManagement.Forms.Student
             {
                 btn_edit.Click += Btn_edit_Click;
                 btn_import.Click += Btn_import_Click;
+                btn_export.Click += Btn_export_Click;
                 dgv_data.DoubleClick += Dgv_DoubleClick;
                 cb_questionType.SelectedIndexChanged += Cb_questionType_SelectedIndexChanged;
             }
 
             LoadQuestion?.Invoke(this, null);
+        }
+
+        private void Btn_export_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void Cb_questionType_SelectedIndexChanged(object sender, EventArgs e)
