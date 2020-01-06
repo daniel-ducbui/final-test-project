@@ -11,12 +11,12 @@ namespace ExaminationManagement.Functions.Validation
         public RequiredValidation()
         {
             // Error message when user have wrong input
-            ErrorMessage = "?";
+            ErrorMessage = "Required field!";
         }
         public override bool Validate()
         {
             // Your required here
-            return true;
+            return ControlToValidate.Text.Length > 0;
         }
     }
 }

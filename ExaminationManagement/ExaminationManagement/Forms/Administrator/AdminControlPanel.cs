@@ -92,7 +92,7 @@ namespace ExaminationManagement.Forms
 
         private void Btn_readData_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openUserDataFile.ShowDialog() == DialogResult.OK)
             {
                 ImportUser?.Invoke(this, null);
                 if (!String.IsNullOrEmpty(ErrorMessage))
@@ -122,7 +122,7 @@ namespace ExaminationManagement.Forms
         public int _userID => this.userID;
         public string searchContent { get => this.tb_search.Text; set => this.tb_search.Text = value; }
         public object DataSource { get => this.dgv_table.DataSource; set => this.dgv_table.DataSource = value; }
-        public string fileName { get => this.openFileDialog1.FileName.ToString(); }
+        public string fileName { get => this.openUserDataFile.FileName.ToString(); }
         public string selectedTable { get => this.cb_table.SelectedIndex.ToString(); }
 
         public event EventHandler LoadData;

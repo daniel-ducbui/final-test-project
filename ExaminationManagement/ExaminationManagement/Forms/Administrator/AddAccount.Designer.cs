@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.mtb_dob = new System.Windows.Forms.MaskedTextBox();
             this.cb_permission = new MetroFramework.Controls.MetroComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorProviderMain = new System.Windows.Forms.ErrorProvider(this.components);
             this.btn_save = new LollipopButton();
             this.btn_add = new LollipopButton();
             this.btn_cancel = new LollipopFlatButton();
@@ -51,6 +53,7 @@
             this.lollipopLabel2 = new LollipopLabel();
             this.lollipopLabel1 = new LollipopLabel();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMain)).BeginInit();
             this.SuspendLayout();
             // 
             // mtb_dob
@@ -60,7 +63,7 @@
             this.mtb_dob.Location = new System.Drawing.Point(186, 174);
             this.mtb_dob.Mask = "00/00/0000";
             this.mtb_dob.Name = "mtb_dob";
-            this.mtb_dob.Size = new System.Drawing.Size(300, 19);
+            this.mtb_dob.Size = new System.Drawing.Size(254, 19);
             this.mtb_dob.TabIndex = 4;
             this.mtb_dob.ValidatingType = typeof(System.DateTime);
             // 
@@ -86,6 +89,10 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(474, 52);
             this.panel1.TabIndex = 10;
+            // 
+            // errorProviderMain
+            // 
+            this.errorProviderMain.ContainerControl = this;
             // 
             // btn_save
             // 
@@ -129,7 +136,7 @@
             this.tb_password.Multiline = false;
             this.tb_password.Name = "tb_password";
             this.tb_password.ReadOnly = false;
-            this.tb_password.Size = new System.Drawing.Size(300, 24);
+            this.tb_password.Size = new System.Drawing.Size(254, 24);
             this.tb_password.TabIndex = 9;
             this.tb_password.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_password.UseSystemPasswordChar = true;
@@ -144,7 +151,7 @@
             this.tb_gradeID.Multiline = false;
             this.tb_gradeID.Name = "tb_gradeID";
             this.tb_gradeID.ReadOnly = false;
-            this.tb_gradeID.Size = new System.Drawing.Size(300, 24);
+            this.tb_gradeID.Size = new System.Drawing.Size(254, 24);
             this.tb_gradeID.TabIndex = 7;
             this.tb_gradeID.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_gradeID.UseSystemPasswordChar = false;
@@ -159,7 +166,7 @@
             this.tb_classID.Multiline = false;
             this.tb_classID.Name = "tb_classID";
             this.tb_classID.ReadOnly = false;
-            this.tb_classID.Size = new System.Drawing.Size(300, 24);
+            this.tb_classID.Size = new System.Drawing.Size(254, 24);
             this.tb_classID.TabIndex = 6;
             this.tb_classID.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_classID.UseSystemPasswordChar = false;
@@ -174,7 +181,7 @@
             this.tb_address.Multiline = false;
             this.tb_address.Name = "tb_address";
             this.tb_address.ReadOnly = false;
-            this.tb_address.Size = new System.Drawing.Size(300, 24);
+            this.tb_address.Size = new System.Drawing.Size(254, 24);
             this.tb_address.TabIndex = 5;
             this.tb_address.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_address.UseSystemPasswordChar = false;
@@ -189,7 +196,7 @@
             this.tb_email.Multiline = false;
             this.tb_email.Name = "tb_email";
             this.tb_email.ReadOnly = false;
-            this.tb_email.Size = new System.Drawing.Size(300, 24);
+            this.tb_email.Size = new System.Drawing.Size(254, 24);
             this.tb_email.TabIndex = 3;
             this.tb_email.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_email.UseSystemPasswordChar = false;
@@ -204,7 +211,7 @@
             this.tb_phoneNumber.Multiline = false;
             this.tb_phoneNumber.Name = "tb_phoneNumber";
             this.tb_phoneNumber.ReadOnly = false;
-            this.tb_phoneNumber.Size = new System.Drawing.Size(300, 24);
+            this.tb_phoneNumber.Size = new System.Drawing.Size(254, 24);
             this.tb_phoneNumber.TabIndex = 2;
             this.tb_phoneNumber.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_phoneNumber.UseSystemPasswordChar = false;
@@ -219,7 +226,7 @@
             this.tb_name.Multiline = false;
             this.tb_name.Name = "tb_name";
             this.tb_name.ReadOnly = false;
-            this.tb_name.Size = new System.Drawing.Size(300, 24);
+            this.tb_name.Size = new System.Drawing.Size(254, 24);
             this.tb_name.TabIndex = 1;
             this.tb_name.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_name.UseSystemPasswordChar = false;
@@ -359,6 +366,7 @@
             this.Name = "AddAccount";
             this.Text = "AddAccount";
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProviderMain)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -388,5 +396,6 @@
         private LollipopButton btn_save;
         private LollipopButton btn_add;
         private LollipopFlatButton btn_cancel;
+        private System.Windows.Forms.ErrorProvider errorProviderMain;
     }
 }

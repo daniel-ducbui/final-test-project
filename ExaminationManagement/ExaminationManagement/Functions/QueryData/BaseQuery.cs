@@ -16,13 +16,14 @@ namespace ExaminationManagement.Functions
         public string ErrorMessage = null;
 
         public void ExecuteAccount(int _userID, string _Name, string _PhoneNumber,
-            string _Email, DateTime _DOB, string _Address, string _ClassID, int _GradeID, int _AccountType, string _temp)
+            string _Email, DateTime _DOB, string _Address, string _ClassID, int _GradeID, int _AccountType, string _temp, int _Permission)
         {
             try
             {
                 using (var _data = new ExaminationManagementDataContext())
                 {
                     var isExists = _data.AccountDetails.Where(a => a.UserID == _userID).FirstOrDefault();
+                    var permission = _data.Accounts.Where(a => a.UserID == _userID).FirstOrDefault();
 
                     if (isExists == null)
                     {
@@ -51,6 +52,7 @@ namespace ExaminationManagement.Functions
                         isExists.ClassID = _ClassID;
                         isExists.GradeID = _GradeID;
                         isExists.AccountType = _AccountType;
+                        permission.Permission = _Permission;
                         _data.SubmitChanges();
                     }
                 }
@@ -63,7 +65,7 @@ namespace ExaminationManagement.Functions
         }
 
         public void ExecuteQuestion(int _questionID, string _Content, string _C1, string _C2, string _C3, string _C4, string _C5, string _C6,
-            string _Answer, int _Level, int _Type, int _userID)
+            string _Answer, int _Level, int _Type, int _userID, int _Status)
         {
             try
             {
@@ -86,6 +88,7 @@ namespace ExaminationManagement.Functions
                             ChoiceF = _C6,
                             Answer = _Answer,
                             UserID = _userID,
+                            Status = _Status,
                         };
                         _data.TheQuestions.InsertOnSubmit(newQuestion);
                         _data.SubmitChanges();
@@ -115,6 +118,238 @@ namespace ExaminationManagement.Functions
             }
         }
 
+        // Execute examination
+        public void ExecuteExamination(int _examinationID, string _testListID, int _examineeListID, string _examinatinName, int _examinationType,
+            int _gradeID, int _time, int _creator, DateTime _createDate, DateTime _startDate, DateTime _endDate, bool _signal)
+        {
+            try
+            {
+                using (var _data = new ExaminationManagementDataContext())
+                {
+                    var isExists = _data.TheExaminations.Where(e => e.ExaminationID == _examinationID).FirstOrDefault();
+
+                    if (isExists == null)
+                    {
+                        var newExamination = new TheExamination
+                        {
+                            TestListID = _testListID,
+                            ExamineeListID = _examineeListID,
+                            ExaminationName = _examinatinName,
+                            ExaminationType = _examinationType,
+                            GradeID = _gradeID,
+                            Time = _time,
+                            Creator = _creator,
+                            CreateDate = _createDate,
+                            StartDate = _startDate,
+                            EndDate = _endDate,
+                        };
+
+                        _data.TheExaminations.InsertOnSubmit(newExamination);
+                    }
+                    else
+                    {
+                        if (!_signal)
+                        {
+                            _data.TheExaminations.DeleteOnSubmit(isExists);
+                        }
+                        else
+                        {
+                            isExists.TestListID = _testListID;
+                            isExists.ExamineeListID = _examineeListID;
+                            isExists.ExaminationName = _examinatinName;
+                            isExists.ExaminationType = _examinationType;
+                            isExists.GradeID = _gradeID;
+                            isExists.Time = _time;
+                            isExists.Creator = _creator;
+                            isExists.CreateDate = _createDate;
+                            isExists.StartDate = _startDate;
+                            isExists.EndDate = _endDate;
+                        }
+                    }
+
+                    _data.SubmitChanges();
+                }
+                this.ErrorMessage = "Success!";
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
+        }
+
+        // For create, edit and delete The test
+        public void ExecuteTheTest(string _testID, string _testName, bool _signal)
+        {
+            try
+            {
+                using (var _data = new ExaminationManagementDataContext())
+                {
+                    var isExists = _data.TheTests.Where(t => t.TestID == _testID).FirstOrDefault();
+
+                    if (isExists == null)
+                    {
+                        var newTest = new TheTest
+                        {
+                            TestID = _testID,
+                            TestName = _testName,
+                        };
+
+                        _data.TheTests.InsertOnSubmit(newTest);
+                    }
+                    else
+                    {
+                        if (!_signal) // Delete
+                        {
+                            _data.TheTests.DeleteOnSubmit(isExists);
+                        }
+                        else
+                        {
+                            isExists.TestID = _testID;
+                            isExists.TestName = _testName;
+                        }
+                    }
+
+                    _data.SubmitChanges();
+                }
+
+                this.ErrorMessage = "Success!";
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
+        }
+
+        // For add, edit, delete question in The test
+        public void ExecuteTheTestDetails(string _testID, int _questionID, bool _signal)
+        {
+            try
+            {
+                using (var _data = new ExaminationManagementDataContext())
+                {
+                    var isExists = _data.TestDetails.Where(td => td.TestID == _testID && td.QuestionID == _questionID).FirstOrDefault();
+
+                    if (isExists == null)
+                    {
+                        var newTestDetail = new TestDetail
+                        {
+                            TestID = _testID,
+                            QuestionID = _questionID,
+                        };
+
+                        _data.TestDetails.InsertOnSubmit(newTestDetail);
+                    }
+                    else
+                    {
+                        if (!_signal)
+                        {
+                            _data.TestDetails.DeleteOnSubmit(isExists);
+                        }
+                        else
+                        {
+                            isExists.TestID = _testID;
+                            isExists.QuestionID = _questionID;
+                        }
+                    }
+
+                    _data.SubmitChanges();
+                }
+
+                this.ErrorMessage = "Success!";
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
+        }
+
+        // For create, edit and delete Test list
+        public void ExecuteTestList(string _testListID, string _testListName, bool _signal)
+        {
+            try
+            {
+                using (var _data = new ExaminationManagementDataContext())
+                {
+                    var isExists = _data.TestLists.Where(tl => tl.TestListID == _testListID).FirstOrDefault();
+
+                    if (isExists == null)
+                    {
+                        var newTestList = new TestList
+                        {
+                            TestListID = _testListID,
+                            TestListName = _testListName,
+                        };
+
+                        _data.TestLists.InsertOnSubmit(newTestList);
+                    }
+                    else
+                    {
+                        if (!_signal)
+                        {
+                            _data.TestLists.DeleteOnSubmit(isExists);
+                        }
+                        else
+                        {
+                            isExists.TestListID = _testListID;
+                            isExists.TestListName = _testListName;
+                        }
+                    }
+
+                    _data.SubmitChanges();
+                }
+
+                this.ErrorMessage = "Success!";
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
+        }
+
+        // For add, edit and delete Test List Details
+        public void ExecuteTestListDetails(string _testListID, string _testID, bool _signal)
+        {
+            try
+            {
+                using (var _data = new ExaminationManagementDataContext())
+                {
+                    var isExists = _data.TestListDetails.Where(tld => tld.TestListID == _testListID && tld.TestID == _testID).FirstOrDefault();
+
+                    if (isExists == null)
+                    {
+                        var newTestListDetail = new TestListDetail
+                        {
+                            TestListID = _testListID,
+                            TestID = _testID,
+                        };
+
+                        _data.TestListDetails.InsertOnSubmit(newTestListDetail);
+                    }
+                    else
+                    {
+                        if (!_signal)
+                        {
+                            _data.TestListDetails.DeleteOnSubmit(isExists);
+                        }
+                        else
+                        {
+                            isExists.TestListID = _testListID;
+                            isExists.TestID = _testID;
+                        }
+                    }
+
+                    _data.SubmitChanges();
+                }
+
+                this.ErrorMessage = "Success!";
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
+        }
+
+        // Calculate total score
         public int TotalScore(int _resultID)
         {
             int score = 0;
@@ -257,7 +492,7 @@ namespace ExaminationManagement.Functions
                                     tl.TestListID == ex.TestListID &&
                                     ex.TestListID == _testListID &&
                                     ex.ExaminationID == _examinationID
-                                orderby r.ResultID descending
+                               orderby r.ResultID descending
 
                                select r.ResultID).FirstOrDefault();
 
@@ -328,6 +563,7 @@ namespace ExaminationManagement.Functions
             return number;
         }
 
+        // Get total score
         public int GetTotalScore(int _resultID)
         {
             int totalScore = 0;
@@ -398,6 +634,42 @@ namespace ExaminationManagement.Functions
             }
 
             return trueAnswersList;
+        }
+
+        // For question control panel
+        public List<TheQuestion> GetQuestion(int _questionID)
+        {
+            List<TheQuestion> theQuestions = new List<TheQuestion>();
+
+            using (var _data = new ExaminationManagementDataContext())
+            {
+                var _question = (from q in _data.TheQuestions
+                                 where q.QuestionID == _questionID
+                                 select q).ToList();
+
+                if (_question != null)
+                {
+                    theQuestions = _question;
+                }
+            }
+
+            return theQuestions;
+        }
+
+        public int GetUserPermission(int _userID)
+        {
+            int permission = -1;
+
+            using (var _data = new ExaminationManagementDataContext())
+            {
+                var _permission = (from a in _data.Accounts
+                                   where a.UserID == _userID
+                                   select a.Permission).FirstOrDefault();
+
+                permission = _permission;
+            }
+
+            return permission;
         }
     }
 }

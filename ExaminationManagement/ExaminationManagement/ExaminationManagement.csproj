@@ -183,10 +183,10 @@
     <Compile Include="Forms\Student\ProfileControlPanel.Designer.cs">
       <DependentUpon>ProfileControlPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Student\QuestionControlPanel.cs">
+    <Compile Include="Forms\Question\QuestionControlPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Student\QuestionControlPanel.Designer.cs">
+    <Compile Include="Forms\Question\QuestionControlPanel.Designer.cs">
       <DependentUpon>QuestionControlPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Student\ResultControlPanel.cs">
@@ -195,11 +195,35 @@
     <Compile Include="Forms\Student\ResultControlPanel.Designer.cs">
       <DependentUpon>ResultControlPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Teacher\ExaminationController\ExaminationManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher\ExaminationController\ExaminationManager.Designer.cs">
+      <DependentUpon>ExaminationManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Teacher\ExaminationController\ExecuteExamination.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher\ExaminationController\ExecuteExamination.Designer.cs">
+      <DependentUpon>ExecuteExamination.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Teacher\StudentManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher\StudentManager.Designer.cs">
+      <DependentUpon>StudentManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Teacher\TeacherControlPanel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Teacher\TeacherControlPanel.Designer.cs">
       <DependentUpon>TeacherControlPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Teacher\TestController\TheTestManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher\TestController\TheTestManagement.Designer.cs">
+      <DependentUpon>TheTestManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="Functions\Events\SelectedChangedEventArgs.cs" />
     <Compile Include="Functions\MainFunction.cs" />
@@ -230,8 +254,11 @@
     <Compile Include="Presenters\Student\ExaminationControllerPresenter.cs" />
     <Compile Include="Presenters\Student\Examination\ExaminatePresenter.cs" />
     <Compile Include="Presenters\Student\ProfilePresenter.cs" />
-    <Compile Include="Presenters\Student\QuestionPresenter.cs" />
+    <Compile Include="Presenters\Question\QuestionPresenter.cs" />
     <Compile Include="Presenters\Student\ResultPresenter.cs" />
+    <Compile Include="Presenters\Teacher\ExaminationManagement\ExaminationManagementPresenter.cs" />
+    <Compile Include="Presenters\Teacher\ExaminationManagement\ExecuteExaminationPresenter.cs" />
+    <Compile Include="Presenters\Teacher\TestController\TheTestManagementPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
@@ -246,7 +273,10 @@
     <Compile Include="Views\Student\IResult.cs" />
     <Compile Include="Views\Student\IExaminationController.cs" />
     <Compile Include="Views\Student\IProfile.cs" />
-    <Compile Include="Views\Student\IQuestion.cs" />
+    <Compile Include="Views\Question\IQuestion.cs" />
+    <Compile Include="Views\Teacher\ExaminationManagement\IExaminationManagement.cs" />
+    <Compile Include="Views\Teacher\ExaminationManagement\IExecuteExamination.cs" />
+    <Compile Include="Views\Teacher\TestController\ITheTestManagement.cs" />
     <EmbeddedResource Include="Forms\Administrator\AddAccount.resx">
       <DependentUpon>AddAccount.cs</DependentUpon>
     </EmbeddedResource>
@@ -283,14 +313,26 @@
     <EmbeddedResource Include="Forms\Student\ProfileControlPanel.resx">
       <DependentUpon>ProfileControlPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Student\QuestionControlPanel.resx">
+    <EmbeddedResource Include="Forms\Question\QuestionControlPanel.resx">
       <DependentUpon>QuestionControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Student\ResultControlPanel.resx">
       <DependentUpon>ResultControlPanel.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher\ExaminationController\ExaminationManager.resx">
+      <DependentUpon>ExaminationManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher\ExaminationController\ExecuteExamination.resx">
+      <DependentUpon>ExecuteExamination.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher\StudentManager.resx">
+      <DependentUpon>StudentManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teacher\TeacherControlPanel.resx">
       <DependentUpon>TeacherControlPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher\TestController\TheTestManagement.resx">
+      <DependentUpon>TheTestManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -379,6 +421,8 @@
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Icons\icons8-management-48.png" />
+    <None Include="Resources\Icons\icons8-management-48 %281%29.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -396,5 +440,6 @@
     <Content Include="Resources\Icons\icons8-help-48.png" />
     <Content Include="Resources\Icons\icons8-male-user-48.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

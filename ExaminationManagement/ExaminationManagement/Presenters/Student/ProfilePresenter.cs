@@ -61,7 +61,8 @@ namespace ExaminationManagement.Presenters.Student
                     Email = null,
                     Address = null,
                     ClassID = "0";
-                int GradeID = 0;
+                int GradeID = 0,
+                    Permission = -1;
                 DateTime DOB;
 
                 Name = view.name.Text;
@@ -75,7 +76,9 @@ namespace ExaminationManagement.Presenters.Student
                 ClassID = view.classID.Text;
                 GradeID = Convert.ToInt32(view.gradeID.Text);
 
-                baseQuery.ExecuteAccount(view._userID, Name, PhoneNumber, Email, DOB, Address, ClassID, GradeID, 0, null);
+                Permission = baseQuery.GetUserPermission(view._userID);
+
+                baseQuery.ExecuteAccount(view._userID, Name, PhoneNumber, Email, DOB, Address, ClassID, GradeID, Permission, null, Permission);
                 this.ErrorMessage= baseQuery.ErrorMessage;
             }
             catch (Exception ex)

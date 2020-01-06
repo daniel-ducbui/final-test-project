@@ -263,7 +263,6 @@
             this.tb_content.ReadOnly = true;
             this.tb_content.Size = new System.Drawing.Size(1197, 147);
             this.tb_content.TabIndex = 22;
-            this.tb_content.Text = "asd";
             this.tb_content.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_content.UseSystemPasswordChar = false;
             // 

@@ -17,6 +17,14 @@ namespace ExaminationManagement.Forms.Student
     public partial class ExaminationControlPanel : MaterialForm, IExaminationController
     {
         ExaminationControllerPresenter examController;
+
+        int userID;
+        int examID;
+        int resultID;
+        string testID;
+
+        bool flagChangeTab = false;
+
         public ExaminationControlPanel()
         {
             MaterialSkin.MaterialSkinManager manager = MaterialSkin.MaterialSkinManager.Instance;
@@ -46,13 +54,6 @@ namespace ExaminationManagement.Forms.Student
         {
             examController = new ExaminationControllerPresenter(this);
         }
-
-        int userID;
-        int examID;
-        int resultID;
-        string testID;
-
-        bool flagChangeTab = false;
 
         public ExaminationControlPanel(int userID) : this()
         {

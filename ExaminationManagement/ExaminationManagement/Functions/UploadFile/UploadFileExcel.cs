@@ -43,7 +43,7 @@ namespace ExaminationManagement.Functions.UploadFile
                     GradeID = 0;
 
                 // Fetch every single row
-                for (int i = 3; i < rowCount; i++)
+                for (int i = 3; i <= rowCount; i++)
                 {
                     Name = range.Cells[i, 1].Value2.ToString();
                     PhoneNumber = range.Cells[i, 2].Value2.ToString();
@@ -74,8 +74,7 @@ namespace ExaminationManagement.Functions.UploadFile
                     string _temp = authentication.Encrypt(temp);
 
                     // Call add account function
-                    baseQuery.ExecuteAccount(-1, Name, PhoneNumber, Email, _dob, Address, ClassID, GradeID, AccountType, _temp);
-
+                    baseQuery.ExecuteAccount(-1, Name, PhoneNumber, Email, _dob, Address, ClassID, GradeID, AccountType, _temp, -1);
                 }
             }
             catch (Exception e)
@@ -129,21 +128,20 @@ namespace ExaminationManagement.Functions.UploadFile
                 int level = 0;
 
                 // Fetch every single row
-                for (int i = 3; i < rowCount; i++)
+                for (int i = 3; i <= rowCount; i++)
                 {
                     content = range.Cells[i, 1].Value2.ToString();
                     c1 = range.Cells[i, 2].Value2.ToString();
                     c2 = range.Cells[i, 3].Value2.ToString();
                     c3 = range.Cells[i, 4].Value2.ToString();
                     c4 = range.Cells[i, 5].Value2.ToString();
-                    c5 = range.Cells[i, 5].Value2.ToString();
-                    c6 = range.Cells[i, 5].Value2.ToString();
-                    answer = range.Cells[i, 6].Value2.ToString();
-                    level = range.Cells[i, 7].Value2.ToString();
+                    c5 = range.Cells[i, 6].Value2.ToString();
+                    c6 = range.Cells[i, 7].Value2.ToString();
+                    answer = range.Cells[i, 8].Value2.ToString();
+                    level = Convert.ToInt32(range.Cells[i, 9].Value2.ToString());
 
                     // Call add account function
-                    baseQuery.ExecuteQuestion(0, content, c1, c2, c3, c4, c5, c6, answer, level, 1, UserID);
-
+                    baseQuery.ExecuteQuestion(0, content, c1, c2, c3, c4, c5, c6, answer, level, 1, UserID, 1);
                 }
             }
             catch (Exception e)

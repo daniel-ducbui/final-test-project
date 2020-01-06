@@ -87,7 +87,7 @@
             this.tb_password.ReadOnly = false;
             this.tb_password.Size = new System.Drawing.Size(307, 24);
             this.tb_password.TabIndex = 3;
-            this.tb_password.Text = "admin";
+            this.tb_password.Text = "1231231";
             this.tb_password.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_password.UseSystemPasswordChar = true;
             // 
@@ -103,7 +103,7 @@
             this.tb_username.ReadOnly = false;
             this.tb_username.Size = new System.Drawing.Size(307, 24);
             this.tb_username.TabIndex = 2;
-            this.tb_username.Text = "admin";
+            this.tb_username.Text = "ducbui2991@gmail.com";
             this.tb_username.TextAlignment = System.Windows.Forms.HorizontalAlignment.Left;
             this.tb_username.UseSystemPasswordChar = false;
             // 

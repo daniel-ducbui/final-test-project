@@ -193,7 +193,7 @@ namespace ExaminationManagement.Presenters.Student.Examination
                         // Initialize Result
                         baseQuery.SaveResult(0, view.userID, view.testID, 0, ++_times, 0, view.examinationID);
 
-                        this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, this.examineeListID);
+                        this.resultID = baseQuery.FindResult(view.userID, view.testID, this.testListID, view.examinationID);
                         this.times = baseQuery.FindTimes(this.resultID);
 
                         this.InitializeResultDetails();

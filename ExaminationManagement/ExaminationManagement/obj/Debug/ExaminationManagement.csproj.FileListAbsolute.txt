@@ -24,7 +24,6 @@ C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\ob
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.CustomMessageBox.frmYesNo.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Student.ResultControlPanel.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Report.StudentResultReport.resources
-C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csprojAssemblyReference.cache
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\RdlCompile.cache
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\RdlCompile.compiled
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\SqlServerTypes\x64\msvcr120.dll
@@ -88,3 +87,8 @@ C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bi
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\bin\Debug\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Administrator.AddAccount.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Password.ChangePassword.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.StudentManager.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.csprojAssemblyReference.cache
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.ExaminationManager.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.ExaminationController.ExecuteExamination.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.TestController.TheTestManagement.resources

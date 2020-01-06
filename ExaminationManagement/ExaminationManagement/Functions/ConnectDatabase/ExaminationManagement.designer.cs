@@ -2318,13 +2318,13 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 		
 		private int _Time;
 		
-		private string _Creator;
-		
 		private System.DateTime _CreateDate;
 		
 		private System.Nullable<System.DateTime> _StartDate;
 		
 		private System.Nullable<System.DateTime> _EndDate;
+		
+		private int _Creator;
 		
 		private EntityRef<ExamineeList> _ExamineeList;
 		
@@ -2348,14 +2348,14 @@ namespace ExaminationManagement.Functions.ConnectDatabase
     partial void OnGradeIDChanged();
     partial void OnTimeChanging(int value);
     partial void OnTimeChanged();
-    partial void OnCreatorChanging(string value);
-    partial void OnCreatorChanged();
     partial void OnCreateDateChanging(System.DateTime value);
     partial void OnCreateDateChanged();
     partial void OnStartDateChanging(System.Nullable<System.DateTime> value);
     partial void OnStartDateChanged();
     partial void OnEndDateChanging(System.Nullable<System.DateTime> value);
     partial void OnEndDateChanged();
+    partial void OnCreatorChanging(int value);
+    partial void OnCreatorChanged();
     #endregion
 		
 		public TheExamination()
@@ -2513,26 +2513,6 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Creator", DbType="Char(30) NOT NULL", CanBeNull=false)]
-		public string Creator
-		{
-			get
-			{
-				return this._Creator;
-			}
-			set
-			{
-				if ((this._Creator != value))
-				{
-					this.OnCreatorChanging(value);
-					this.SendPropertyChanging();
-					this._Creator = value;
-					this.SendPropertyChanged("Creator");
-					this.OnCreatorChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime NOT NULL")]
 		public System.DateTime CreateDate
 		{
@@ -2589,6 +2569,26 @@ namespace ExaminationManagement.Functions.ConnectDatabase
 					this._EndDate = value;
 					this.SendPropertyChanged("EndDate");
 					this.OnEndDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Creator", DbType="Int NOT NULL")]
+		public int Creator
+		{
+			get
+			{
+				return this._Creator;
+			}
+			set
+			{
+				if ((this._Creator != value))
+				{
+					this.OnCreatorChanging(value);
+					this.SendPropertyChanging();
+					this._Creator = value;
+					this.SendPropertyChanged("Creator");
+					this.OnCreatorChanged();
 				}
 			}
 		}

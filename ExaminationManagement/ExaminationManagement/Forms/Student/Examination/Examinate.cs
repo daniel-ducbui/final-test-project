@@ -27,6 +27,7 @@ namespace ExaminationManagement.Forms.Student.Examination
         int examinationType = 0;
         string testID = null;
         string[] answers = null;
+        string[] previousAnswers = null;
         string answer = null;
         bool nav = false;
 
@@ -39,7 +40,6 @@ namespace ExaminationManagement.Forms.Student.Examination
 
         int currentIndex = 0;
         int maxQuestions = 0;
-        string[] previousAnswers = null;
 
         public Examinate()
         {
