@@ -32,10 +32,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btn_back = new LollipopFlatButton();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgv_data = new MetroFramework.Controls.MetroGrid();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.btn_examinationResultReport = new LollipopButton();
             this.btn_createTheTest = new LollipopButton();
             this.btn_detele = new LollipopButton();
             this.btn_editExamination = new LollipopButton();
@@ -43,6 +43,8 @@
             this.btn_load = new LollipopButton();
             this.btn_createTestList = new LollipopButton();
             this.btn_createExamination = new LollipopButton();
+            this.btn_back = new LollipopFlatButton();
+            this.btn_examineeListReport = new LollipopButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_data)).BeginInit();
@@ -51,22 +53,13 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.btn_back);
             this.panel1.Location = new System.Drawing.Point(0, 64);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1354, 45);
             this.panel1.TabIndex = 0;
-            // 
-            // btn_back
-            // 
-            this.btn_back.BackColor = System.Drawing.Color.Transparent;
-            this.btn_back.FontColor = "#ed5245";
-            this.btn_back.Location = new System.Drawing.Point(3, 1);
-            this.btn_back.Name = "btn_back";
-            this.btn_back.Size = new System.Drawing.Size(105, 39);
-            this.btn_back.TabIndex = 1;
-            this.btn_back.Text = "Back";
             // 
             // panel2
             // 
@@ -124,6 +117,9 @@
             // 
             // panel4
             // 
+            this.panel4.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panel4.Controls.Add(this.btn_examineeListReport);
+            this.panel4.Controls.Add(this.btn_examinationResultReport);
             this.panel4.Controls.Add(this.btn_createTheTest);
             this.panel4.Controls.Add(this.btn_detele);
             this.panel4.Controls.Add(this.btn_editExamination);
@@ -136,6 +132,17 @@
             this.panel4.Size = new System.Drawing.Size(200, 631);
             this.panel4.TabIndex = 3;
             // 
+            // btn_examinationResultReport
+            // 
+            this.btn_examinationResultReport.BackColor = System.Drawing.Color.Transparent;
+            this.btn_examinationResultReport.BGColor = "#508ef5";
+            this.btn_examinationResultReport.FontColor = "#ffffff";
+            this.btn_examinationResultReport.Location = new System.Drawing.Point(3, 283);
+            this.btn_examinationResultReport.Name = "btn_examinationResultReport";
+            this.btn_examinationResultReport.Size = new System.Drawing.Size(194, 50);
+            this.btn_examinationResultReport.TabIndex = 8;
+            this.btn_examinationResultReport.Text = "Examination Report";
+            // 
             // btn_createTheTest
             // 
             this.btn_createTheTest.BackColor = System.Drawing.Color.Transparent;
@@ -143,7 +150,7 @@
             this.btn_createTheTest.FontColor = "#ffffff";
             this.btn_createTheTest.Location = new System.Drawing.Point(3, 171);
             this.btn_createTheTest.Name = "btn_createTheTest";
-            this.btn_createTheTest.Size = new System.Drawing.Size(185, 50);
+            this.btn_createTheTest.Size = new System.Drawing.Size(194, 50);
             this.btn_createTheTest.TabIndex = 7;
             this.btn_createTheTest.Text = "Tests Manager";
             // 
@@ -152,9 +159,9 @@
             this.btn_detele.BackColor = System.Drawing.Color.Transparent;
             this.btn_detele.BGColor = "#ed5245";
             this.btn_detele.FontColor = "#ffffff";
-            this.btn_detele.Location = new System.Drawing.Point(3, 339);
+            this.btn_detele.Location = new System.Drawing.Point(3, 451);
             this.btn_detele.Name = "btn_detele";
-            this.btn_detele.Size = new System.Drawing.Size(185, 50);
+            this.btn_detele.Size = new System.Drawing.Size(194, 50);
             this.btn_detele.TabIndex = 6;
             this.btn_detele.Text = "Delete";
             // 
@@ -165,7 +172,7 @@
             this.btn_editExamination.FontColor = "#ffffff";
             this.btn_editExamination.Location = new System.Drawing.Point(3, 59);
             this.btn_editExamination.Name = "btn_editExamination";
-            this.btn_editExamination.Size = new System.Drawing.Size(185, 50);
+            this.btn_editExamination.Size = new System.Drawing.Size(194, 50);
             this.btn_editExamination.TabIndex = 5;
             this.btn_editExamination.Text = "Edit Examination Information";
             // 
@@ -176,7 +183,7 @@
             this.btn_createExamineeList.FontColor = "#ffffff";
             this.btn_createExamineeList.Location = new System.Drawing.Point(3, 227);
             this.btn_createExamineeList.Name = "btn_createExamineeList";
-            this.btn_createExamineeList.Size = new System.Drawing.Size(185, 50);
+            this.btn_createExamineeList.Size = new System.Drawing.Size(194, 50);
             this.btn_createExamineeList.TabIndex = 4;
             this.btn_createExamineeList.Text = "Examinee List Manager";
             // 
@@ -185,9 +192,9 @@
             this.btn_load.BackColor = System.Drawing.Color.Transparent;
             this.btn_load.BGColor = "#508ef5";
             this.btn_load.FontColor = "#ffffff";
-            this.btn_load.Location = new System.Drawing.Point(3, 283);
+            this.btn_load.Location = new System.Drawing.Point(3, 395);
             this.btn_load.Name = "btn_load";
-            this.btn_load.Size = new System.Drawing.Size(185, 50);
+            this.btn_load.Size = new System.Drawing.Size(194, 50);
             this.btn_load.TabIndex = 3;
             this.btn_load.Text = "Reload";
             // 
@@ -198,7 +205,7 @@
             this.btn_createTestList.FontColor = "#ffffff";
             this.btn_createTestList.Location = new System.Drawing.Point(3, 115);
             this.btn_createTestList.Name = "btn_createTestList";
-            this.btn_createTestList.Size = new System.Drawing.Size(185, 50);
+            this.btn_createTestList.Size = new System.Drawing.Size(194, 50);
             this.btn_createTestList.TabIndex = 2;
             this.btn_createTestList.Text = "Tests List Manager";
             // 
@@ -209,9 +216,30 @@
             this.btn_createExamination.FontColor = "#ffffff";
             this.btn_createExamination.Location = new System.Drawing.Point(3, 3);
             this.btn_createExamination.Name = "btn_createExamination";
-            this.btn_createExamination.Size = new System.Drawing.Size(185, 50);
+            this.btn_createExamination.Size = new System.Drawing.Size(194, 50);
             this.btn_createExamination.TabIndex = 0;
             this.btn_createExamination.Text = "Create Examination";
+            // 
+            // btn_back
+            // 
+            this.btn_back.BackColor = System.Drawing.Color.Transparent;
+            this.btn_back.FontColor = "#ed5245";
+            this.btn_back.Location = new System.Drawing.Point(3, 1);
+            this.btn_back.Name = "btn_back";
+            this.btn_back.Size = new System.Drawing.Size(105, 39);
+            this.btn_back.TabIndex = 1;
+            this.btn_back.Text = "Back";
+            // 
+            // btn_examineeListReport
+            // 
+            this.btn_examineeListReport.BackColor = System.Drawing.Color.Transparent;
+            this.btn_examineeListReport.BGColor = "#508ef5";
+            this.btn_examineeListReport.FontColor = "#ffffff";
+            this.btn_examineeListReport.Location = new System.Drawing.Point(3, 339);
+            this.btn_examineeListReport.Name = "btn_examineeListReport";
+            this.btn_examineeListReport.Size = new System.Drawing.Size(194, 50);
+            this.btn_examineeListReport.TabIndex = 9;
+            this.btn_examineeListReport.Text = "Examinee Report";
             // 
             // ExaminationManager
             // 
@@ -246,5 +274,7 @@
         private LollipopButton btn_editExamination;
         private LollipopButton btn_detele;
         private LollipopButton btn_createTheTest;
+        private LollipopButton btn_examinationResultReport;
+        private LollipopButton btn_examineeListReport;
     }
 }

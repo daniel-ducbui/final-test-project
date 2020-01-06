@@ -97,3 +97,7 @@ C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\ob
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.TestController.TheTest.TestDetailsManagement.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.ExamineeController.ExamineeListManagement.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.ExamineeController.ExamineeListDetailsManagement.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Report.QuestionExporter.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Report.ExaminationResultReport.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Report.StudentListReport.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Report.Teacher_StudentResultReport.resources

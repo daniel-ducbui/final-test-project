@@ -60,7 +60,7 @@ namespace ExaminationManagement.Functions
             }
             catch (Exception e)
             {
-                ErrorMessage = "Something wrong! \nDetails: \n- " + e.Message;
+                ErrorMessage = "Something wrong! \nDetails: \n- User existed";
             }
         }
 

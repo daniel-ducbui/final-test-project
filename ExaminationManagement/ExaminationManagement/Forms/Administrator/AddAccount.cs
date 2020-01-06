@@ -21,7 +21,7 @@ namespace ExaminationManagement.Forms.Administrator
         AddAccountPresenter addAccount;
 
         int flagValidation = 0;
-        string onlyLetterPattern = @"^\b[A-Z][a-zA-Z]*$";
+        string onlyLetterPattern = @"^\b[A-Z][ a-zA-Z]*$";
         string emailPattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
         string phoneNumberParttern = @"^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d{9}$";
         string dobPattern = @"^(\d{1,2})/(\d{1,2})/(\d{4})$";
@@ -248,6 +248,12 @@ namespace ExaminationManagement.Forms.Administrator
                 if (this.flagValidation == 0)
                 {
                     Save?.Invoke(this, null);
+
+                    if (!string.IsNullOrEmpty(addAccount.ErrorMessage))
+                    {
+                        MessageBox.Show(addAccount.ErrorMessage);
+                        this.Close();
+                    }
                 }
                 else
                 {
@@ -268,7 +274,12 @@ namespace ExaminationManagement.Forms.Administrator
                 {
                     AddUser?.Invoke(this, null);
 
-                    this.Close();
+
+                    if (!string.IsNullOrEmpty(addAccount.ErrorMessage))
+                    {
+                        MessageBox.Show(addAccount.ErrorMessage);
+                        this.Close();
+                    }
                 }
                 else
                 {

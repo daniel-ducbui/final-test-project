@@ -52,7 +52,7 @@ namespace ExaminationManagement.Presenters.Student
                 var questionList = (from q in _data.TheQuestions
                                     where q.QuestionType == this._permission
                                     //&& q.UserID == this.userID
-                                    select new { q.QuestionID, q.QuestionContent, q.ChoiceA, q.ChoiceB, q.ChoiceC, q.ChoiceD, q.ChoiceE, q.ChoiceF, q.Answer, q.Status }).ToList();
+                                    select new { q.QuestionID, q.QuestionContent, q.ChoiceA, q.ChoiceB, q.ChoiceC, q.ChoiceD, q.ChoiceE, q.ChoiceF, q.Answer, q.QuestionLevel, q.Status }).ToList();
                 view.DataSource = questionList;
             }
         }

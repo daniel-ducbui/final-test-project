@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_export = new LollipopButton();
             this.btn_import = new LollipopButton();
             this.btn_edit = new LollipopButton();
             this.btn_add = new LollipopButton();
@@ -61,7 +62,6 @@
             this.btn_back = new LollipopFlatButton();
             this.openQuestionDataFile = new System.Windows.Forms.OpenFileDialog();
             this.cb_questionType = new MetroFramework.Controls.MetroComboBox();
-            this.btn_export = new LollipopButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_data)).BeginInit();
             this.panel2.SuspendLayout();
@@ -100,6 +100,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1320, 307);
             this.panel1.TabIndex = 11;
+            // 
+            // btn_export
+            // 
+            this.btn_export.BackColor = System.Drawing.Color.Transparent;
+            this.btn_export.BGColor = "#508ef5";
+            this.btn_export.FontColor = "#ffffff";
+            this.btn_export.Location = new System.Drawing.Point(1202, 70);
+            this.btn_export.Name = "btn_export";
+            this.btn_export.Size = new System.Drawing.Size(115, 51);
+            this.btn_export.TabIndex = 31;
+            this.btn_export.Text = "Export";
             // 
             // btn_import
             // 
@@ -300,7 +311,7 @@
             // 
             this.tb_f.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tb_f.FocusedColor = "#508ef5";
-            this.tb_f.FontColor = "#999999";
+            this.tb_f.FontColor = "#000";
             this.tb_f.IsEnabled = true;
             this.tb_f.Location = new System.Drawing.Point(84, 267);
             this.tb_f.MaxLength = 32767;
@@ -316,7 +327,7 @@
             // 
             this.tb_e.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tb_e.FocusedColor = "#508ef5";
-            this.tb_e.FontColor = "#999999";
+            this.tb_e.FontColor = "#000";
             this.tb_e.IsEnabled = true;
             this.tb_e.Location = new System.Drawing.Point(84, 237);
             this.tb_e.MaxLength = 32767;
@@ -332,7 +343,7 @@
             // 
             this.tb_d.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tb_d.FocusedColor = "#508ef5";
-            this.tb_d.FontColor = "#999999";
+            this.tb_d.FontColor = "#000";
             this.tb_d.IsEnabled = true;
             this.tb_d.Location = new System.Drawing.Point(84, 207);
             this.tb_d.MaxLength = 32767;
@@ -348,7 +359,7 @@
             // 
             this.tb_c.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tb_c.FocusedColor = "#508ef5";
-            this.tb_c.FontColor = "#999999";
+            this.tb_c.FontColor = "#000";
             this.tb_c.IsEnabled = true;
             this.tb_c.Location = new System.Drawing.Point(84, 177);
             this.tb_c.MaxLength = 32767;
@@ -364,7 +375,7 @@
             // 
             this.tb_b.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tb_b.FocusedColor = "#508ef5";
-            this.tb_b.FontColor = "#999999";
+            this.tb_b.FontColor = "#000";
             this.tb_b.IsEnabled = true;
             this.tb_b.Location = new System.Drawing.Point(84, 147);
             this.tb_b.MaxLength = 32767;
@@ -380,7 +391,7 @@
             // 
             this.tb_a.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tb_a.FocusedColor = "#508ef5";
-            this.tb_a.FontColor = "#999999";
+            this.tb_a.FontColor = "#000";
             this.tb_a.IsEnabled = true;
             this.tb_a.Location = new System.Drawing.Point(84, 117);
             this.tb_a.MaxLength = 32767;
@@ -396,7 +407,7 @@
             // 
             this.tb_content.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.tb_content.FocusedColor = "#508ef5";
-            this.tb_content.FontColor = "#999999";
+            this.tb_content.FontColor = "#000";
             this.tb_content.IsEnabled = true;
             this.tb_content.Location = new System.Drawing.Point(84, 13);
             this.tb_content.MaxLength = 32767;
@@ -487,17 +498,6 @@
             this.cb_questionType.Size = new System.Drawing.Size(121, 29);
             this.cb_questionType.TabIndex = 30;
             this.cb_questionType.UseSelectable = true;
-            // 
-            // btn_export
-            // 
-            this.btn_export.BackColor = System.Drawing.Color.Transparent;
-            this.btn_export.BGColor = "#508ef5";
-            this.btn_export.FontColor = "#ffffff";
-            this.btn_export.Location = new System.Drawing.Point(1202, 70);
-            this.btn_export.Name = "btn_export";
-            this.btn_export.Size = new System.Drawing.Size(115, 51);
-            this.btn_export.TabIndex = 31;
-            this.btn_export.Text = "Export";
             // 
             // QuestionControlPanel
             // 

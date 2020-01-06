@@ -153,11 +153,35 @@
     <Compile Include="Forms\Password\ChangePassword.Designer.cs">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Report\ExaminationResultReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Report\ExaminationResultReport.Designer.cs">
+      <DependentUpon>ExaminationResultReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Report\QuestionExporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Report\QuestionExporter.Designer.cs">
+      <DependentUpon>QuestionExporter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Report\StudentListReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Report\StudentListReport.Designer.cs">
+      <DependentUpon>StudentListReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Report\StudentResultReport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Report\StudentResultReport.Designer.cs">
       <DependentUpon>StudentResultReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Report\Teacher_StudentResultReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Report\Teacher_StudentResultReport.Designer.cs">
+      <DependentUpon>Teacher_StudentResultReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Student\StudentControlPanel.cs">
       <SubType>Form</SubType>
@@ -290,6 +314,7 @@
     <Compile Include="Presenters\Teacher\ExaminationManagement\ExecuteExaminationPresenter.cs" />
     <Compile Include="Presenters\Teacher\ExamineeController\ExamineeListDetailsManegementPresenter.cs" />
     <Compile Include="Presenters\Teacher\ExamineeController\ExamineeListManagementPresenter.cs" />
+    <Compile Include="Presenters\Teacher\StudentManagerPresenter.cs" />
     <Compile Include="Presenters\Teacher\TestController\TestList\TestDetailsManagementPresenter.cs" />
     <Compile Include="Presenters\Teacher\TestController\TestList\TestListManagementPresenter.cs" />
     <Compile Include="Presenters\Teacher\TestController\TheTest\TestDetailsManagementPresenter.cs" />
@@ -312,6 +337,7 @@
     <Compile Include="Views\Teacher\ExaminationManagement\IExecuteExamination.cs" />
     <Compile Include="Views\Teacher\ExamineeController\IExamineeListDetailsManagement.cs" />
     <Compile Include="Views\Teacher\ExamineeController\IExamineeListManagement.cs" />
+    <Compile Include="Views\Teacher\IStudentManager.cs" />
     <Compile Include="Views\Teacher\TestController\TestList\ITestListDetailsManagement.cs" />
     <Compile Include="Views\Teacher\TestController\TestList\ITestListManagement.cs" />
     <Compile Include="Views\Teacher\TestController\TheTest\ITestDetailsManagement.cs" />
@@ -335,11 +361,27 @@
     <EmbeddedResource Include="Forms\Password\ChangePassword.resx">
       <DependentUpon>ChangePassword.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Report\ExaminationResultReport.resx">
+      <DependentUpon>ExaminationResultReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Report\QuestionExporter.resx">
+      <DependentUpon>QuestionExporter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Report\rptExaminationResultReport.rdlc" />
+    <EmbeddedResource Include="Forms\Report\rptExportQuestion.rdlc" />
+    <EmbeddedResource Include="Forms\Report\rptTeacher_StudentResultReport.rdlc" />
+    <EmbeddedResource Include="Forms\Report\StudentListReport.rdlc" />
+    <EmbeddedResource Include="Forms\Report\StudentListReport.resx">
+      <DependentUpon>StudentListReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\StudentResultReport.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Report\StudentResultReport.resx">
       <DependentUpon>StudentResultReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Report\Teacher_StudentResultReport.resx">
+      <DependentUpon>Teacher_StudentResultReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Student\StudentControlPanel.resx">
       <DependentUpon>StudentControlPanel.cs</DependentUpon>

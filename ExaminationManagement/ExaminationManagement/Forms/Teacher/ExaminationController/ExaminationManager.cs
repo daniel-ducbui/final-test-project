@@ -1,4 +1,5 @@
-﻿using ExaminationManagement.Forms.Teacher.ExaminationController;
+﻿using ExaminationManagement.Forms.Report;
+using ExaminationManagement.Forms.Teacher.ExaminationController;
 using ExaminationManagement.Forms.Teacher.ExamineeController;
 using ExaminationManagement.Forms.Teacher.TestController;
 using ExaminationManagement.Forms.Teacher.TestController.TheTest;
@@ -58,9 +59,23 @@ namespace ExaminationManagement.Forms.Teacher
             btn_createTheTest.Click += Btn_createTheTest_Click;
             btn_load.Click += Btn_load_Click;
             btn_detele.Click += Btn_detele_Click;
+            btn_examinationResultReport.Click += Btn_report_Click;
+            btn_examineeListReport.Click += Btn_examineeListReport_Click;
             dgv_data.DoubleClick += Dgv_data_DoubleClick;
             
             this.LoadExamination();
+        }
+
+        private void Btn_examineeListReport_Click(object sender, EventArgs e)
+        {
+            StudentListReport studentListReport = new StudentListReport();
+            studentListReport.ShowDialog();
+        }
+
+        private void Btn_report_Click(object sender, EventArgs e)
+        {
+            ExaminationResultReport examinationResultReport = new ExaminationResultReport();
+            examinationResultReport.ShowDialog();
         }
 
         private void Dgv_data_DoubleClick(object sender, EventArgs e)

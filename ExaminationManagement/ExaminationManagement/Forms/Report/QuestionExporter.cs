@@ -1,8 +1,11 @@
-﻿using MaterialSkin.Controls;
+﻿using ExaminationManagement.Functions.ConnectDatabase;
+using MaterialSkin.Controls;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Linq;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -26,7 +29,7 @@ namespace ExaminationManagement.Forms.Report
 
             InitializeComponent();
 
-            Load += QuestionExporter_Load;
+            Load += QuestionExporter_Load_1;
         }
 
         public QuestionExporter(int userID) : this()
@@ -39,6 +42,29 @@ namespace ExaminationManagement.Forms.Report
 
         }
 
-        // Start here
+        private void QuestionExporter_Load_1(object sender, EventArgs e)
+        {
+            rptQuestion.LocalReport.DataSources.Clear();
+            using (var examination = new ExaminationManagementDataContext())
+            {
+                examination.DeferredLoadingEnabled = false;
+
+                //Question
+                var questionBS = new BindingSource();
+                var rDSquestion = new ReportDataSource("question");
+                rDSquestion.Value = questionBS;
+                rptQuestion.LocalReport.DataSources.Add(rDSquestion);
+
+                var loa = new DataLoadOptions();
+                loa.LoadWith<TheQuestion>(t => t.QuestionID);
+                var ex = examination.TheQuestions.ToList();
+                questionBS.DataSource = ex;
+
+
+            }
+            this.rptQuestion.RefreshReport();
+        }
+
+        // Start here 
     }
 }

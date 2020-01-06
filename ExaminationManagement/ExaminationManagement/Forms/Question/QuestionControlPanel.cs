@@ -1,4 +1,5 @@
 ﻿using ExaminationManagement.Forms.CustomMessageBox;
+using ExaminationManagement.Forms.Report;
 using ExaminationManagement.Presenters.Student;
 using ExaminationManagement.Views.Student;
 using MaterialSkin.Controls;
@@ -58,6 +59,7 @@ namespace ExaminationManagement.Forms.Student
             {
                 btn_edit.Hide();
                 btn_import.Hide();
+                btn_export.Hide();
                 cb_questionType.Hide();
             }
             else
@@ -74,7 +76,8 @@ namespace ExaminationManagement.Forms.Student
 
         private void Btn_export_Click(object sender, EventArgs e)
         {
-
+            QuestionExporter questionExporter = new QuestionExporter();
+            questionExporter.ShowDialog();
         }
 
         private void Cb_questionType_SelectedIndexChanged(object sender, EventArgs e)
@@ -319,6 +322,8 @@ namespace ExaminationManagement.Forms.Student
             ckb_choiceD.Checked = false;
             ckb_choiceE.Checked = false;
             ckb_choiceF.Checked = false;
+
+            this.errorMessage = null;
         }
 
         private void Btn_cancel_Click(object sender, EventArgs e)
