@@ -11,8 +11,11 @@ namespace ExaminationManagement.Views.Teacher.TestController
         int userID { get; }
         string errorMessage { get; set; }
         object testList { get; set; }
-        //object testListDetails { get; set; }
+        string testListID { get; set; }
+        string testListName { get; set; }
+        bool signal { get; set; }
 
-        event EventHandler LoadQuestion;
+        event EventHandler Execute;
+        event EventHandler ShowTestList;
     }
 }
