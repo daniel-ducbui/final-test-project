@@ -40,12 +40,9 @@ namespace ExaminationManagement.Presenters.Teacher.TestController
             {
                 this.testListIDList = view.testListIDList;
 
-                using (var _data = new ExaminationManagementDataContext())
+                foreach (var item in this.testListIDList)
                 {
-                    foreach (var item in this.testListIDList)
-                    {
-                        baseQuery.ExecuteTestListDetails(this.testListID, item, view.signal);
-                    }
+                    baseQuery.ExecuteTestListDetails(this.testListID, item, view.signal);
                 }
 
                 LoadData();

@@ -207,6 +207,18 @@
     <Compile Include="Forms\Teacher\ExaminationController\ExecuteExamination.Designer.cs">
       <DependentUpon>ExecuteExamination.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Teacher\ExamineeController\ExamineeListDetailsManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher\ExamineeController\ExamineeListDetailsManagement.Designer.cs">
+      <DependentUpon>ExamineeListDetailsManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Teacher\ExamineeController\ExamineeListManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher\ExamineeController\ExamineeListManagement.Designer.cs">
+      <DependentUpon>ExamineeListManagement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Teacher\StudentManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -230,6 +242,18 @@
     </Compile>
     <Compile Include="Forms\Teacher\TestController\TestList\TestListManagement.Designer.cs">
       <DependentUpon>TestListManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Teacher\TestController\TheTest\TestDetailsManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher\TestController\TheTest\TestDetailsManagement.Designer.cs">
+      <DependentUpon>TestDetailsManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Teacher\TestController\TheTest\TestManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Teacher\TestController\TheTest\TestManagement.Designer.cs">
+      <DependentUpon>TestManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="Functions\Events\SelectedChangedEventArgs.cs" />
     <Compile Include="Functions\MainFunction.cs" />
@@ -264,8 +288,11 @@
     <Compile Include="Presenters\Student\ResultPresenter.cs" />
     <Compile Include="Presenters\Teacher\ExaminationManagement\ExaminationManagementPresenter.cs" />
     <Compile Include="Presenters\Teacher\ExaminationManagement\ExecuteExaminationPresenter.cs" />
-    <Compile Include="Presenters\Teacher\TestController\TestDetailsManagementPresenter.cs" />
-    <Compile Include="Presenters\Teacher\TestController\TestListManagementPresenter.cs" />
+    <Compile Include="Presenters\Teacher\ExamineeController\ExamineeListDetailsManegementPresenter.cs" />
+    <Compile Include="Presenters\Teacher\ExamineeController\ExamineeListManagementPresenter.cs" />
+    <Compile Include="Presenters\Teacher\TestController\TestList\TestDetailsManagementPresenter.cs" />
+    <Compile Include="Presenters\Teacher\TestController\TestList\TestListManagementPresenter.cs" />
+    <Compile Include="Presenters\Teacher\TestController\TheTest\TestDetailsManagementPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
@@ -283,8 +310,13 @@
     <Compile Include="Views\Question\IQuestion.cs" />
     <Compile Include="Views\Teacher\ExaminationManagement\IExaminationManagement.cs" />
     <Compile Include="Views\Teacher\ExaminationManagement\IExecuteExamination.cs" />
-    <Compile Include="Views\Teacher\TestController\ITestListDetailsManagement.cs" />
-    <Compile Include="Views\Teacher\TestController\ITestListManagement.cs" />
+    <Compile Include="Views\Teacher\ExamineeController\IExamineeListDetailsManagement.cs" />
+    <Compile Include="Views\Teacher\ExamineeController\IExamineeListManagement.cs" />
+    <Compile Include="Views\Teacher\TestController\TestList\ITestListDetailsManagement.cs" />
+    <Compile Include="Views\Teacher\TestController\TestList\ITestListManagement.cs" />
+    <Compile Include="Views\Teacher\TestController\TheTest\ITestDetailsManagement.cs" />
+    <Compile Include="Views\Teacher\TestController\TheTest\ITheTestManagement.cs" />
+    <Compile Include="Presenters\Teacher\TestController\TheTest\TheTestPresenter.cs" />
     <EmbeddedResource Include="Forms\Administrator\AddAccount.resx">
       <DependentUpon>AddAccount.cs</DependentUpon>
     </EmbeddedResource>
@@ -333,6 +365,12 @@
     <EmbeddedResource Include="Forms\Teacher\ExaminationController\ExecuteExamination.resx">
       <DependentUpon>ExecuteExamination.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher\ExamineeController\ExamineeListDetailsManagement.resx">
+      <DependentUpon>ExamineeListDetailsManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher\ExamineeController\ExamineeListManagement.resx">
+      <DependentUpon>ExamineeListManagement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teacher\StudentManager.resx">
       <DependentUpon>StudentManager.cs</DependentUpon>
     </EmbeddedResource>
@@ -344,6 +382,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teacher\TestController\TestList\TestListManagement.resx">
       <DependentUpon>TestListManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher\TestController\TheTest\TestDetailsManagement.resx">
+      <DependentUpon>TestDetailsManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teacher\TestController\TheTest\TestManagement.resx">
+      <DependentUpon>TestManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -451,8 +495,6 @@
     <Content Include="Resources\Icons\icons8-help-48.png" />
     <Content Include="Resources\Icons\icons8-male-user-48.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\Teacher\TestController\TheTest\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

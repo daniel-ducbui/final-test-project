@@ -349,6 +349,92 @@ namespace ExaminationManagement.Functions
             }
         }
 
+        // For add, edit and delete Examinee list
+        public void ExecuteExamineeList(int _examineeListID, string _examineeListName, bool _signal)
+        {
+            try
+            {
+                using (var _data = new ExaminationManagementDataContext())
+                {
+                    var isExists = _data.ExamineeLists.Where(exl => exl.ExamineeListID == _examineeListID).FirstOrDefault();
+
+                    if (isExists == null)
+                    {
+                        var newExamineeList = new ExamineeList
+                        {
+                            ExamineeListName = _examineeListName,
+                        };
+
+                        _data.ExamineeLists.InsertOnSubmit(newExamineeList);
+                    }
+                    else
+                    {
+                        if (!_signal)
+                        {
+                            _data.ExamineeLists.DeleteOnSubmit(isExists);
+                        }
+                        else
+                        {
+                            isExists.ExamineeListName = _examineeListName;
+                        }
+                    }
+
+                    _data.SubmitChanges();
+
+                    this.ErrorMessage = "Success!";
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
+        }
+
+        public void ExecuteExamineeListDetails(int _examineeListID, int _userID, bool _signal)
+        {
+            try
+            {
+                using (var _data = new ExaminationManagementDataContext())
+                {
+                    var isExists = _data.ExamineeListDetails.Where(exld => exld.ExamineeListID == _examineeListID && exld.UserID == _userID).FirstOrDefault();
+                    //int i = 0;
+
+                    if (isExists == null)
+                    {
+                        var newExamineeListDetail = new ExamineeListDetail
+                        {
+                            ExamineeListID = _examineeListID,
+                            UserID = _userID,
+                        };
+
+                        _data.ExamineeListDetails.InsertOnSubmit(newExamineeListDetail);
+                    }
+                    else
+                    {
+                        if (!_signal)
+                        {
+                            _data.ExamineeListDetails.DeleteOnSubmit(isExists);
+                        }
+                        else
+                        {
+                            isExists.ExamineeListID = _examineeListID;
+                            isExists.UserID = _userID;
+                            //i++;
+                            //this.ErrorMessage = i + " User existed!";
+                        }
+                    }
+
+                    _data.SubmitChanges();
+
+                    this.ErrorMessage = "Success!";
+                }
+            }
+            catch (Exception ex)
+            {
+                this.ErrorMessage = ex.Message;
+            }
+        }
+
         // Calculate total score
         public int TotalScore(int _resultID)
         {

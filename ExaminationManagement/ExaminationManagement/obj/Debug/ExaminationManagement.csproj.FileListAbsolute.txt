@@ -93,3 +93,7 @@ C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\ob
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.ExaminationController.ExecuteExamination.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.TestController.TestListManagement.resources
 C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.TestController.TestListDetailsManagement.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.TestController.TheTest.TestManagement.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.TestController.TheTest.TestDetailsManagement.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.ExamineeController.ExamineeListManagement.resources
+C:\_GIT_github\final-test-project\ExaminationManagement\ExaminationManagement\obj\Debug\ExaminationManagement.Forms.Teacher.ExamineeController.ExamineeListDetailsManagement.resources

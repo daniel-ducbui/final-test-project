@@ -1,5 +1,7 @@
 ﻿using ExaminationManagement.Forms.Teacher.ExaminationController;
+using ExaminationManagement.Forms.Teacher.ExamineeController;
 using ExaminationManagement.Forms.Teacher.TestController;
+using ExaminationManagement.Forms.Teacher.TestController.TheTest;
 using ExaminationManagement.Presenters.Teacher.ExaminationManagement;
 using ExaminationManagement.Views.Teacher.ExaminationManagement;
 using MaterialSkin.Controls;
@@ -52,7 +54,8 @@ namespace ExaminationManagement.Forms.Teacher
             btn_createExamination.Click += Btn_createExamination_Click;
             btn_editExamination.Click += Btn_editExamination_Click;
             btn_createExamineeList.Click += Btn_createExamineeList_Click;
-            btn_createTest.Click += Btn_createTest_Click;
+            btn_createTestList.Click += Btn_createTestList_Click;
+            btn_createTheTest.Click += Btn_createTheTest_Click;
             btn_load.Click += Btn_load_Click;
             btn_detele.Click += Btn_detele_Click;
             dgv_data.DoubleClick += Dgv_data_DoubleClick;
@@ -104,17 +107,28 @@ namespace ExaminationManagement.Forms.Teacher
             executeExamination.ShowDialog();
         }
 
-        private void Btn_createExamineeList_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Btn_createTest_Click(object sender, EventArgs e)
+        private void Btn_createTestList_Click(object sender, EventArgs e)
         {
             this.Hide();
 
             TestListManagement theTest = new TestListManagement(this.userID);
             theTest.Show();
+        }
+
+        private void Btn_createTheTest_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            TestManagement testManagement = new TestManagement(this.userID);
+            testManagement.Show();
+        }
+
+        private void Btn_createExamineeList_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            ExamineeListManagement examineeManagement = new ExamineeListManagement(this.userID);
+            examineeManagement.Show();
         }
 
         private void Btn_detele_Click(object sender, EventArgs e)
